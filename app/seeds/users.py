@@ -33,7 +33,6 @@ def seed_users():
     BoardUser(user=marnie, board=board4)
     BoardUser(user=bobbie, board=board5)
 
-
     db.session.add(board1)
     db.session.add(board2)
     db.session.add(board3)
