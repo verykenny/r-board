@@ -9,7 +9,7 @@ class Board(db.Model):
     backgroundUrl = db.Column(
         db.String, nullable=False, default='/bg-whiteboard.png')
 
-    users = db.relationship('BoardUser', back_populates='board')
+    users = db.relationship('BoardUser', back_populates='board', cascade='all, delete')
 
     def to_dict(self):
         return {
