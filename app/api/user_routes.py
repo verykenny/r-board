@@ -17,3 +17,11 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/<int:id>/boards')
+@login_required
+def boards(id):
+    user = User.query.get(id)
+    print(user.boards)
+    return {'boards': [board.board_to_dict() for board in user.boards]}

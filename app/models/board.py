@@ -6,7 +6,10 @@ class Board(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(25), nullable=False)
-    backgroundUrl = db.Column(db.String, nullable=False, default='/bg-whiteboard.png')
+    backgroundUrl = db.Column(
+        db.String, nullable=False, default='/bg-whiteboard.png')
+
+    users = db.relationship('BoardUser', back_populates='board', cascade='all, delete')
 
     def to_dict(self):
         return {
