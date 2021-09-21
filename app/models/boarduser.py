@@ -8,3 +8,6 @@ class BoardUser(db.Model):
 
     user = db.relationship('User', back_populates='boards')
     board = db.relationship('Board', back_populates='users')
+
+    def board_to_dict(self):
+        return self.board.to_dict()

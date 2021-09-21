@@ -22,4 +22,6 @@ def user(id):
 @user_routes.route('/<int:id>/boards')
 @login_required
 def boards(id):
-    return {'boards': 'placeholder -- need to update to_dicts to include nested info'}
+    user = User.query.get(id)
+    print(user.boards)
+    return {'boards': [board.board_to_dict() for board in user.boards]}
