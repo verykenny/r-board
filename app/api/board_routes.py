@@ -25,7 +25,23 @@ def create_board():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@board_routes.route('/<int:boardId>', methods=['GET', 'PATCH', 'DELETE'])
+@board_routes.route('/<int:boardId>', methods=['GET', 'PUT', 'DELETE'])
 @login_required
 def board_items(boardId):
-    return {'boardItems': 'success'}
+    board = Board.query.get(boardId)
+    if request.method == 'GET':
+        return {'boardItems': 'placeholder -- need to update to_dicts to include nested info'}
+    elif request.method == 'PUT':
+        form = BoardForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            board.name = form['name'].data
+            board.backgroundUrl = form['backgroundUrl'].data
+            db.session.add(board)
+            db.session.commit()
+            return {'board': board.to_dict()}
+        return {'boardItems': 'patch'}
+    elif request.method == 'DELETE':
+        db.session.delete(board)
+        db.session.commit()
+        return {'deleted': board.to_dict()}
