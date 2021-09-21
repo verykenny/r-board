@@ -1,8 +1,9 @@
-from app.models import db, User
+from app.models import db, User, Board, BoardUser
 
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
+
     demo = User(
         username='Demo', email='demo@aa.io', password='password')
     marnie = User(
@@ -10,6 +11,13 @@ def seed_users():
     bobbie = User(
         username='bobbie', email='bobbie@aa.io', password='password')
 
+    board1 = Board(
+        name='Home', backgroundUrl='/bg-whiteboard.png'
+    )
+
+    BoardUser(user=demo, board=board1)
+
+    db.session.add(board1)
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
