@@ -1,5 +1,6 @@
-from app.models import db, Board, User, BoardUser
+from app.models import db, Board, User, BoardUser, ToDoList
 from app.forms.board_form import BoardForm
+from app.forms.todoList_form import ToDoListForm
 from .validation_errors import validation_errors_to_error_messages
 from flask import Blueprint, request
 from flask_login import login_required, current_user
@@ -29,7 +30,7 @@ def create_board():
 
 @board_routes.route('/<int:boardId>', methods=['GET', 'PUT', 'DELETE'])
 @login_required
-def board_items(boardId):
+def boards(boardId):
     """
     GET board items
     PUT update board
@@ -37,7 +38,7 @@ def board_items(boardId):
     """
     board = Board.query.get(boardId)
     if request.method == 'GET':
-        return {'boardItems': 'placeholder -- need to update to_dicts to include nested info'}
+        return {'boardItems': board.to_dict_items()}
     elif request.method == 'PUT':
         form = BoardForm()
         form['csrf_token'].data = request.cookies['csrf_token']
@@ -47,8 +48,28 @@ def board_items(boardId):
             db.session.add(board)
             db.session.commit()
             return {'board': board.to_dict()}
-        return {'boardItems': 'patch'}
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     elif request.method == 'DELETE':
         db.session.delete(board)
         db.session.commit()
         return {'deleted': board.to_dict()}
+
+
+@board_routes.route('/<int:boardId>/todo_lists', methods=['POST'])
+@login_required
+def create_todo_list(boardId):
+    """
+    Create a new todo list
+    """
+    board = Board.query.get(boardId)
+    form = ToDoListForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        todoList = ToDoList()
+        form.populate_obj(todoList)
+        board.lists.append(todoList)
+        db.session.add(board)
+        db.session.commit()
+
+        return {'todoList': todoList.to_dict()}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
