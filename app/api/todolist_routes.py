@@ -1,12 +1,11 @@
-from flask import Blueprint
+from app.forms.todoList_form import ToDoListForm
+from flask import Blueprint, request
+from app.models import db, User, ToDoList
+from flask_login import login_required, current_user
 
 
 todolist_routes = Blueprint('todo_lists', __name__)
 
-
-@todolist_routes.route('/', methods=['POST'])
-def create_todo_list():
-    return {'message': 'success'}
 
 
 @todolist_routes.route('/<int:todoListId>', methods=['PUT', 'DELETE'])

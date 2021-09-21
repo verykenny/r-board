@@ -1,5 +1,6 @@
-from app.models import db, Board, User, BoardUser
+from app.models import db, Board, User, BoardUser, ToDoList
 from app.forms.board_form import BoardForm
+from app.forms.todoList_form import ToDoListForm
 from .validation_errors import validation_errors_to_error_messages
 from flask import Blueprint, request
 from flask_login import login_required, current_user
@@ -52,3 +53,22 @@ def boards(boardId):
         db.session.delete(board)
         db.session.commit()
         return {'deleted': board.to_dict()}
+
+
+@board_routes.route('/<int:boardId>/todo_lists', methods=['POST'])
+@login_required
+def create_todo_list(boardId):
+    """
+    Create a new todo list
+    """
+    board = Board.query.get(boardId)
+    form = ToDoListForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        todoList = ToDoList()
+        form.populate_obj(todoList)
+        board.lists.append(todoList)
+        db.session.add(board)
+        db.session.commit()
+
+    return {'todoList': todoList.to_dict()}
