@@ -17,3 +17,9 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/<int:id>/boards')
+@login_required
+def boards(id):
+    return {'boards': 'success'}

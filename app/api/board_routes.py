@@ -12,7 +12,7 @@ board_routes = Blueprint('boards', __name__)
 @login_required
 def create_board():
     """
-    Create a new board.
+    Create a new board
     """
     form = BoardForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -28,6 +28,11 @@ def create_board():
 @board_routes.route('/<int:boardId>', methods=['GET', 'PUT', 'DELETE'])
 @login_required
 def board_items(boardId):
+    """
+    GET board items
+    PUT update board
+    DELETE board
+    """
     board = Board.query.get(boardId)
     if request.method == 'GET':
         return {'boardItems': 'placeholder -- need to update to_dicts to include nested info'}
