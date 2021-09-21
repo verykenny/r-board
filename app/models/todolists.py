@@ -19,6 +19,10 @@ class ToDoLists(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'createdAt': self.createdAt.strftime('%Y-%m-%d %H:%M:%S'),
+            'xPos': self.xPos,
+            'yPos': self.yPos,
+            'todos': [todo.to_dict() for todo in self.todos]
         }
 
 
