@@ -71,4 +71,5 @@ def create_todo_list(boardId):
         db.session.add(board)
         db.session.commit()
 
-    return {'todoList': todoList.to_dict()}
+        return {'todoList': todoList.to_dict()}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
