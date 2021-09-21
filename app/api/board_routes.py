@@ -29,7 +29,7 @@ def create_board():
 
 @board_routes.route('/<int:boardId>', methods=['GET', 'PUT', 'DELETE'])
 @login_required
-def board_items(boardId):
+def boards(boardId):
     """
     GET board items
     PUT update board
