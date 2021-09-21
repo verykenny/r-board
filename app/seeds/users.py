@@ -1,4 +1,4 @@
-from app.models import db, User, Board, BoardUser
+from app.models import db, User, Board, BoardUser, ToDoList, ToDo
 
 
 # Adds a demo user, you can add other users here if you want
@@ -33,6 +33,21 @@ def seed_users():
     BoardUser(user=marnie, board=board4)
     BoardUser(user=bobbie, board=board5)
 
+    todolist1 = ToDoList(
+        name='Chores'
+    )
+
+    todo1 = ToDo(content='take out trash')
+    todo2 = ToDo(content='do dishes')
+
+    todolist1.todos.append(todo1)
+    todolist1.todos.append(todo2)
+
+    board1.lists.append(todolist1)
+
+    db.session.add(todolist1)
+    db.session.add(todo1)
+    db.session.add(todo2)
 
     db.session.add(board1)
     db.session.add(board2)
