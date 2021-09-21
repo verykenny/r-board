@@ -4,6 +4,16 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
+board_users = db.Table('board_users',
+                       db.Column('userId', db.Integer, db.ForeignKey(
+                           'users.id'), primary_key=True),
+                       db.Column('boardId', db.Integer, db.ForeignKey(
+                           'boards.id'), primary_key=True),
+                       db.Column('owner', db.Boolean),
+                       db.Column('verified', db.Boolean),
+                       ),
+
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -31,4 +41,23 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email
+        }
+
+
+class Board(db.Model):
+    __tablename__ = 'boards'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(25), nullable=False)
+    backgroundUrl = db.Column(
+        db.String, nullable=False, default='/bg-whiteboard.png')
+
+    users = db.relationship(
+        'User', secondary=board_users, back_populates='boards')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'backgroundUrl': self.backgroundUrl
         }
