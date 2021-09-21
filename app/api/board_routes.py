@@ -48,7 +48,7 @@ def boards(boardId):
             db.session.add(board)
             db.session.commit()
             return {'board': board.to_dict()}
-        return {'boardItems': 'patch'}
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     elif request.method == 'DELETE':
         db.session.delete(board)
         db.session.commit()
