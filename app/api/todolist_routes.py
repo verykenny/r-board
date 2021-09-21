@@ -50,3 +50,4 @@ def create_todo(todoListId):
         db.session.commit()
 
         return {'todo': todo.to_dict()}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
