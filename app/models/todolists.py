@@ -1,7 +1,8 @@
 from .db import db
+from datetime import datetime
 
 
-class ToDoLists(db.Model):
+class ToDoList(db.Model):
     __tablename__ = 'todo_lists'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -10,10 +11,10 @@ class ToDoLists(db.Model):
     xPos = db.Column(db.Integer, nullable=False, default=0)
     yPos = db.Column(db.Integer, nullable=False, default=0)
 
-    boardId = db.Column(db.ForeignKey('boards.id'), primary_key=True)
+    boardId = db.Column(db.Integer, db.ForeignKey('boards.id'))
 
     board = db.relationship('Board', back_populates='lists')
-    todos = db.relationship('ToDos', back_populates='todoList', cascade='all, delete')
+    todos = db.relationship('ToDo', back_populates='todoList', cascade='all, delete')
 
     def to_dict(self):
         return {
@@ -26,16 +27,16 @@ class ToDoLists(db.Model):
         }
 
 
-class ToDos(db.Model):
+class ToDo(db.Model):
     __tablename__ = 'todos'
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(50), nullable=False)
     completed = db.Column(db.Boolean, nullable=False, default=False)
 
-    todoListId = db.Column(db.ForeignKey('todo_lists.id'), primary_key=True)
+    todoListId = db.Column(db.Integer, db.ForeignKey('todo_lists.id'))
 
-    todoList = db.relationship('ToDoLists', back_populates='todos')
+    todoList = db.relationship('ToDoList', back_populates='todos')
 
     def to_dict(self):
         return {
