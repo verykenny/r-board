@@ -37,7 +37,7 @@ def boards(boardId):
     """
     board = Board.query.get(boardId)
     if request.method == 'GET':
-        return {'boardItems': 'placeholder -- need to update to_dicts to include nested info'}
+        return {'boardItems': board.to_dict_items()}
     elif request.method == 'PUT':
         form = BoardForm()
         form['csrf_token'].data = request.cookies['csrf_token']

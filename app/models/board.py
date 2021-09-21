@@ -19,3 +19,8 @@ class Board(db.Model):
             'name': self.name,
             'backgroundUrl': self.backgroundUrl
         }
+
+    def to_dict_items(self):
+        return {
+            'todoLists': [todoList.to_dict() for todoList in self.lists]
+        }
