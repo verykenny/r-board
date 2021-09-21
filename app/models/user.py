@@ -1,5 +1,5 @@
 from .db import db
-from . import board_users
+from .boarduser import board_users
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     boards = db.relationship(
-        'Board', secondary=board_users, back_populates='pets')
+        'Board', secondary=board_users, back_populates='users')
 
     @property
     def password(self):

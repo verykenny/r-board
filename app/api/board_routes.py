@@ -1,8 +1,8 @@
-from app.models import db, Board
+from app.models import db, Board, User
 from app.forms.board_form import BoardForm
 from .validation_errors import validation_errors_to_error_messages
 from flask import Blueprint, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 
 board_routes = Blueprint('boards', __name__)
@@ -14,11 +14,13 @@ def create_board():
     """
     Create a new board
     """
+    # user = User.query.get(current_user.get_id())
     form = BoardForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         board = Board()
         form.populate_obj(board)
+        # print(dir(user))
         db.session.add(board)
         db.session.commit()
         return {'board': board.to_dict()}

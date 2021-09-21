@@ -1,5 +1,5 @@
 from .db import db
-from . import board_users
+from .boarduser import board_users
 
 
 class Board(db.Model):
