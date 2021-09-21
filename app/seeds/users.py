@@ -14,10 +14,31 @@ def seed_users():
     board1 = Board(
         name='Home', backgroundUrl='/bg-whiteboard.png'
     )
+    board2 = Board(
+        name='School', backgroundUrl='/bg-whiteboard.png'
+    )
+    board3 = Board(
+        name='Home', backgroundUrl='/bg-whiteboard.png'
+    )
+    board4 = Board(
+        name='School', backgroundUrl='/bg-whiteboard.png'
+    )
+    board5 = Board(
+        name='Home', backgroundUrl='/bg-whiteboard.png'
+    )
 
     BoardUser(user=demo, board=board1)
+    BoardUser(user=demo, board=board2)
+    BoardUser(user=marnie, board=board3)
+    BoardUser(user=marnie, board=board4)
+    BoardUser(user=bobbie, board=board5)
+
 
     db.session.add(board1)
+    db.session.add(board2)
+    db.session.add(board3)
+    db.session.add(board4)
+    db.session.add(board5)
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
@@ -32,4 +53,5 @@ def seed_users():
 # dependent entities
 def undo_users():
     db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE boards RESTART IDENTITY CASCADE;')
     db.session.commit()
