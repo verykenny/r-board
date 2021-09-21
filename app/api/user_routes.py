@@ -22,4 +22,4 @@ def user(id):
 @user_routes.route('/<int:id>/boards')
 @login_required
 def boards(id):
-    return {'boards': 'success'}
+    return {'boards': 'placeholder -- need to update to_dicts to include nested info'}
