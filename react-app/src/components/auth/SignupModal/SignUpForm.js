@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
-
+import styled from 'styled-components';
 import { signUp } from '../../../store/session';
-import { Button } from '../../StyledComponents';
+import { Button, ErrorsContainer, Form, FormContainer, InputsContainer, StringInput } from '../../StyledComponents';
+
+const SignInFormContainer = styled(FormContainer)`
+    height: fit-content;
+`;
+
 
 const SignUpForm = ({ setShowModal }) => {
     const [errors, setErrors] = useState([]);
@@ -19,6 +24,8 @@ const SignUpForm = ({ setShowModal }) => {
             if (data) {
                 setErrors(data)
             }
+        } else {
+            setErrors(['Error: Both passwords must match'])
         }
     };
 
@@ -39,51 +46,56 @@ const SignUpForm = ({ setShowModal }) => {
     };
 
     return (
-        <form onSubmit={onSignUp}>
-            <div>
-                {errors.map((error, ind) => (
-                    <div key={ind}>{error}</div>
-                ))}
-            </div>
-            <div>
-                <label>User Name</label>
-                <input
-                    type='text'
-                    name='username'
-                    onChange={updateUsername}
-                    value={username}
-                ></input>
-            </div>
-            <div>
-                <label>Email</label>
-                <input
-                    type='text'
-                    name='email'
-                    onChange={updateEmail}
-                    value={email}
-                ></input>
-            </div>
-            <div>
-                <label>Password</label>
-                <input
-                    type='password'
-                    name='password'
-                    onChange={updatePassword}
-                    value={password}
-                ></input>
-            </div>
-            <div>
-                <label>Repeat Password</label>
-                <input
-                    type='password'
-                    name='repeat_password'
-                    onChange={updateRepeatPassword}
-                    value={repeatPassword}
-                    required={true}
-                ></input>
-            </div>
-            <Button type='submit'>Sign up</Button>
-        </form>
+        <SignInFormContainer>
+            <h1>rBoard</h1>
+            <p>Don't forget soccer practice!</p>
+
+            <Form onSubmit={onSignUp}>
+                <ErrorsContainer>
+                    {errors.map((error, ind) => (
+                        <div key={ind}>{error.split(':')[1]}</div>
+                    ))}
+                </ErrorsContainer>
+                <InputsContainer>
+
+                    <StringInput
+                        type='text'
+                        name='username'
+                        placeholder='Username'
+                        onChange={updateUsername}
+                        value={username}
+                    />
+
+
+                    <StringInput
+                        type='text'
+                        name='email'
+                        placeholder='Email'
+                        onChange={updateEmail}
+                        value={email}
+                    />
+
+
+                    <StringInput
+                        type='password'
+                        name='password'
+                        placeholder='Password'
+                        onChange={updatePassword}
+                        value={password}
+                    />
+
+
+                    <StringInput
+                        type='password'
+                        name='repeat_password'
+                        placeholder='Confirm Password'
+                        onChange={updateRepeatPassword}
+                        value={repeatPassword}
+                    />
+                </InputsContainer>
+                <Button type='submit'>Sign up</Button>
+            </Form>
+        </SignInFormContainer>
     );
 };
 

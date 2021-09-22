@@ -32,16 +32,11 @@ const Title = styled.h1`
 `
 
 const SplashNavBar = () => {
-    const [errors, setErrors] = useState([]);
     const dispatch = useDispatch()
 
     const handleDemoLogin = async (e) => {
         e.preventDefault()
-        const data = await dispatch(login('demo@aa.io', 'password'));
-
-        if (data) {
-            setErrors(data);
-        };
+        await dispatch(login('demo@aa.io', 'password'));
     }
 
 

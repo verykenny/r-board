@@ -5,7 +5,7 @@ import SignUpForm from './SignUpForm';
 import styled from 'styled-components';
 
 const SignUpButton = styled(Button)`
-    margin-right: 10px;
+    margin-right: 20px;
 `;
 
 function SignupModal() {
