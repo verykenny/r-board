@@ -11,10 +11,10 @@ def password_matches(form, field):
     user = User.query.filter(User.email == email).first()
     if not user:
         raise ValidationError(
-            'Issue Logging In: Please check username or password.')
+            'Unable to verify email/password.')
     if not user.check_password(password):
         raise ValidationError(
-            'Issue Logging In: Please check username or password.')
+            'Unable to verify email/password.')
 
 
 class LoginForm(FlaskForm):
