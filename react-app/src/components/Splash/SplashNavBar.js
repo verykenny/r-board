@@ -20,6 +20,7 @@ const SplashNav = styled.nav`
 `;
 
 const Title = styled.h1`
+    font-weight: normal;
 `
 
 const SplashNavBar = () => {

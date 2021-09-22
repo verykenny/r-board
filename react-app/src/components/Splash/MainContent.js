@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MainContentContainer = styled.main`
+const MainContentContainer = styled.main`
     align-items: center;
     display: flex;
     flex: 1 1 auto;
@@ -11,30 +11,40 @@ export const MainContentContainer = styled.main`
     background-size: cover;
 `;
 
-export const SmallContainer = styled.section`
+const SmallContainer = styled.section`
     border: 1px solid lightgrey;
     display: flex;
     flex-direction: column;
     height: 40%;
+    justify-content: space-between;
     margin: 0px 50px;
-    padding: 20px;
+    padding: 50px 25px;
     width: 300px;
     background: white;
 `;
+
+const ContentHeader = styled.h2`
+    font-weight: normal;
+    text-align: center;
+`;
+
+const Content = styled.p`
+`;
+
 
 const MainContent = () => {
     return (
         <>
             <MainContentContainer>
                 <SmallContainer>
-                    <h2>Welcome to rBoard!</h2>
-                    <p>rBoard meant to combine precious refrigerator space and whiteboards into one app.</p>
-                    <p>Begin by creating a whiteboard and inviting family or roommates to keep your home organized!</p>
+                    <ContentHeader>Welcome to rBoard!</ContentHeader>
+                    <Content>rBoard meant to combine precious refrigerator space and whiteboards into one app.</Content>
+                    <Content>Begin by creating a whiteboard and inviting family or roommates to keep your home organized!</Content>
                 </SmallContainer>
                 <SmallContainer>
-                    <h2>Get Started!</h2>
-                    <p>Don't have an account yet? Create one by signing up.</p>
-                    <p>Check out the app first by signing in as a demo user!</p>
+                    <ContentHeader>Get Started...</ContentHeader>
+                    <Content>Don't have an account yet? Create one by signing up.</Content>
+                    <Content>Check out the app first by signing in as a demo user!</Content>
                 </SmallContainer>
             </MainContentContainer>
 
