@@ -6,7 +6,7 @@ const MainContentContainer = styled.main`
     flex: 1 1 auto;
     flex-wrap: wrap;
     justify-content: space-around;
-    background-image: url('/bg-splash-fridge.jpeg');
+    background-image: url("https://pseudogram-bucket.s3.amazonaws.com/bg-splash-fridge.jpeg");
     background-position: center;
     background-size: cover;
 `;

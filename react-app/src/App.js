@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 import Splash from './components/Splash';
+import Home from './components/Home';
 
 function App() {
     const [loaded, setLoaded] = useState(false);
@@ -31,12 +32,7 @@ function App() {
                     <Splash />
                 </Route>
                 <ProtectedRoute path='/home' exact={true} >
-                    {user && (
-                        <>
-                            <NavBar />
-                            <h1>home</h1>
-                        </>
-                    )}
+                    <Home />
                 </ProtectedRoute>
                 <Route>
                     <h1>Page Not Found</h1>
