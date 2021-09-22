@@ -2,6 +2,8 @@ import MainContent from "./MainContent"
 import SplashNavBar from "./SplashNavBar"
 import styled from 'styled-components';
 import Footer from "./Footer";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router";
 
 const SplashContainer = styled.div`
     display: flex;
@@ -11,6 +13,13 @@ const SplashContainer = styled.div`
 
 
 const Splash = () => {
+    const user = useSelector(state => state.session.user)
+
+    if (user) {
+        return  (<Redirect to='/home' />)
+    }
+
+
     return (
         <SplashContainer>
             <SplashNavBar />
