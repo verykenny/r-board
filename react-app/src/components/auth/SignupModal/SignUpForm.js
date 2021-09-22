@@ -25,7 +25,7 @@ const SignUpForm = ({ setShowModal }) => {
                 setErrors(data)
             }
         } else {
-            setErrors(['Both passwords must match'])
+            setErrors(['Error: Both passwords must match'])
         }
     };
 
