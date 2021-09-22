@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import LoginModal from '../auth/LoginModal';
 
 
 const Bar = styled.div`
@@ -29,9 +30,7 @@ const SplashNavBar = () => {
         <SplashNav>
             <Title>rBoard</Title>
             <div>
-                <NavLink to='/login' exact={true} activeClassName='active'>
-                    Login
-                </NavLink>
+                <LoginModal />
 
                 <NavLink to='/sign-up' exact={true} activeClassName='active'>
                     Sign Up
