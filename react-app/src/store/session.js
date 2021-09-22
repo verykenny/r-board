@@ -1,7 +1,13 @@
 // constants
 
+const SET_USER_BEGIN = 'session/SET_USER_BEGIN';
 const SET_USER_SUCCESS = 'session/SET_USER_SUCCESS';
 const REMOVE_USER_SUCCESS = 'session/REMOVE_USER_SUCCESS';
+
+
+const setUserBegin = () => ({
+    type: SET_USER_BEGIN,
+})
 
 const setUser = (user) => ({
     type: SET_USER_SUCCESS,
@@ -15,6 +21,7 @@ const removeUser = () => ({
 const initialState = { user: null, loading: false, errors: null };
 
 export const authenticate = () => async (dispatch) => {
+    dispatch(setUserBegin())
     const response = await fetch('/api/auth/', {
         headers: {
             'Content-Type': 'application/json'
@@ -31,6 +38,7 @@ export const authenticate = () => async (dispatch) => {
 }
 
 export const login = (email, password) => async (dispatch) => {
+    dispatch(setUserBegin())
     const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
@@ -72,6 +80,7 @@ export const logout = () => async (dispatch) => {
 
 
 export const signUp = (username, email, password) => async (dispatch) => {
+    dispatch(setUserBegin())
     const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
@@ -100,6 +109,12 @@ export const signUp = (username, email, password) => async (dispatch) => {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case SET_USER_BEGIN:
+            return {
+                user: null,
+                loading: true,
+                errors: null,
+            }
         case SET_USER_SUCCESS:
             return {
                 user: action.payload,
