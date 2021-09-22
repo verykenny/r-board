@@ -14,6 +14,10 @@ const FooterContentContainer = styled.div`
     justify-content: space-between;
     max-width: 85%;
     width: 900px;
+
+    @media screen and (max-width: 480px){
+        flex-direction: column;
+    }
 `
 
 const FooterContent = styled.div`
