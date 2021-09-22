@@ -37,7 +37,7 @@ const LoginForm = ({ setShowModal }) => {
             <Form onSubmit={onLogin}>
                 <div>
                     {errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
+                        <div key={ind}>{error.split(':')[1]}</div>
                     ))}
                 </div>
                 <InputsContainer>

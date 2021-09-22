@@ -53,7 +53,7 @@ const SignUpForm = ({ setShowModal }) => {
             <Form onSubmit={onSignUp}>
                 <div>
                     {errors.map((error, ind) => (
-                        <div key={ind}>{error}</div>
+                        <div key={ind}>{error.split(':')[1]}</div>
                     ))}
                 </div>
                 <InputsContainer>
