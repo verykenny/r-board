@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../store/session';
-import { ButtonAlt } from '../../StyledComponents';
+import { ButtonAlt, Form, FormContainer, StringInput, InputsContainer } from '../../StyledComponents';
+import styled from 'styled-components';
 
 
 const LoginForm = ({ setShowModal }) => {
@@ -31,34 +32,34 @@ const LoginForm = ({ setShowModal }) => {
     };
 
     return (
-        <form onSubmit={onLogin}>
-            <div>
-                {errors.map((error, ind) => (
-                    <div key={ind}>{error}</div>
-                ))}
-            </div>
-            <div>
-                <label htmlFor='email'>Email</label>
-                <input
-                    name='email'
-                    type='text'
-                    placeholder='Email'
-                    value={email}
-                    onChange={updateEmail}
-                />
-            </div>
-            <div>
-                <label htmlFor='password'>Password</label>
-                <input
-                    name='password'
-                    type='password'
-                    placeholder='Password'
-                    value={password}
-                    onChange={updatePassword}
-                />
+        <FormContainer>
+            <h1>rBoard</h1>
+            <p>Don't forget soccer practice!</p>
+            <Form onSubmit={onLogin}>
+                <div>
+                    {errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))}
+                </div>
+                <InputsContainer>
+                    <StringInput
+                        name='email'
+                        type='text'
+                        placeholder='Email'
+                        value={email}
+                        onChange={updateEmail}
+                    />
+                    <StringInput
+                        name='password'
+                        type='password'
+                        placeholder='Password'
+                        value={password}
+                        onChange={updatePassword}
+                    />
                 <ButtonAlt type='submit'>Login</ButtonAlt>
-            </div>
-        </form>
+                </InputsContainer>
+            </Form>
+        </FormContainer>
     );
 };
 
