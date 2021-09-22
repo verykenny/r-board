@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import LoginModal from '../auth/LoginModal';
 import SignupModal from '../auth/SignupModal';
-
+import { ButtonAlt } from '../StyledComponents';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/session'
 
 const Bar = styled.div`
     background: lightblue;
@@ -21,24 +23,40 @@ const SplashNav = styled.nav`
     width: 900px;
 `;
 
+const NavButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+`
+
 const Title = styled.h1`
     font-weight: normal;
 `
 
 const SplashNavBar = () => {
+    const [errors, setErrors] = useState([]);
+    const dispatch = useDispatch()
+
+    const handleDemoLogin = async (e) => {
+        e.preventDefault()
+        const data = await dispatch(login('demo@aa.io', 'password'));
+
+        if (data) {
+            setErrors(data);
+        };
+    }
+
+
     return (
         <Bar>
         <SplashNav>
             <Title>rBoard</Title>
-            <div>
+            <NavButtonContainer>
                 <LoginModal />
 
                 <SignupModal />
 
-                <NavLink to='/login' exact={true} activeClassName='active'>
-                    Demo Login
-                </NavLink>
-            </div>
+                <ButtonAlt onClick={handleDemoLogin}>Demo Login</ButtonAlt>
+            </NavButtonContainer>
 
         </SplashNav>
         </Bar>

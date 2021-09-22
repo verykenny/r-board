@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../store/session';
-import { Button } from '../../StyledComponents';
+import { Button, ButtonAlt } from '../../StyledComponents';
+
 
 const LoginForm = ({ setShowModal }) => {
     const [errors, setErrors] = useState([]);
@@ -13,7 +14,7 @@ const LoginForm = ({ setShowModal }) => {
         e.preventDefault();
 
         const data = await dispatch(login(email, password));
-        
+
         if (data) {
             setErrors(data);
         } else {
@@ -55,7 +56,7 @@ const LoginForm = ({ setShowModal }) => {
                     value={password}
                     onChange={updatePassword}
                 />
-                <Button type='submit'>Login</Button>
+                <ButtonAlt type='submit'>Login</ButtonAlt>
             </div>
         </form>
     );
