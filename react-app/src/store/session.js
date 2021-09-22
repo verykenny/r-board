@@ -18,7 +18,7 @@ const removeUser = () => ({
     type: REMOVE_USER_SUCCESS,
 })
 
-const initialState = { user: null, loading: false, errors: null };
+const initialState = { user: null, loading: false };
 
 export const authenticate = () => async (dispatch) => {
     dispatch(setUserBegin())
