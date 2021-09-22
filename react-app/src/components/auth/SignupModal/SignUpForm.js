@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
 
 import { signUp } from '../../../store/session';
+import { Button } from '../../StyledComponents';
 
 const SignUpForm = ({ setShowModal }) => {
     const [errors, setErrors] = useState([]);
@@ -81,7 +82,7 @@ const SignUpForm = ({ setShowModal }) => {
                     required={true}
                 ></input>
             </div>
-            <button type='submit'>Sign Up</button>
+            <Button type='submit'>Sign up</Button>
         </form>
     );
 };
