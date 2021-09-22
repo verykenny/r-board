@@ -4,6 +4,10 @@ import NavBar from "../NavBar";
 
 const HomeContainer = styled.div`
     position: relative;
+    background-image: url('https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png');
+    background-size: 100vw 100vh;
+    height: 100vh;
+    width: 100vw;
 `;
 
 const Home = () => {
@@ -12,7 +16,6 @@ const Home = () => {
     return (
         <HomeContainer>
             <NavBar />
-            <h1> Home </h1>
 
         </HomeContainer>
     )

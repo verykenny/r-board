@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import LogoutButton from '../auth/LogoutButton';
+import WhiteBoards from './WhiteBoards';
 
 
 const FlyOutContainer = styled.div`
@@ -8,13 +9,6 @@ const FlyOutContainer = styled.div`
     display: flex;
     flex-direction: column;
 
-`;
-
-const WhiteBoardsContainer = styled.div`
-    background: #D8E2DC;
-    width: 100%;
-    height: 600px;
-    max-height: 65%;
 `;
 
 const MenuOptionsContainer = styled.div`
@@ -29,11 +23,8 @@ const FlyOut = () => {
 
     return (
         <FlyOutContainer>
-            <WhiteBoardsContainer>
-
-            </WhiteBoardsContainer>
+            <WhiteBoards />
             <MenuOptionsContainer>
-                foyout
                 <LogoutButton />
             </MenuOptionsContainer>
         </FlyOutContainer>

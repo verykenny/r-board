@@ -7,7 +7,7 @@ const NavSideBar = styled.nav`
     position: absolute;
     height: 100vh;
     display: flex;
-    
+
 
     .fa-bars {
         font-size: 40px;
@@ -21,7 +21,7 @@ const NavBar = () => {
 
     return (
         <NavSideBar>
-            <i class="fas fa-bars" onClick={() => setShowFlyOut(prev => !prev)}></i>
+            <i className="fas fa-bars" onClick={() => setShowFlyOut(prev => !prev)}></i>
             {showFlyOut && (
                 <FlyOut />
             )}
