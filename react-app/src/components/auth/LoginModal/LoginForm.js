@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../store/session';
-import { ButtonAlt, Form, FormContainer, StringInput, InputsContainer } from '../../StyledComponents';
+import { ButtonAlt, Form, FormContainer, StringInput, InputsContainer, ErrorsContainer } from '../../StyledComponents';
 
 
 const LoginForm = ({ setShowModal }) => {
@@ -35,11 +35,11 @@ const LoginForm = ({ setShowModal }) => {
             <h1>rBoard</h1>
             <p>Don't forget soccer practice!</p>
             <Form onSubmit={onLogin}>
-                <div>
+                <ErrorsContainer>
                     {errors.map((error, ind) => (
                         <div key={ind}>{error.split(':')[1]}</div>
                     ))}
-                </div>
+                </ErrorsContainer>
                 <InputsContainer>
                     <StringInput
                         name='email'

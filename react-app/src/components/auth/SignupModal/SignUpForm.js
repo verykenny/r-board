@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components';
 import { signUp } from '../../../store/session';
-import { Button, Form, FormContainer, InputsContainer, StringInput } from '../../StyledComponents';
+import { Button, ErrorsContainer, Form, FormContainer, InputsContainer, StringInput } from '../../StyledComponents';
 
 const SignInFormContainer = styled(FormContainer)`
     height: fit-content;
@@ -51,11 +51,11 @@ const SignUpForm = ({ setShowModal }) => {
             <p>Don't forget soccer practice!</p>
 
             <Form onSubmit={onSignUp}>
-                <div>
+                <ErrorsContainer>
                     {errors.map((error, ind) => (
                         <div key={ind}>{error.split(':')[1]}</div>
                     ))}
-                </div>
+                </ErrorsContainer>
                 <InputsContainer>
 
                     <StringInput
