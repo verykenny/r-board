@@ -1,34 +1,33 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
+import styled from 'styled-components';
 
-
+export const SplashNav = styled.nav`
+    background: lightblue;
+    display: flex;
+    height: 50px;
+`;
 
 const SplashNavBar = () => {
     return (
-        <nav>
-            <ul>
-                <li>
+        <SplashNav>
+
                     <NavLink to='/login' exact={true} activeClassName='active'>
                         Login
                     </NavLink>
-                </li>
-                <li>
+
                     <NavLink to='/sign-up' exact={true} activeClassName='active'>
                         Sign Up
                     </NavLink>
-                </li>
-                <li>
+
                     <NavLink to='/login' exact={true} activeClassName='active'>
                         Demo Login
                     </NavLink>
-                </li>
-                <li>
+
                     <LogoutButton />
-                </li>
-            </ul>
-        </nav>
+
+        </SplashNav>
     );
 }
 
