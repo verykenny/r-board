@@ -1,3 +1,4 @@
+import NavBar from "../NavBar";
 
 
 
@@ -6,9 +7,11 @@ const Home = () => {
 
 
     return (
-        <h1>
-            Home
-        </h1>
+        <div>
+            <NavBar />
+            <h1> Home </h1>
+
+        </div>
     )
 }
 
