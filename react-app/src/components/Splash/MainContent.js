@@ -18,6 +18,7 @@ const SmallContainer = styled.section`
     height: 40%;
     justify-content: space-between;
     margin: 0px 50px;
+    max-height: 300px;
     padding: 50px 25px;
     width: 300px;
     background: white;
