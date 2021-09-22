@@ -5,8 +5,8 @@ export const Button = styled.button`
     border: 2px solid black;
     border-radius: 225px 15px 225px 15px/15px 225px 15px 225px;
     color: white;
-    padding: 5px;
-    width: 80px;
+    padding: 7px 15px;
+    min-width: 80px;
 
     &:hover {
         background: #0457F1;

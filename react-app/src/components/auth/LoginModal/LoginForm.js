@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../store/session';
 import { ButtonAlt, Form, FormContainer, StringInput, InputsContainer } from '../../StyledComponents';
-import styled from 'styled-components';
 
 
 const LoginForm = ({ setShowModal }) => {

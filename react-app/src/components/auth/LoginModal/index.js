@@ -5,7 +5,7 @@ import LoginForm from './LoginForm'
 import styled from 'styled-components';
 
 const LoginButton = styled(Button)`
-    margin-right: 10px;
+    margin-right: 20px;
 `;
 
 function LoginModal() {
