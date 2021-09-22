@@ -21,3 +21,15 @@ export const ButtonAlt = styled(Button)`
         background: #434337;
     }
 `;
+
+
+const StickyNote = styled.div`
+    // peeled bottom
+    border-bottom-right-radius: 60px 5px;
+    font-family: 'Reenie Beanie', cursive;
+`;
+
+
+const ToDoList = stuled.div`
+    font-family: 'Reenie Beanie', cursive;
+`;
