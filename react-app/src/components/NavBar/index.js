@@ -6,9 +6,12 @@ const NavSideBar = styled.nav`
     background: #F06449;
     position: absolute;
     height: 100vh;
+    display: flex;
+    
 
     .fa-bars {
         font-size: 40px;
+        padding: 10px;
     }
 `;
 
