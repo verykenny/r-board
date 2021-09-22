@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Button = styled.button`
     background: #2D75FC;
-    border: 2px solid black;
+    border: 1px solid black;
     border-radius: 225px 15px 225px 15px/15px 225px 15px 225px;
     color: white;
     padding: 7px 15px;
@@ -33,7 +33,10 @@ export const StickyNote = styled.div`
 
 
 export const ToDoList = styled.div`
-font-family: 'Reenie Beanie', cursive;
+    font-family: 'Reenie Beanie', cursive;
+    border-width: 3px 4px 3px 5px;
+    border-radius:95% 4% 92% 5%/4% 95% 6% 95%;
+    transform: rotate(2deg);
 `;
 
 
