@@ -83,4 +83,5 @@ export const InputsContainer = styled.div`
 export const ErrorsContainer = styled.div`
     color: #F06449;
     font-weight: bold;
+    text-align: center;
 `;
