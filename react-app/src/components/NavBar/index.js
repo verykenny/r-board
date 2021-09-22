@@ -1,16 +1,28 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import LogoutButton from '../auth/LogoutButton';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import FlyOut from './FlyOut';
+
+const NavSideBar = styled.nav`
+    background: #F06449;
+    position: absolute;
+    height: 100vh;
+
+    .fa-bars {
+        font-size: 40px;
+    }
+`;
+
 
 const NavBar = () => {
+    const [showFlyOut, setShowFlyOut] = useState(false)
+
     return (
-        <nav>
-            <ul>
-                <li>
-                    <LogoutButton />
-                </li>
-            </ul>
-        </nav>
+        <NavSideBar>
+            <i class="fas fa-bars" onClick={() => setShowFlyOut(prev => !prev)}></i>
+            {showFlyOut && (
+                <FlyOut />
+            )}
+        </NavSideBar>
     );
 }
 
