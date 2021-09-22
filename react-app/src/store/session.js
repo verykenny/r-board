@@ -1,15 +1,15 @@
 // constants
 
-const SET_USER = 'session/SET_USER';
-const REMOVE_USER = 'session/REMOVE_USER';
+const SET_USER_SUCCESS = 'session/SET_USER_SUCCESS';
+const REMOVE_USER_SUCCESS = 'session/REMOVE_USER_SUCCESS';
 
 const setUser = (user) => ({
-    type: SET_USER,
+    type: SET_USER_SUCCESS,
     payload: user
 });
 
 const removeUser = () => ({
-    type: REMOVE_USER,
+    type: REMOVE_USER_SUCCESS,
 })
 
 const initialState = { user: null, loading: false, errors: null };
@@ -100,13 +100,13 @@ export const signUp = (username, email, password) => async (dispatch) => {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case SET_USER:
+        case SET_USER_SUCCESS:
             return {
                 user: action.payload,
                 loading: false,
                 errors: null,
             }
-        case REMOVE_USER:
+        case REMOVE_USER_SUCCESS:
             return {
                 user: null,
                 loading: false,
