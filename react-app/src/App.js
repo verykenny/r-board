@@ -41,9 +41,9 @@ function App() {
                 <ProtectedRoute path='/users/:userId' exact={true} >
                     <User />
                 </ProtectedRoute>
-                <ProtectedRoute path='/' exact={true} >
+                <Route path='/' exact={true} >
                     <Splash />
-                </ProtectedRoute>
+                </Route>
                 <Route>
                     <h1>Page Not Found</h1>
                 </Route>
