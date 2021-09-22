@@ -23,13 +23,13 @@ export const ButtonAlt = styled(Button)`
 `;
 
 
-const StickyNote = styled.div`
+export const StickyNote = styled.div`
     // peeled bottom
     border-bottom-right-radius: 60px 5px;
     font-family: 'Reenie Beanie', cursive;
 `;
 
 
-const ToDoList = stuled.div`
+export const ToDoList = styled.div`
     font-family: 'Reenie Beanie', cursive;
 `;

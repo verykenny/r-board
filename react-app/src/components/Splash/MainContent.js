@@ -15,13 +15,14 @@ const SmallContainer = styled.section`
     border: 1px solid lightgrey;
     display: flex;
     flex-direction: column;
-    height: 40%;
+    height: 300px;
     justify-content: space-between;
     margin: 0px 50px;
-    max-height: 300px;
     padding: 50px 25px;
     width: 300px;
-    background: white;
+    border-bottom-right-radius: 60px 5px;
+    background: #ffff88;
+
 `;
 
 const ContentHeader = styled.h2`

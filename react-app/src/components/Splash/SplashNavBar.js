@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import LoginModal from '../auth/LoginModal';
 import SignupModal from '../auth/SignupModal';
