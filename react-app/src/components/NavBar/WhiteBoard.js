@@ -31,6 +31,10 @@ const WhiteBoardNameEdit = styled.input`
     background: transparent;
     color: white;
     font-size: 16px;
+
+    &:focus {
+        outline: none;
+    }
 `;
 
 const BoardOptionsContainer = styled.div`
@@ -80,6 +84,7 @@ const WhiteBoard = ({ board }) => {
                 console.log(data.errors);
             } else {
                 board.name = data.board.name
+                setNameEditToggle(prev => !prev)
             }
         })()
     }
@@ -88,6 +93,7 @@ const WhiteBoard = ({ board }) => {
         <WhiteBoardNameContainer>
             {nameEditToggle && (
                 <WhiteBoardNameEdit
+                    autoFocus
                     type='text'
                     value={boardName}
                     onChange={(e) => setBoardName(e.target.value)}
@@ -100,16 +106,22 @@ const WhiteBoard = ({ board }) => {
                 <WhiteBoardName onClick={handleChangeBoard}>{board.name}</WhiteBoardName>
             )}
             <i onClick={() => setOptionsToggle(prev => !prev)} className="fas fa-ellipsis-h"></i>
-            {optionsToggle && <BoardOptionsMenu setNameEditToggle={setNameEditToggle} />}
+            {optionsToggle && <BoardOptionsMenu setNameEditToggle={setNameEditToggle} setOptionsToggle={setOptionsToggle} />}
         </WhiteBoardNameContainer>
     )
 }
 
 
-const BoardOptionsMenu = ({ setNameEditToggle }) => {
+const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle }) => {
+
+    const handleEditToggle = () => {
+        setNameEditToggle(prev => !prev)
+        setOptionsToggle(prev => !prev)
+    }
+
     return (
         <BoardOptionsContainer>
-            <ButtonAlt onClick={() => setNameEditToggle(prev => !prev)}>Update Name</ButtonAlt>
+            <ButtonAlt onClick={handleEditToggle}>Update Name</ButtonAlt>
             Update Background
             Delete
         </BoardOptionsContainer>
