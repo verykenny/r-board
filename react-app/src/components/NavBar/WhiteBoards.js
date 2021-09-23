@@ -25,8 +25,9 @@ const WhiteBoards = () => {
             if (data.errors) {
                 setErrors(data.errors)
                 console.log(errors);
+            } else {
+                setBoards(data.boards)
             }
-            setBoards(data.boards)
         })()
 
     }, [user.id, errors])

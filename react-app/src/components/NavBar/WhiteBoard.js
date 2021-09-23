@@ -100,6 +100,7 @@ const WhiteBoard = ({ board }) => {
 
     return (
         <WhiteBoardNameContainer>
+            
             {nameEditToggle && (
                 <WhiteBoardNameEdit
                     autoFocus
@@ -114,7 +115,10 @@ const WhiteBoard = ({ board }) => {
             {!nameEditToggle && (
                 <WhiteBoardName onClick={handleChangeBoard}>{board.name}</WhiteBoardName>
             )}
+
             <i onClick={() => setOptionsToggle(prev => !prev)} className="fas fa-ellipsis-h"></i>
+
+
             <CSSTransition
                 in={optionsToggle}
                 timeout={300}
@@ -125,6 +129,7 @@ const WhiteBoard = ({ board }) => {
                     setNameEditToggle={setNameEditToggle}
                     setOptionsToggle={setOptionsToggle}
                     setBackgroundEditToggle={setBackgroundEditToggle}
+                    board={board}
                 />
             </CSSTransition>
 
@@ -142,12 +147,14 @@ const WhiteBoard = ({ board }) => {
                     />
                 </CSSTransition>
             </PositionedContainer>
+
+
         </WhiteBoardNameContainer>
     )
 }
 
 
-const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEditToggle }) => {
+const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEditToggle, board }) => {
 
     const handleNameEditToggle = () => {
         setNameEditToggle(prev => !prev)
@@ -163,8 +170,34 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
         <BoardOptionsContainer>
             <ButtonAlt onClick={handleNameEditToggle}>Update Name</ButtonAlt>
             <ButtonAlt onClick={handleUpdateBackgroundToggle}>Update Background</ButtonAlt>
-            <ButtonAlt>Delete</ButtonAlt>
+            <DeleteButton board={board} setOptionsToggle={setOptionsToggle} />
         </BoardOptionsContainer>
+    )
+}
+
+
+const DeleteButton = ({ board, setOptionsToggle }) => {
+    const [errors, setErrors] = useState(null)
+    const { setDisplayBoard } = useBoardType()
+
+
+    const handleDeleteBoard = () => {
+        (async () => {
+            const response = await fetch(`/api/boards/${board.id}`, { method: 'DELETE'})
+            const data = await response.json()
+            if (data.errors) {
+                setErrors(data.errors)
+                console.log(errors);
+            } else {
+                setDisplayBoard(null);
+                board = null;
+                setOptionsToggle(prev => !prev)
+            }
+        })()
+    }
+
+    return (
+        <ButtonAlt onClick={handleDeleteBoard}>Delete</ButtonAlt>
     )
 }
 
