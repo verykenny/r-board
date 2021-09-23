@@ -15,7 +15,9 @@ const BackgroundOptionsContainer = styled.div`
     width: 100%;
     height: fit-content;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 `;
 
 const SubmitButtonContainer = styled.div`
@@ -24,6 +26,14 @@ const SubmitButtonContainer = styled.div`
     margin-bottom: 50px;
     display: flex;
     justify-content: center;
+`;
+
+const ImageBackgroundContainer = styled.div`
+    width: 250px;
+    height: 150px;
+    background-image: url(${props => props.backgroundUrl});
+    background-size: 250px 150px;
+
 `;
 
 
@@ -38,7 +48,8 @@ const BackgroundEditFlyout = ({ setOptionsToggle, board, setBackgroundEditToggle
     return (
         <EditFlyoutContainer>
             <BackgroundOptionsContainer>
-                options
+                <ImageBackgroundContainer backgroundUrl={'https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'}/>
+                <ImageBackgroundContainer backgroundUrl={'https://pseudogram-bucket.s3.amazonaws.com/bg-blackboard2.jpeg'}/>
             </BackgroundOptionsContainer>
 
         <SubmitButtonContainer>
@@ -47,6 +58,5 @@ const BackgroundEditFlyout = ({ setOptionsToggle, board, setBackgroundEditToggle
         </EditFlyoutContainer>
     )
 }
-
 
 export default BackgroundEditFlyout;
