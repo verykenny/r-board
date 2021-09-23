@@ -6,6 +6,7 @@ import App from './App';
 import configureStore from './store';
 import { ModalProvider } from './context/Modal';
 import { BoardProvider } from './context/Board';
+import { BoardsProvider } from './context/Boards';
 
 const store = configureStore();
 
@@ -13,9 +14,11 @@ ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <BoardProvider>
+                <BoardsProvider>
                 <ModalProvider>
                     <App />
                 </ModalProvider>
+                </BoardsProvider>
             </BoardProvider>
         </Provider>
     </React.StrictMode>,

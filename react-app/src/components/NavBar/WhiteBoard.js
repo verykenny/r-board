@@ -4,6 +4,7 @@ import useBoardType from "../../context/Board";
 import { ButtonAlt } from "../StyledComponents";
 import { CSSTransition } from 'react-transition-group'
 import BackgroundEditFlyout from './BackgroundEditFlyout';
+import useBoardsType from "../../context/Boards";
 
 
 const WhiteBoardNameContainer = styled.div`
@@ -59,6 +60,7 @@ const PositionedContainer = styled.div`
 
 const WhiteBoard = ({ board }) => {
     const { setDisplayBoard } = useBoardType()
+
     const [optionsToggle, setOptionsToggle] = useState(false)
     const [nameEditToggle, setNameEditToggle] = useState(false)
     const [backgroundEditToggle, setBackgroundEditToggle] = useState(false)
@@ -100,7 +102,7 @@ const WhiteBoard = ({ board }) => {
 
     return (
         <WhiteBoardNameContainer>
-            
+
             {nameEditToggle && (
                 <WhiteBoardNameEdit
                     autoFocus
@@ -179,6 +181,7 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
 const DeleteButton = ({ board, setOptionsToggle }) => {
     const [errors, setErrors] = useState(null)
     const { setDisplayBoard } = useBoardType()
+    const { setUsersBoards } = useBoardsType()
 
 
     const handleDeleteBoard = () => {
@@ -192,6 +195,7 @@ const DeleteButton = ({ board, setOptionsToggle }) => {
                 setDisplayBoard(null);
                 board = null;
                 setOptionsToggle(prev => !prev)
+                setUsersBoards(null)
             }
         })()
     }
