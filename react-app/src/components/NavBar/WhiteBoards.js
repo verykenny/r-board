@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import WhiteBoard from "./WhiteBoard";
 
 
 const WhiteBoardsContainer = styled.div`
@@ -40,11 +41,6 @@ const WhiteBoards = () => {
 
 
 
-const WhiteBoard = ({ board }) => {
 
-    return (
-        <p>{board.name}</p>
-    )
-}
 
 export default WhiteBoards;
