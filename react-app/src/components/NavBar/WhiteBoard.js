@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
-import { ButtonAlt, FlyOutContainer } from "../StyledComponents";
+import { ButtonAlt } from "../StyledComponents";
 import { CSSTransition } from 'react-transition-group'
 import BackgroundEditFlyout from './BackgroundEditFlyout';
 
@@ -58,21 +58,15 @@ const PositionedContainer = styled.div`
 
 
 const WhiteBoard = ({ board }) => {
-    const { displayBoard, setDisplayBoard } = useBoardType()
+    const { setDisplayBoard } = useBoardType()
     const [optionsToggle, setOptionsToggle] = useState(false)
     const [nameEditToggle, setNameEditToggle] = useState(false)
     const [backgroundEditToggle, setBackgroundEditToggle] = useState(false)
     const [boardName, setBoardName] = useState(board.name)
 
     const handleChangeBoard = () => {
-        setDisplayBoard(board.id)
+        setDisplayBoard(board)
     }
-
-    useEffect(() => {
-        if (!displayBoard) {
-            setDisplayBoard(board.id)
-        }
-    }, [board.id, displayBoard, setDisplayBoard])
 
 
     const handleKeyDown = (e) => {
@@ -98,6 +92,7 @@ const WhiteBoard = ({ board }) => {
                 console.log(data.errors);
             } else {
                 board.name = data.board.name
+                setDisplayBoard(board)
                 setNameEditToggle(prev => !prev)
             }
         })()

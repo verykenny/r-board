@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import useBoardType from "../../context/Board";
 import { Button, FlyOutContainer } from "../StyledComponents";
 
 
@@ -56,13 +57,31 @@ const ImageBackground = styled.div`
 
 const BackgroundEditFlyout = ({ setOptionsToggle, board, setBackgroundEditToggle }) => {
     const [backgroundUrl, setBackgroundUrl] = useState(board.backgroundUrl);
+    const { setDisplayBoard } = useBoardType()
 
     const handleUpdateBackground = () => {
-        setBackgroundEditToggle(prev => !prev)
+        (async () => {
+            const response = await fetch(`/api/boards/${board.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: board.name,
+                    backgroundUrl: backgroundUrl
+                })
+            })
+            const data = await response.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                board.backgroundUrl = data.board.backgroundUrl
+                setDisplayBoard(board)
+                setBackgroundEditToggle(prev => !prev)
+            }
+        })()
         return;
     }
-
-    console.log(backgroundUrl);
 
     return (
         <EditFlyoutContainer>

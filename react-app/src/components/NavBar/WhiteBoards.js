@@ -29,7 +29,7 @@ const WhiteBoards = () => {
             setBoards(data.boards)
         })()
 
-    }, [user.id])
+    }, [user.id, errors])
 
 
     return (
