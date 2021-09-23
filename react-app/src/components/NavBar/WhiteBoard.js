@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
+import { ButtonAlt } from "../StyledComponents";
 
 
 const WhiteBoardNameContainer = styled.div`
@@ -9,6 +10,7 @@ const WhiteBoardNameContainer = styled.div`
     justify-content: space-between;
     margin-top: 20px;
     position: relative;
+    font-size: 16px;
 
 
     .fa-ellipsis-h:hover {
@@ -23,6 +25,14 @@ const WhiteBoardName = styled.p`
     }
 `;
 
+
+const WhiteBoardNameEdit = styled.input`
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 16px;
+`;
+
 const BoardOptionsContainer = styled.div`
     position: absolute;
     left: 280px;
@@ -33,6 +43,8 @@ const BoardOptionsContainer = styled.div`
 const WhiteBoard = ({ board }) => {
     const { displayBoard, setDisplayBoard } = useBoardType()
     const [optionsToggle, setOptionsToggle] = useState(false)
+    const [nameEditToggle, setNameEditToggle] = useState(false)
+    const [boardName, setBoardName] = useState(board.name)
 
     const handleChangeBoard = () => {
         setDisplayBoard(board.id)
@@ -46,18 +58,28 @@ const WhiteBoard = ({ board }) => {
 
     return (
         <WhiteBoardNameContainer>
-            <WhiteBoardName onClick={handleChangeBoard}>{board.name}</WhiteBoardName>
+            {nameEditToggle && (
+                <WhiteBoardNameEdit
+                    type='text'
+                    value={boardName}
+                    onChange={(e) => setBoardName(e.target.value)}
+                />
+
+            )}
+            {!nameEditToggle && (
+                <WhiteBoardName onClick={handleChangeBoard}>{board.name}</WhiteBoardName>
+            )}
             <i onClick={() => setOptionsToggle(prev => !prev)} className="fas fa-ellipsis-h"></i>
-            {optionsToggle && <BoardOptionsMenu />}
+            {optionsToggle && <BoardOptionsMenu setNameEditToggle={setNameEditToggle} />}
         </WhiteBoardNameContainer>
     )
 }
 
 
-const BoardOptionsMenu = () => {
+const BoardOptionsMenu = ({ setNameEditToggle }) => {
     return (
         <BoardOptionsContainer>
-            Update Name
+            <ButtonAlt onClick={() => setNameEditToggle(prev => !prev)}>Update Name</ButtonAlt>
             Update Background
             Delete
         </BoardOptionsContainer>
