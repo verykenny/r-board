@@ -155,26 +155,26 @@ const WhiteBoard = ({ board }) => {
     )
 }
 
-const ClickChecker = (ref) => {
-    useEffect(() => {
-        const handleCloseOptions = (e) => {
-            if (ref.current && !ref.current.contains(e.target)) {
-                // setOptionsToggle(prev => !prev)
-                console.log('outside click');
-            }
-        }
-
-        document.addEventListener("mousedown", handleCloseOptions);
-
-        return () => {
-            document.removeEventListener("mousedown", handleCloseOptions);
-        };
-    })
-}
 
 
 const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEditToggle, board }) => {
     const clickCheck = useRef(null)
+    const ClickChecker = (ref) => {
+        useEffect(() => {
+            const handleCloseOptions = (e) => {
+                if (ref.current && !ref.current.contains(e.target)) {
+                    setOptionsToggle(prev => !prev)
+
+                }
+            }
+
+            document.addEventListener("mousedown", handleCloseOptions);
+
+            return () => {
+                document.removeEventListener("mousedown", handleCloseOptions);
+            };
+        })
+    }
     ClickChecker(clickCheck)
 
     const handleNameEditToggle = () => {
