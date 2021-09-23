@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
 import { ButtonAlt } from "../StyledComponents";
@@ -156,7 +156,26 @@ const WhiteBoard = ({ board }) => {
 }
 
 
+
 const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEditToggle, board }) => {
+    const clickCheck = useRef(null)
+    const ClickChecker = (ref) => {
+        useEffect(() => {
+            const handleCloseOptions = (e) => {
+                if (ref.current && !ref.current.contains(e.target)) {
+                    setOptionsToggle(prev => !prev)
+
+                }
+            }
+
+            document.addEventListener("mousedown", handleCloseOptions);
+
+            return () => {
+                document.removeEventListener("mousedown", handleCloseOptions);
+            };
+        })
+    }
+    ClickChecker(clickCheck)
 
     const handleNameEditToggle = () => {
         setNameEditToggle(prev => !prev)
@@ -164,12 +183,13 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
     }
 
     const handleUpdateBackgroundToggle = () => {
+        console.log('HELLO!')
         setOptionsToggle(prev => !prev)
         setBackgroundEditToggle(prev => !prev)
     }
 
     return (
-        <BoardOptionsContainer>
+        <BoardOptionsContainer ref={clickCheck} >
             <ButtonAlt onClick={handleNameEditToggle}>Update Name</ButtonAlt>
             <ButtonAlt onClick={handleUpdateBackgroundToggle}>Update Background</ButtonAlt>
             <DeleteButton board={board} setOptionsToggle={setOptionsToggle} />
