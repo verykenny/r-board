@@ -8,6 +8,7 @@ const WhiteBoardsContainer = styled.div`
     width: 100%;
     height: 600px;
     max-height: 65%;
+    padding: 60px 20px;
 `;
 
 
