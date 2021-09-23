@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
-import { ButtonAlt } from "../StyledComponents";
+import { ButtonAlt, FlyOutContainer } from "../StyledComponents";
 
 
 const WhiteBoardNameContainer = styled.div`
@@ -41,6 +41,7 @@ const BoardOptionsContainer = styled.div`
     position: absolute;
     left: 280px;
     background: #363635;
+    width: fit-content;
 `;
 
 
@@ -48,6 +49,7 @@ const WhiteBoard = ({ board }) => {
     const { displayBoard, setDisplayBoard } = useBoardType()
     const [optionsToggle, setOptionsToggle] = useState(false)
     const [nameEditToggle, setNameEditToggle] = useState(false)
+    const [backgroundEditToggle, setBackgroundEditToggle] = useState(false)
     const [boardName, setBoardName] = useState(board.name)
 
     const handleChangeBoard = () => {
@@ -110,6 +112,14 @@ const WhiteBoard = ({ board }) => {
                 <BoardOptionsMenu
                     setNameEditToggle={setNameEditToggle}
                     setOptionsToggle={setOptionsToggle}
+                    setBackgroundEditToggle={setBackgroundEditToggle}
+                />
+            )}
+            {backgroundEditToggle && (
+                <BackgroundEditFlyout
+                    board={board}
+                    setOptionsToggle={setOptionsToggle}
+                    setBackgroundEditToggle={setBackgroundEditToggle}
                 />
             )}
         </WhiteBoardNameContainer>
@@ -117,21 +127,36 @@ const WhiteBoard = ({ board }) => {
 }
 
 
-const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle }) => {
+const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEditToggle }) => {
 
     const handleNameEditToggle = () => {
         setNameEditToggle(prev => !prev)
         setOptionsToggle(prev => !prev)
     }
 
+    const handleUpdateBackgroundToggle = () => {
+        setBackgroundEditToggle(prev => !prev)
+        setOptionsToggle(prev => !prev)
+    }
 
     return (
         <BoardOptionsContainer>
             <ButtonAlt onClick={handleNameEditToggle}>Update Name</ButtonAlt>
-            Update Background
-            Delete
+            <ButtonAlt onClick={handleUpdateBackgroundToggle}>Update Background</ButtonAlt>
+            <ButtonAlt>Delete</ButtonAlt>
         </BoardOptionsContainer>
     )
 }
+
+const BackgroundEditFlyout = ({ setOptionsToggle }) => {
+
+    return (
+        <FlyOutContainer>
+
+        </FlyOutContainer>
+    )
+}
+
+
 
 export default WhiteBoard;

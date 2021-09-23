@@ -1,0 +1,21 @@
+
+
+.main-flyout-enter {
+    position: absolute;
+    transform: translateX(-110%);
+}
+
+.main-flyout-enter-active {
+    transform: translateX(0%);
+    transition: all 1000 ease;
+}
+
+.main-flyout-exit {
+    position: absolute;
+}
+
+.main-flyout-exit-active {
+    transform: translateX(-110%);
+    transition: all 1000 ease;
+
+}

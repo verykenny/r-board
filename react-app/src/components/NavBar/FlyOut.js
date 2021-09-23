@@ -1,15 +1,11 @@
 import styled from 'styled-components';
 import LogoutButton from '../auth/LogoutButton';
 import WhiteBoards from './WhiteBoards';
+import { FlyOutContainer } from '../StyledComponents'
+
+import './FlyOut.css'
 
 
-const FlyOutContainer = styled.div`
-    height: 100vh;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-
-`;
 
 const MenuOptionsContainer = styled.div`
     background: #363635;
@@ -18,16 +14,16 @@ const MenuOptionsContainer = styled.div`
 `;
 
 
-const FlyOut = () => {
-
-
+const FlyOut = ({ showFlyOut }) => {
     return (
+    <div className='main-flyout'>
         <FlyOutContainer>
             <WhiteBoards />
             <MenuOptionsContainer>
                 <LogoutButton />
             </MenuOptionsContainer>
         </FlyOutContainer>
+    </div>
     )
 }
 
