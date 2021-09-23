@@ -20,6 +20,7 @@ const NavSideBar = styled.nav`
 const PositionedContainer = styled.div`
     position: absolute;
     left: 50px;
+    z-index: 50;
 `;
 
 const NavBar = () => {
@@ -32,7 +33,7 @@ const NavBar = () => {
             <NavSideBar>
                 <i className="fas fa-bars" onClick={() => setShowFlyOut(prev => !prev)}></i>
             </NavSideBar>
-            
+
             <PositionedContainer>
                 <CSSTransition
                     in={showFlyOut}

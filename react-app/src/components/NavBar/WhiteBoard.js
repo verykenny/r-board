@@ -42,9 +42,17 @@ const BoardOptionsContainer = styled.div`
     position: absolute;
     left: 280px;
     top: 10px;
+    z-index: 100;
     background: #363635;
     width: fit-content;
 `;
+
+const PositionedContainer = styled.div`
+    position: fixed;
+    left: 350px;
+    top: 0px;
+`;
+
 
 
 const WhiteBoard = ({ board }) => {
@@ -121,14 +129,22 @@ const WhiteBoard = ({ board }) => {
                     setOptionsToggle={setOptionsToggle}
                     setBackgroundEditToggle={setBackgroundEditToggle}
                 />
+            </CSSTransition>
+
+            <PositionedContainer>
+                <CSSTransition
+                    in={backgroundEditToggle}
+                    timeout={300}
+                    classNames='main-flyout'
+                    unmountOnExit
+                >
+                    <BackgroundEditFlyout
+                        board={board}
+                        setOptionsToggle={setOptionsToggle}
+                        setBackgroundEditToggle={setBackgroundEditToggle}
+                    />
                 </CSSTransition>
-            {backgroundEditToggle && (
-                <BackgroundEditFlyout
-                    board={board}
-                    setOptionsToggle={setOptionsToggle}
-                    setBackgroundEditToggle={setBackgroundEditToggle}
-                />
-            )}
+            </PositionedContainer>
         </WhiteBoardNameContainer>
     )
 }
@@ -142,8 +158,8 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
     }
 
     const handleUpdateBackgroundToggle = () => {
-        setBackgroundEditToggle(prev => !prev)
         setOptionsToggle(prev => !prev)
+        setBackgroundEditToggle(prev => !prev)
     }
 
     return (

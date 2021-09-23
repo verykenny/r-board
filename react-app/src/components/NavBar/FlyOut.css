@@ -1,9 +1,11 @@
 .main-flyout-enter {
     position: absolute;
+    z-index: 1;
     transform: translateX(-110%);
 }
 
 .main-flyout-enter-active {
+    z-index: -1;
     transform: translateX(0%);
     transition: all 300ms ease;
 }

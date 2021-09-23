@@ -16,7 +16,7 @@ export const Button = styled.button`
     `;
 
 
-    export const ButtonAlt = styled(Button)`
+export const ButtonAlt = styled(Button)`
     background: #595A4A;
 
     &:hover {
