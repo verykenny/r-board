@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
 
@@ -22,9 +22,14 @@ const WhiteBoardName = styled.p`
     }
 `;
 
+const BoardOptionsContainer = styled.div`
+
+`;
+
 
 const WhiteBoard = ({ board }) => {
     const { displayBoard, setDisplayBoard } = useBoardType()
+    const [optionsToggle, setOptionsToggle] = useState(false)
 
     const handleChangeBoard = () => {
         setDisplayBoard(board.id)
@@ -39,8 +44,16 @@ const WhiteBoard = ({ board }) => {
     return (
         <WhiteBoardNameContainer>
             <WhiteBoardName onClick={handleChangeBoard}>{board.name}</WhiteBoardName>
-            <i className="fas fa-ellipsis-h"></i>
+            <i onClick={() => setOptionsToggle(prev => !prev)} className="fas fa-ellipsis-h"></i>
+            <BoardOptionsMenu />
         </WhiteBoardNameContainer>
+    )
+}
+
+
+const BoardOptionsMenu = () => {
+    return (
+        <BoardOptionsContainer></BoardOptionsContainer>
     )
 }
 
