@@ -56,6 +56,34 @@ const WhiteBoard = ({ board }) => {
         }
     }, [board.id, displayBoard, setDisplayBoard])
 
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit(e)
+        }
+    }
+
+    const handleSubmit = (e) => {
+        (async () => {
+            const response = await fetch(`/api/boards/${board.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: boardName,
+                    backgroundUrl: board.backgroundUrl
+                })
+            })
+            const data = await response.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                board.name = data.board.name
+            }
+        })()
+    }
+
     return (
         <WhiteBoardNameContainer>
             {nameEditToggle && (
@@ -63,6 +91,8 @@ const WhiteBoard = ({ board }) => {
                     type='text'
                     value={boardName}
                     onChange={(e) => setBoardName(e.target.value)}
+                    onBlur={handleSubmit}
+                    onKeyDown={handleKeyDown}
                 />
 
             )}
