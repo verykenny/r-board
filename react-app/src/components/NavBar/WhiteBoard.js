@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import useBoardType from "../../context/Board";
 
 
 const WhiteBoardNameContainer = styled.div`
@@ -21,15 +23,18 @@ const WhiteBoardName = styled.p`
 `;
 
 
-
-
 const WhiteBoard = ({ board }) => {
+    const { displayBoard, setDisplayBoard } = useBoardType()
 
     const handleChangeBoard = () => {
-        alert('whatNow?')
+        setDisplayBoard(board.id)
     }
 
-
+    useEffect(() => {
+        if (!displayBoard) {
+            setDisplayBoard(board.id)
+        }
+    }, [board.id, displayBoard, setDisplayBoard])
 
     return (
         <WhiteBoardNameContainer>
