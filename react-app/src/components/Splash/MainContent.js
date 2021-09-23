@@ -9,6 +9,16 @@ const MainContentContainer = styled.main`
     background-image: url("https://pseudogram-bucket.s3.amazonaws.com/bg-splash-fridge.jpeg");
     background-position: center;
     background-size: cover;
+    `;
+
+    const Opacity = styled.div`
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,.55);
 `;
 
 const SmallContainer = styled.section`
@@ -23,7 +33,7 @@ const SmallContainer = styled.section`
     border-bottom-right-radius: 60px 5px;
     background: #ffff88;
 
-`;
+    `;
 
 const ContentHeader = styled.h2`
     font-weight: normal;
@@ -38,6 +48,7 @@ const MainContent = () => {
     return (
         <>
             <MainContentContainer>
+                <Opacity>
                 <SmallContainer>
                     <ContentHeader>Welcome to rBoard!</ContentHeader>
                     <Content>rBoard meant to combine precious refrigerator space and whiteboards into one app.</Content>
@@ -48,6 +59,7 @@ const MainContent = () => {
                     <Content>Don't have an account yet? Create one by signing up.</Content>
                     <Content>Check out the app first by signing in as a demo user!</Content>
                 </SmallContainer>
+                </Opacity>
             </MainContentContainer>
 
         </>
