@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import FlyOut from './FlyOut';
 
 const NavSideBar = styled.nav`
-    background: #F06449;
-    position: absolute;
-    height: 100vh;
+    background: #363635;
+    color: white;
     display: flex;
+    height: 100vh;
+    position: absolute;
 
 
     .fa-bars {
