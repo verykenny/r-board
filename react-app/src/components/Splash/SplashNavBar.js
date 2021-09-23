@@ -7,7 +7,8 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../store/session'
 
 const Bar = styled.div`
-    background: lightblue;
+    background: #363635;
+    color: white;
     display: flex;
     height: 50px;
     justify-content: center;
@@ -23,8 +24,8 @@ const SplashNav = styled.nav`
 `;
 
 const NavButtonContainer = styled.div`
-    display: flex;
     align-items: center;
+    display: flex;
 `
 
 const Title = styled.h1`

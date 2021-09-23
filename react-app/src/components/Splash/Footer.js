@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const FooterContainer = styled.footer`
-    background: black;
-    display: flex;
+    background: #363635;
     color: white;
+    display: flex;
     justify-content: center;
 `
 
