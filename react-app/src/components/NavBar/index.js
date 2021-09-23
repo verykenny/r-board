@@ -17,6 +17,10 @@ const NavSideBar = styled.nav`
     }
 `;
 
+const PositionedContainer = styled.div`
+    position: absolute;
+    left: 50px;
+`;
 
 const NavBar = () => {
     const [showFlyOut, setShowFlyOut] = useState(false)
@@ -28,16 +32,19 @@ const NavBar = () => {
             <NavSideBar>
                 <i className="fas fa-bars" onClick={() => setShowFlyOut(prev => !prev)}></i>
             </NavSideBar>
-            <CSSTransition
-                in={showFlyOut}
-                timeout={300}
-                classNames='main-flyout'
-                unmountOnExit
-            >
-                <div classNames='main-flyout'>
-                    <FlyOut />
-                </div>
-            </CSSTransition>
+            
+            <PositionedContainer>
+                <CSSTransition
+                    in={showFlyOut}
+                    timeout={300}
+                    classNames='main-flyout'
+                    unmountOnExit
+                    >
+                    <div classNames='main-flyout'>
+                        <FlyOut />
+                    </div>
+                </CSSTransition>
+            </PositionedContainer>
         </>
     );
 }

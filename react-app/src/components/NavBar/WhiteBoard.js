@@ -41,6 +41,7 @@ const WhiteBoardNameEdit = styled.input`
 const BoardOptionsContainer = styled.div`
     position: absolute;
     left: 280px;
+    top: 10px;
     background: #363635;
     width: fit-content;
 `;
