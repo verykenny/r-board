@@ -3,6 +3,7 @@ import styled from "styled-components";
 import useBoardType from "../../context/Board";
 import { ButtonAlt, FlyOutContainer } from "../StyledComponents";
 import { CSSTransition } from 'react-transition-group'
+import BackgroundEditFlyout from './BackgroundEditFlyout';
 
 
 const WhiteBoardNameContainer = styled.div`
@@ -51,6 +52,7 @@ const PositionedContainer = styled.div`
     position: fixed;
     left: 300px;
     top: 0px;
+    z-index: -1;
 `;
 
 
@@ -135,7 +137,7 @@ const WhiteBoard = ({ board }) => {
                 <CSSTransition
                     in={backgroundEditToggle}
                     timeout={300}
-                    classNames='main-flyout'
+                    classNames='second-flyout'
                     unmountOnExit
                 >
                     <BackgroundEditFlyout
@@ -168,15 +170,6 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
             <ButtonAlt onClick={handleUpdateBackgroundToggle}>Update Background</ButtonAlt>
             <ButtonAlt>Delete</ButtonAlt>
         </BoardOptionsContainer>
-    )
-}
-
-const BackgroundEditFlyout = ({ setOptionsToggle }) => {
-
-    return (
-        <FlyOutContainer>
-
-        </FlyOutContainer>
     )
 }
 

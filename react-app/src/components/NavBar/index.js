@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import FlyOut from './FlyOut';
 import { CSSTransition } from 'react-transition-group'
 
+
 const NavSideBar = styled.nav`
     background: #363635;
     color: white;
