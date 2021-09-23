@@ -9,6 +9,7 @@ const NavSideBar = styled.nav`
     display: flex;
     height: 100vh;
     position: absolute;
+    z-index: 100;
 
     .fa-bars {
         font-size: 40px;

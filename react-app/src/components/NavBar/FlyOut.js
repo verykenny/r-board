@@ -13,15 +13,19 @@ const MenuOptionsContainer = styled.div`
 
 `;
 
+const MainFlyoutContainer = styled(FlyOutContainer)`
+    margin-left: 45px;
+`;
+
 
 const FlyOut = ({ showFlyOut }) => {
     return (
-        <FlyOutContainer>
+        <MainFlyoutContainer>
             <WhiteBoards />
             <MenuOptionsContainer>
                 <LogoutButton />
             </MenuOptionsContainer>
-        </FlyOutContainer>
+        </MainFlyoutContainer>
     )
 }
 
