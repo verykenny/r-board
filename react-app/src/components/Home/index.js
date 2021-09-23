@@ -39,7 +39,7 @@ const Home = () => {
     return (
         <HomeContainer>
             <NavBar />
-            {whiteboard && <h1>WHITCH A BIG HELLO!</h1>}
+            {whiteboard && <h1>YOU HAVE A WHITEBOARD!!!!!</h1>}
         </HomeContainer>
     )
 }
