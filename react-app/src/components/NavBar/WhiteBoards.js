@@ -28,7 +28,9 @@ const WhiteBoards = () => {
             }
             setBoards(data.boards)
         })()
-    }, [user.id, errors])
+
+    }, [user.id])
+
 
     return (
         <WhiteBoardsContainer>

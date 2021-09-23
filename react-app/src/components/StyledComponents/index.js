@@ -7,19 +7,32 @@ export const Button = styled.button`
     color: white;
     padding: 7px 15px;
     min-width: 80px;
+    transition: filter 300ms;
 
     &:hover {
-        background: #0457F1;
+        // background: #0457F1;
+        filter: brightness(1.3);
     }
-`;
+    `;
 
 
 export const ButtonAlt = styled(Button)`
     background: #595A4A;
 
     &:hover {
-        background: #434337;
+        filter: brightness(1.3);
+        // background: #434337;
     }
+`;
+
+
+export const FlyOutContainer = styled.div`
+    height: 100vh;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    background: #363635;
+    color: white;
 `;
 
 
