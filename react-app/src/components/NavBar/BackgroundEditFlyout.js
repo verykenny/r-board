@@ -28,19 +28,25 @@ const SubmitButtonContainer = styled.div`
     justify-content: center;
 `;
 
+const SubmitButton = styled(Button)`
+    &:disabled {
+        background: #363635;
+        cursor: auto;
+    }
+`;
+
 const ImageBackgroundContainer = styled.div`
     margin: 15px 0;
 `;
 
-const ImageBackground = styled.div.attrs(props => ({
-    boxShadow: (props.active) ? "box-shadow: -8px 11px 10px;" : "-2px 5px 5px;"
-}))`
+const ImageBackground = styled.div`
     width: 250px;
     height: 150px;
     background-image: url(${props => props.backgroundUrl});
     background-size: 250px 150px;
     color: black;
     transition: box-shadow 300ms;
+    box-shadow: ${props => (props.active) ? "-8px 11px 10px;" : "-2px 5px 5px;"};
 
     &:hover {
         box-shadow: -8px 11px 10px;
@@ -57,7 +63,7 @@ const BackgroundEditFlyout = ({ setOptionsToggle, board, setBackgroundEditToggle
     }
 
     console.log(backgroundUrl);
-    
+
     return (
         <EditFlyoutContainer>
             <BackgroundOptionsContainer>
@@ -65,18 +71,20 @@ const BackgroundEditFlyout = ({ setOptionsToggle, board, setBackgroundEditToggle
                     <ImageBackground
                         active={backgroundUrl === 'https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'}
                         backgroundUrl={'https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'}
+                        onClick={() => setBackgroundUrl('https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png')}
                         />
                 </ImageBackgroundContainer>
                 <ImageBackgroundContainer>
                     <ImageBackground
                         active={backgroundUrl === 'https://pseudogram-bucket.s3.amazonaws.com/bg-blackboard2.jpeg'}
                         backgroundUrl={'https://pseudogram-bucket.s3.amazonaws.com/bg-blackboard2.jpeg'}
+                        onClick={() => setBackgroundUrl('https://pseudogram-bucket.s3.amazonaws.com/bg-blackboard2.jpeg')}
                     />
                 </ImageBackgroundContainer>
             </BackgroundOptionsContainer>
 
             <SubmitButtonContainer>
-                <Button disabled={board.backgroundUrl === backgroundUrl} onClick={handleUpdateBackground}>Update Background</Button>
+                <SubmitButton disabled={board.backgroundUrl === backgroundUrl} onClick={handleUpdateBackground}>Update Background</SubmitButton>
             </SubmitButtonContainer>
         </EditFlyoutContainer>
     )

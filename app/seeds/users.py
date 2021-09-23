@@ -12,19 +12,19 @@ def seed_users():
         username='bobbie', email='bobbie@aa.io', password='password')
 
     board1 = Board(
-        name='Home', backgroundUrl='/bg-whiteboard.png'
+        name='Home', backgroundUrl='https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'
     )
     board2 = Board(
-        name='School', backgroundUrl='/bg-whiteboard.png'
+        name='School', backgroundUrl='https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'
     )
     board3 = Board(
-        name='Home', backgroundUrl='/bg-whiteboard.png'
+        name='Home', backgroundUrl='https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'
     )
     board4 = Board(
-        name='School', backgroundUrl='/bg-whiteboard.png'
+        name='School', backgroundUrl='https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'
     )
     board5 = Board(
-        name='Home', backgroundUrl='/bg-whiteboard.png'
+        name='Home', backgroundUrl='https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'
     )
 
     BoardUser(user=demo, board=board1)
