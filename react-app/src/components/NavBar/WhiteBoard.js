@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
 import { ButtonAlt, FlyOutContainer } from "../StyledComponents";
+import { CSSTransition } from 'react-transition-group'
 
 
 const WhiteBoardNameContainer = styled.div`
@@ -108,13 +109,18 @@ const WhiteBoard = ({ board }) => {
                 <WhiteBoardName onClick={handleChangeBoard}>{board.name}</WhiteBoardName>
             )}
             <i onClick={() => setOptionsToggle(prev => !prev)} className="fas fa-ellipsis-h"></i>
-            {optionsToggle && (
+            <CSSTransition
+                in={optionsToggle}
+                timeout={300}
+                classNames='options-menu'
+                unmountOnExit
+            >
                 <BoardOptionsMenu
                     setNameEditToggle={setNameEditToggle}
                     setOptionsToggle={setOptionsToggle}
                     setBackgroundEditToggle={setBackgroundEditToggle}
                 />
-            )}
+                </CSSTransition>
             {backgroundEditToggle && (
                 <BackgroundEditFlyout
                     board={board}
