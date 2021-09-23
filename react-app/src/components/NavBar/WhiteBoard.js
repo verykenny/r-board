@@ -106,7 +106,12 @@ const WhiteBoard = ({ board }) => {
                 <WhiteBoardName onClick={handleChangeBoard}>{board.name}</WhiteBoardName>
             )}
             <i onClick={() => setOptionsToggle(prev => !prev)} className="fas fa-ellipsis-h"></i>
-            {optionsToggle && <BoardOptionsMenu setNameEditToggle={setNameEditToggle} setOptionsToggle={setOptionsToggle} />}
+            {optionsToggle && (
+                <BoardOptionsMenu
+                    setNameEditToggle={setNameEditToggle}
+                    setOptionsToggle={setOptionsToggle}
+                />
+            )}
         </WhiteBoardNameContainer>
     )
 }
@@ -114,14 +119,15 @@ const WhiteBoard = ({ board }) => {
 
 const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle }) => {
 
-    const handleEditToggle = () => {
+    const handleNameEditToggle = () => {
         setNameEditToggle(prev => !prev)
         setOptionsToggle(prev => !prev)
     }
 
+
     return (
         <BoardOptionsContainer>
-            <ButtonAlt onClick={handleEditToggle}>Update Name</ButtonAlt>
+            <ButtonAlt onClick={handleNameEditToggle}>Update Name</ButtonAlt>
             Update Background
             Delete
         </BoardOptionsContainer>
