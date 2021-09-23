@@ -16,14 +16,12 @@ const MenuOptionsContainer = styled.div`
 
 const FlyOut = ({ showFlyOut }) => {
     return (
-    <div className='main-flyout'>
         <FlyOutContainer>
             <WhiteBoards />
             <MenuOptionsContainer>
                 <LogoutButton />
             </MenuOptionsContainer>
         </FlyOutContainer>
-    </div>
     )
 }
 

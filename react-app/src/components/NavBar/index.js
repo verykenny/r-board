@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import FlyOut from './FlyOut';
 import { CSSTransition } from 'react-transition-group'
@@ -20,18 +20,24 @@ const NavSideBar = styled.nav`
 const NavBar = () => {
     const [showFlyOut, setShowFlyOut] = useState(false)
 
+
+
     return (
-        <NavSideBar>
-            <i className="fas fa-bars" onClick={() => setShowFlyOut(prev => !prev)}></i>
+        <>
+            <NavSideBar>
+                <i className="fas fa-bars" onClick={() => setShowFlyOut(prev => !prev)}></i>
+            </NavSideBar>
             <CSSTransition
                 in={showFlyOut}
                 timeout={300}
                 classNames='main-flyout'
                 unmountOnExit
             >
-                <FlyOut />
+                <div classNames='main-flyout'>
+                    <FlyOut />
+                </div>
             </CSSTransition>
-        </NavSideBar>
+        </>
     );
 }
 

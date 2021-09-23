@@ -31,6 +31,8 @@ export const FlyOutContainer = styled.div`
     width: 300px;
     display: flex;
     flex-direction: column;
+    background: #363635;
+    color: white;
 `;
 
 

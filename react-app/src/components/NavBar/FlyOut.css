@@ -7,7 +7,7 @@
 
 .main-flyout-enter-active {
     transform: translateX(0%);
-    transition: all 1000 ease;
+    transition: all 500ms ease;
 }
 
 .main-flyout-exit {
@@ -16,6 +16,6 @@
 
 .main-flyout-exit-active {
     transform: translateX(-110%);
-    transition: all 1000 ease;
+    transition: all 500ms ease;
 
 }
