@@ -24,10 +24,11 @@ const WhiteBoards = () => {
             const data = await response.json()
             if (data.errors) {
                 setErrors(data.errors)
+                console.log(errors);
             }
             setBoards(data.boards)
         })()
-    }, [user.id])
+    }, [user.id, errors])
 
     return (
         <WhiteBoardsContainer>
