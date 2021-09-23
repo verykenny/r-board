@@ -10,8 +10,8 @@ export const Button = styled.button`
     transition: filter 300ms;
 
     &:hover {
-        // background: #0457F1;
         filter: brightness(1.3);
+        cursor: pointer;
     }
     `;
 
@@ -21,7 +21,6 @@ export const ButtonAlt = styled(Button)`
 
     &:hover {
         filter: brightness(1.3);
-        // background: #434337;
     }
 `;
 

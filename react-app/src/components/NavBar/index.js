@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import FlyOut from './FlyOut';
 import { CSSTransition } from 'react-transition-group'
+
 
 const NavSideBar = styled.nav`
     background: #363635;
