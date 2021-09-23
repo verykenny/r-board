@@ -38,6 +38,7 @@ const SmallContainer = styled.section`
 const ContentHeader = styled.h2`
     font-weight: normal;
     text-align: center;
+    font-family: 'Permanent Marker', cursive;
 `;
 
 const Content = styled.p`
