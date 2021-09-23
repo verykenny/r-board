@@ -49,7 +49,7 @@ const BoardOptionsContainer = styled.div`
 
 const PositionedContainer = styled.div`
     position: fixed;
-    left: 350px;
+    left: 300px;
     top: 0px;
 `;
 
