@@ -5,10 +5,9 @@ import styled from "styled-components";
 
 
 const WhiteBoardsContainer = styled.div`
-background: #D8E2DC;
-width: 100%;
-height: 600px;
-max-height: 65%;
+    width: 100%;
+    height: 600px;
+    max-height: 65%;
 `;
 
 
