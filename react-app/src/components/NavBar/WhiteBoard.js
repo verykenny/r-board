@@ -8,6 +8,7 @@ const WhiteBoardNameContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    position: relative;
 
 
     .fa-ellipsis-h:hover {
@@ -23,7 +24,9 @@ const WhiteBoardName = styled.p`
 `;
 
 const BoardOptionsContainer = styled.div`
-
+    position: absolute;
+    left: 280px;
+    background: #363635;
 `;
 
 
@@ -45,7 +48,7 @@ const WhiteBoard = ({ board }) => {
         <WhiteBoardNameContainer>
             <WhiteBoardName onClick={handleChangeBoard}>{board.name}</WhiteBoardName>
             <i onClick={() => setOptionsToggle(prev => !prev)} className="fas fa-ellipsis-h"></i>
-            <BoardOptionsMenu />
+            {optionsToggle && <BoardOptionsMenu />}
         </WhiteBoardNameContainer>
     )
 }
@@ -53,7 +56,11 @@ const WhiteBoard = ({ board }) => {
 
 const BoardOptionsMenu = () => {
     return (
-        <BoardOptionsContainer></BoardOptionsContainer>
+        <BoardOptionsContainer>
+            Update Name
+            Update Background
+            Delete
+        </BoardOptionsContainer>
     )
 }
 
