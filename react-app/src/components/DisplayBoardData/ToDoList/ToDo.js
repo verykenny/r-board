@@ -1,24 +1,28 @@
 import styled from "styled-components"
-import useBoardType from "../../../context/Board";
 import ToDoCheckBox from "./ToDoCheckBox";
 
 
 const ToDoContainer = styled.div`
-    font-family: 'Reenie Beanie', cursive;
     font-size: 20px;
     display: flex;
+    align-items: center;
+    padding: 10px 0px;
+    border-bottom: 1px solid grey
+`;
+
+const ToDoContentContainer = styled.div`
+    font-family: 'Reenie Beanie', cursive;
+    padding-left: 20px;
 `;
 
 
 function ToDo({ todo, todoListId }) {
-    const { setDisplayBoardData } = useBoardType()
-
 
 
     return (
         <ToDoContainer>
             <ToDoCheckBox todo={todo} todoListId={todoListId}/>
-            {todo.content}
+            <ToDoContentContainer>{todo.content}</ToDoContentContainer>
         </ToDoContainer>
     )
 }

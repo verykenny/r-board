@@ -42,11 +42,9 @@ export default function ToDoCheckBox({ todo, todoListId }) {
 
 
     return (
-        <>
             <i
                 className={`far ${(todo.completed) ? 'fa-check-square' : 'fa-square'}`}
                 onClick={handleTodoToggle}
             />
-        </>
     )
 }
