@@ -23,12 +23,19 @@ def username_exists(form, field):
 
 def password_length(form, field):
     password = field.data
-    if len(password) > 20:
+    if len(password) > 21:
         raise ValidationError('Password must be less than 20 characters.')
+
+
+def username_length(form, field):
+    username = field.data
+    if len(username) > 21:
+        raise ValidationError('Username must be less than 20 characters.')
 
 
 class SignUpForm(FlaskForm):
     username = StringField('username', validators=[
+        username_length,
         DataRequired(message='Please provide a username.'),
         username_exists,
     ])
