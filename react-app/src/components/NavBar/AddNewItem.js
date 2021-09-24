@@ -43,7 +43,7 @@ const AddNewItem = () => {
 
 
 const ItemOptions = ({ setAddItemToggle }) => {
-    const { displayBoard, setDisplayBoard } = useBoardType()
+    const { displayBoard, setDisplayBoardData, displayBoardData } = useBoardType()
 
     const handleCreateTodoList = () => {
         (async () => {
@@ -62,11 +62,17 @@ const ItemOptions = ({ setAddItemToggle }) => {
             if (data.errors) {
                 console.log(data.errors);
             } else {
+                console.log(displayBoard);
                 setAddItemToggle(false)
+                setDisplayBoardData(prev => {
+                    const newBoardData = { ...prev }
+                    newBoardData.todoLists.push(data.todoList)
+                    return newBoardData;
+                })
             }
         })()
     }
-
+    console.log(displayBoardData);
 
     return (
         <ItemFlyoutContainer>

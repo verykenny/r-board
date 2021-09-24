@@ -16,8 +16,7 @@ const HomeContainer = styled.div`
 const Home = () => {
     const user = useSelector(state => state.session.user)
     const [errors, setErrors] = useState(null)
-    const { displayBoard, setDisplayBoard } = useBoardType()
-    const dispatch = useDispatch()
+    const { displayBoard, setDisplayBoard, displayBoardData, setDisplayBoardData } = useBoardType()
 
     useEffect(() => {
         (async () => {
@@ -32,12 +31,29 @@ const Home = () => {
             }
         })()
 
-    }, [dispatch, setDisplayBoard, displayBoard, errors, user.id])
+    }, [setDisplayBoard, displayBoard, errors, user.id])
+
+    useEffect(() => {
+        (async () => {
+            if (displayBoard) {
+                const response = await fetch(`/api/boards/${displayBoard.id}`)
+                const data = await response.json()
+                if (data.errors) {
+                    setErrors(data.errors)
+                    console.log(errors);
+                }
+                setDisplayBoardData(data.boardItems)
+            }
+        })()
+
+    }, [displayBoard, setDisplayBoardData, errors])
 
     return (
         <HomeContainer backgroundUrl={displayBoard?.backgroundUrl}>
             <NavBar />
-            {displayBoard && <h1>YOU HAVE A WHITEBOARD!!!!!</h1>}
+            {displayBoardData && displayBoardData.todoLists.map(todoList => (
+                <div>Pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp{todoList.name}</div>
+            ))}
         </HomeContainer>
     )
 }
