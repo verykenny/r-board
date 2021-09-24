@@ -10,9 +10,10 @@ const ToDoContainer = styled.div`
     border-bottom: 1px solid grey
 `;
 
-const ToDoContentContainer = styled.div`
+const ToDoContentContainer = styled.p`
     font-family: 'Reenie Beanie', cursive;
     padding-left: 20px;
+    max-width: 100%;
 `;
 
 
