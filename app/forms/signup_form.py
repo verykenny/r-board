@@ -21,6 +21,12 @@ def username_exists(form, field):
         raise ValidationError('Username is already in use.')
 
 
+def password_length(form, field):
+    password = field.data
+    if len(password) > 20:
+        raise ValidationError('Password must be less than 20 characters.')
+
+
 class SignUpForm(FlaskForm):
     username = StringField('username', validators=[
         DataRequired(message='Please provide a username.'),
@@ -32,6 +38,7 @@ class SignUpForm(FlaskForm):
         user_exists,
     ])
     password = StringField('password', validators=[
+        password_length,
         DataRequired(message='Please provide a password.'),
         Regexp(
             '^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$',
