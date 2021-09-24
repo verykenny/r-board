@@ -3,6 +3,7 @@ import { CSSTransition } from 'react-transition-group'
 import { FlyOutContainer } from "../StyledComponents";
 import styled from "styled-components";
 import { useState } from "react";
+import useBoardType from "../../context/Board";
 
 
 const PositionedContainer = styled.div`
@@ -23,30 +24,53 @@ const ItemFlyoutContainer = styled(FlyOutContainer)`
 const AddNewItem = () => {
     const [addItemToggle, setAddItemToggle] = useState(false)
 
-
     return (
         <>
-        <Button onClick={() => setAddItemToggle(prev => !prev)}>Add New Item</Button>
-        <PositionedContainer>
-        <CSSTransition
-            in={addItemToggle}
-            timeout={300}
-            classNames='second-flyout'
-            unmountOnExit
-        >
-            <ItemOptions />
-        </CSSTransition>
-    </PositionedContainer>
-    </>
+            <Button onClick={() => setAddItemToggle(prev => !prev)}>Add New Item</Button>
+            <PositionedContainer>
+                <CSSTransition
+                    in={addItemToggle}
+                    timeout={300}
+                    classNames='second-flyout'
+                    unmountOnExit
+                >
+                    <ItemOptions setAddItemToggle={setAddItemToggle} />
+                </CSSTransition>
+            </PositionedContainer>
+        </>
     )
 }
 
 
-const ItemOptions = () => {
+const ItemOptions = ({ setAddItemToggle }) => {
+    const { displayBoard, setDisplayBoard } = useBoardType()
+
+    const handleCreateTodoList = () => {
+        (async () => {
+            const response = await fetch(`/api/boards/${displayBoard.id}/todo_lists`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: 'New List',
+                    xPos: 0,
+                    yPos: 0,
+                })
+            })
+            const data = await response.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                setAddItemToggle(false)
+            }
+        })()
+    }
+
 
     return (
         <ItemFlyoutContainer>
-
+            <Button onClick={handleCreateTodoList}>New Todo List</Button>
         </ItemFlyoutContainer>
     )
 }
