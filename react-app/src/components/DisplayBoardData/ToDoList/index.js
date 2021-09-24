@@ -30,7 +30,7 @@ function ToDoList({ todoList }) {
             </ToDoListNameContainer>
             <ToDosContainer>
                 {todoList.todos.map(todo => (
-                    <ToDo key={todo.id} todo={todo}/>
+                    <ToDo key={todo.id} todo={todo} todoListId={todoList.id}/>
                 ))}
             </ToDosContainer>
         </ToDoListContainer>
