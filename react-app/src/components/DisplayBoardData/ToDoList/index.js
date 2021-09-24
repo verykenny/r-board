@@ -3,6 +3,7 @@ import styled from "styled-components"
 import AddToDo from "./AddToDo";
 
 import ToDo from "./ToDo";
+import TodoMenu from "./TodoMenu";
 
 const ToDoListContainer = styled.div`
     padding: 5px;
@@ -21,12 +22,15 @@ const ToDoListNameContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 3px;
+    position: relative;
 
-    .fa-plus {
+    .fa-plus,
+    .fa-ellipsis-h {
         color: grey;
     }
 
-    .fa-plus:hover {
+    .fa-plus:hover,
+    .fa-ellipsis-h:hover {
         color: black;
         cursor: pointer;
     }
@@ -40,6 +44,7 @@ const ToDosContainer = styled.div`
 
 function ToDoList({ todoList }) {
     const [addTodo, setAddTodo] = useState(false)
+    const [toggleTodoMenu, setToggleTodoMenu] = useState(false)
 
 
     return (
@@ -47,6 +52,8 @@ function ToDoList({ todoList }) {
             <ToDoListNameContainer>
                 {todoList.name}
                 <i onClick={() => setAddTodo(prev => !prev)} className="fas fa-plus"></i>
+                <i onClick={() => setToggleTodoMenu(prev => !prev)} class="fas fa-ellipsis-h"></i>
+                {toggleTodoMenu && <TodoMenu setToggleTodoMenu={setToggleTodoMenu} />}
             </ToDoListNameContainer>
             <ToDosContainer>
                 {todoList.todos.map(todo => (

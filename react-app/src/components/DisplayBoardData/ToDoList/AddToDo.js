@@ -22,7 +22,8 @@ const ToDoEdit = styled.input`
     font-family: 'Reenie Beanie', cursive;
     border: none;
     background: transparent;
-
+    width: 75px;
+    min-width: fit-content;
     &:focus {
         outline: none;
     }
