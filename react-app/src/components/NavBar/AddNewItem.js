@@ -62,7 +62,6 @@ const ItemOptions = ({ setAddItemToggle }) => {
             if (data.errors) {
                 console.log(data.errors);
             } else {
-                console.log(displayBoard);
                 setAddItemToggle(false)
                 setDisplayBoardData(prev => {
                     const newBoardData = { ...prev }
