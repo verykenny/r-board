@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
+import useBoardsType from "../../context/Boards";
 import { Button, FlyOutContainer } from "../StyledComponents";
 
 
@@ -57,6 +58,7 @@ const ImageBackground = styled.div`
 
 const BackgroundEditFlyout = ({ setOptionsToggle, board, setBackgroundEditToggle }) => {
     const [backgroundUrl, setBackgroundUrl] = useState(board.backgroundUrl);
+    const { setUsersBoards } = useBoardsType()
     const { setDisplayBoard } = useBoardType()
 
     const handleUpdateBackground = () => {
@@ -75,8 +77,14 @@ const BackgroundEditFlyout = ({ setOptionsToggle, board, setBackgroundEditToggle
             if (data.errors) {
                 console.log(data.errors);
             } else {
-                board.backgroundUrl = data.board.backgroundUrl
-                setDisplayBoard(board)
+                setDisplayBoard(data.board)
+                setUsersBoards(prev => prev.map(userboard => {
+                    if (userboard.id ===  board.id) {
+                        return data.board
+                    } else {
+                        return userboard
+                    }
+                }))
                 setBackgroundEditToggle(prev => !prev)
             }
         })()

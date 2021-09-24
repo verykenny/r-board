@@ -183,7 +183,6 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
     }
 
     const handleUpdateBackgroundToggle = () => {
-        console.log('HELLO!')
         setOptionsToggle(prev => !prev)
         setBackgroundEditToggle(prev => !prev)
     }

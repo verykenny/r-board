@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
 import NavBar from "../NavBar";
+import DisplayBoardData from "../DisplayBoardData";
 
 
 const HomeContainer = styled.div`
@@ -11,6 +12,10 @@ const HomeContainer = styled.div`
     background-size: 100vw 100vh;
     height: 100vh;
     width: 100vw;
+
+
+    display: flex;
+    justify-content: center;
 `;
 
 const Home = () => {
@@ -51,9 +56,7 @@ const Home = () => {
     return (
         <HomeContainer backgroundUrl={displayBoard?.backgroundUrl}>
             <NavBar />
-            {displayBoardData && displayBoardData.todoLists.map(todoList => (
-                <div>Pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp{todoList.name}</div>
-            ))}
+            {displayBoardData && <DisplayBoardData />}
         </HomeContainer>
     )
 }

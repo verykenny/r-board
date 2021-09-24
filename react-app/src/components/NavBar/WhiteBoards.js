@@ -35,7 +35,6 @@ const WhiteBoards = () => {
         })()
     }, [user.id, errors, setUsersBoards, usersBoards])
 
-    console.log(usersBoards);
     return (
         <WhiteBoardsContainer>
             <h2>Whiteboards</h2>
