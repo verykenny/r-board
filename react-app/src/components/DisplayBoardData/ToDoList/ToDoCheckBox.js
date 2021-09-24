@@ -30,12 +30,12 @@ export default function ToDoCheckBox({ todo, todoListId }) {
                                 return listedTodo;
                             }
                         })
-                        return updatedTodoList
+                        return updatedTodoList;
                     } else {
                         return todoList;
                     }
                 })
-                return updatedBoardItems
+                return updatedBoardItems;
             })
         })()
     }

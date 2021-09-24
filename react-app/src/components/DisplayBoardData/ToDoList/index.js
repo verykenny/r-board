@@ -52,7 +52,7 @@ function ToDoList({ todoList }) {
                 {todoList.todos.map(todo => (
                     <ToDo key={todo.id} todo={todo} todoListId={todoList.id}/>
                 ))}
-                {addTodo && <AddToDo todoList={todoList}/>}
+                {addTodo && <AddToDo todoList={todoList} setAddTodo={setAddTodo}/>}
             </ToDosContainer>
         </ToDoListContainer>
     )
