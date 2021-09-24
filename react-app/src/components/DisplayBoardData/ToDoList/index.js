@@ -53,7 +53,7 @@ function ToDoList({ todoList }) {
                 {todoList.name}
                 <i onClick={() => setAddTodo(prev => !prev)} className="fas fa-plus"></i>
                 <i onClick={() => setToggleTodoMenu(prev => !prev)} class="fas fa-ellipsis-h"></i>
-                {toggleTodoMenu && <TodoMenu setToggleTodoMenu={setToggleTodoMenu} />}
+                {toggleTodoMenu && <TodoMenu setToggleTodoMenu={setToggleTodoMenu} todoList={todoList} />}
             </ToDoListNameContainer>
             <ToDosContainer>
                 {todoList.todos.map(todo => (

@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { useEffect, useRef } from "react";
 import { Button } from "../../StyledComponents";
+import useBoardType from "../../../context/Board";
 
 const TodoMenuContainer = styled.div`
     position: absolute;
@@ -12,7 +13,9 @@ const TodoMenuContainer = styled.div`
 
 `;
 
-function TodoMenu({setToggleTodoMenu}) {
+function TodoMenu({ setToggleTodoMenu, todoList }) {
+    const { setDisplayBoardData } = useBoardType()
+
     const clickCheck = useRef(null)
     const ClickChecker = (ref) => {
         useEffect(() => {
@@ -33,9 +36,27 @@ function TodoMenu({setToggleTodoMenu}) {
     ClickChecker(clickCheck)
 
 
+    const handleDeleteList = () => {
+        (async () => {
+            const response = await fetch(`/api/todo_lists/${todoList.id}`, { method: 'DELETE' })
+            const data = await response.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                setDisplayBoardData(prev => {
+                    const updatedBoardItems = { ...prev }
+                    updatedBoardItems.todoLists = updatedBoardItems.todoLists.filter(listedTodoList => listedTodoList.id !== todoList.id)
+                    return updatedBoardItems;
+                })
+            }
+            setToggleTodoMenu(prev => !prev)
+        })()
+    }
+
+
     return (
         <TodoMenuContainer ref={clickCheck}>
-            <Button>Delete List</Button>
+            <Button onClick={handleDeleteList}>Delete List</Button>
             <Button>Update Name</Button>
         </TodoMenuContainer>
     )
