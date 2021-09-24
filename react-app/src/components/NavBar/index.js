@@ -6,6 +6,9 @@ import { CSSTransition } from 'react-transition-group'
 
 const NavSideBar = styled.nav`
     background: #363635;
+    position: fixed;
+    top: 0;
+    left: 0;
     color: white;
     display: flex;
     height: 100vh;

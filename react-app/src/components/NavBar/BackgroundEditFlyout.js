@@ -58,7 +58,7 @@ const ImageBackground = styled.div`
 
 const BackgroundEditFlyout = ({ setOptionsToggle, board, setBackgroundEditToggle }) => {
     const [backgroundUrl, setBackgroundUrl] = useState(board.backgroundUrl);
-    const { usersBoards, setUsersBoards } = useBoardsType()
+    const { setUsersBoards } = useBoardsType()
     const { setDisplayBoard } = useBoardType()
 
     const handleUpdateBackground = () => {
