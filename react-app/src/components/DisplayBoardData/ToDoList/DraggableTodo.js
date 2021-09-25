@@ -108,7 +108,6 @@ function DraggableTodo({ children, todoList }) {
                     onToucheStart={handleMouseDown}
                     onTouchMove={handleMouseMove}
                     onTouchEnd={handleMouseUp}
-                    className='drag-bar'
                 />
                 {children}
             </DraggableConatiner>
