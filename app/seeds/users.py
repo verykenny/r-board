@@ -34,7 +34,9 @@ def seed_users():
     BoardUser(user=bobbie, board=board5)
 
     todolist1 = ToDoList(
-        name='Chores'
+        name='Chores',
+        xPos=500,
+        yPos=150
     )
 
     todo1 = ToDo(content='take out trash')
