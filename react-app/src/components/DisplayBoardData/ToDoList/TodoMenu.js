@@ -13,7 +13,7 @@ const TodoMenuContainer = styled.div`
 
 `;
 
-function TodoMenu({ setToggleTodoMenu, todoList }) {
+function TodoMenu({ setToggleTodoMenu, todoList, setNameEditToggle }) {
     const { setDisplayBoardData } = useBoardType()
 
     const clickCheck = useRef(null)
@@ -53,11 +53,15 @@ function TodoMenu({ setToggleTodoMenu, todoList }) {
         })()
     }
 
+    const handleNameEditToggle = () => {
+        setNameEditToggle(prev => !prev)
+        setToggleTodoMenu(prev => !prev)
+    }
 
     return (
         <TodoMenuContainer ref={clickCheck}>
+            <Button onClick={handleNameEditToggle}>Update Name</Button>
             <Button onClick={handleDeleteList}>Delete List</Button>
-            <Button>Update Name</Button>
         </TodoMenuContainer>
     )
 }

@@ -1,32 +1,27 @@
 import useBoardType from "../../../context/Board"
 import styled from "styled-components"
 import { useState } from "react";
+import { StringEditInput } from "../../StyledComponents";
 
 
 const ToDoContainer = styled.div`
+    font-family: 'Reenie Beanie', cursive;
     font-size: 20px;
     display: flex;
     align-items: center;
     padding: 10px 0px;
-    border-bottom: 1px solid grey
+    border-bottom: 1px solid grey;
     `;
 
 const ToDoContentContainer = styled.div`
-    font-family: 'Reenie Beanie', cursive;
     padding-left: 20px;
     `;
 
-const ToDoEdit = styled.input`
-    font-size: 20px;
-    padding-left: 20px;
+const ToDoEdit = styled(StringEditInput)`
     font-family: 'Reenie Beanie', cursive;
-    border: none;
-    background: transparent;
+    padding-left: 20px;
     width: 75px;
     min-width: fit-content;
-    &:focus {
-        outline: none;
-    }
 `;
 
 function AddToDo({ todoList, setAddTodo }) {
