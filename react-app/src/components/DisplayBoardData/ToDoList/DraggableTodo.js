@@ -22,8 +22,13 @@ function DraggableTodo({children}) {
         setIsDragging(true)
     }
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = ({ clientX, clientY }) => {
+        if (!isDragging) {
+            return;
+        }
 
+        setTranslateX(origX + lastTranslateX)
+        setTranslateY(origY + lastTranslateY)
     }
 
     const handleMouseUp = (e) => {
