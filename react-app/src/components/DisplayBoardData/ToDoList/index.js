@@ -3,6 +3,7 @@ import styled from "styled-components"
 import TodoListName from "./TodoListName";
 import AddToDo from "./AddToDo";
 import ToDo from "./ToDo";
+import DraggableTodo from "./DraggableTodo";
 
 
 const ToDoListContainer = styled.div`
@@ -25,16 +26,18 @@ function ToDoList({ todoList }) {
     const [nameEditToggle, setNameEditToggle] = useState(false)
 
     return (
-        <ToDoListContainer>
-            <DraggableTodo />
-            <TodoListName nameEditToggle={nameEditToggle} todoList={todoList} setNameEditToggle={setNameEditToggle} setAddTodo={setAddTodo} />
-            <ToDosContainer>
-                {todoList.todos.map(todo => (
-                    <ToDo key={todo.id} todo={todo} todoListId={todoList.id} />
-                ))}
-                {addTodo && <AddToDo todoList={todoList} setAddTodo={setAddTodo} />}
-            </ToDosContainer>
-        </ToDoListContainer>
+        <DraggableTodo>
+
+            <ToDoListContainer>
+                <TodoListName nameEditToggle={nameEditToggle} todoList={todoList} setNameEditToggle={setNameEditToggle} setAddTodo={setAddTodo} />
+                <ToDosContainer>
+                    {todoList.todos.map(todo => (
+                        <ToDo key={todo.id} todo={todo} todoListId={todoList.id} />
+                    ))}
+                    {addTodo && <AddToDo todoList={todoList} setAddTodo={setAddTodo} />}
+                </ToDosContainer>
+            </ToDoListContainer>
+        </DraggableTodo>
     )
 }
 
