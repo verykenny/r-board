@@ -12,6 +12,7 @@ const HomeContainer = styled.div`
     background-size: 100vw 100vh;
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 
 
     display: flex;
