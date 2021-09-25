@@ -27,8 +27,14 @@ function DraggableTodo({children}) {
     }
 
     const handleMouseUp = (e) => {
+        window.removeEventListener('mosuemove', handleMouseMove);
+        window.removeEventListener('mouseup', handleMouseUp);
 
-
+        setOrigX(0)
+        setOrigY(0)
+        setLastTranslateX(translateX)
+        setLastTranslateY(translateY)
+        setIsDragging(false)
     }
 
 
