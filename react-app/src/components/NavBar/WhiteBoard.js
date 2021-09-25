@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
-import { ButtonAlt } from "../StyledComponents";
+import { ButtonAlt, StringEditInput } from "../StyledComponents";
 import { CSSTransition } from 'react-transition-group'
 import BackgroundEditFlyout from './BackgroundEditFlyout';
 import useBoardsType from "../../context/Boards";
@@ -29,15 +29,9 @@ const WhiteBoardName = styled.p`
 `;
 
 
-const WhiteBoardNameEdit = styled.input`
-    border: none;
-    background: transparent;
+const WhiteBoardNameEdit = styled(StringEditInput)`
     color: white;
     font-size: 16px;
-
-    &:focus {
-        outline: none;
-    }
 `;
 
 const BoardOptionsContainer = styled.div`
@@ -112,7 +106,6 @@ const WhiteBoard = ({ board }) => {
                     onBlur={handleSubmit}
                     onKeyDown={handleKeyDown}
                 />
-
             )}
             {!nameEditToggle && (
                 <WhiteBoardName onClick={handleChangeBoard}>{board.name}</WhiteBoardName>

@@ -100,3 +100,14 @@ export const ErrorsContainer = styled.div`
     font-weight: bold;
     text-align: center;
 `;
+
+export const StringEditInput = styled.input`
+    border: none;
+    background: transparent;
+    font-size: inherit;
+    font-type: inherit;
+
+    &:focus {
+        outline: none;
+    }
+`;
