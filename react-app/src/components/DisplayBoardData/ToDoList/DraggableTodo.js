@@ -1,6 +1,13 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import useBoardType from "../../../context/Board";
 import styled from "styled-components"
+
+const DraggableConatiner = styled.div`
+    position: absolute;
+    left: ${props => props.left};
+    top: ${props => props.top};
+`;
+
 
 const DragBar = styled.div`
     height: 7px;
@@ -11,8 +18,7 @@ const DragBar = styled.div`
     }
 `;
 
-// need to use a class component because we need the updated state immediately and functional components won't let you use the updated values immediately
-// useRef won't work because it doesn't notify anything of a change and doesn't cause a re-render
+
 function DraggableTodo({ children, todoList }) {
     const { setDisplayBoardData } = useBoardType();
     const [dragData, setDragData] = useState({
@@ -93,7 +99,7 @@ function DraggableTodo({ children, todoList }) {
 
 
     return (
-            <div style={{ position: 'absolute', left: `${dragData.translation.xPos}px`, top: `${dragData.translation.yPos}px`, background: 'pink' }}>
+            <DraggableConatiner left={`${dragData.translation.xPos}px`} top={`${dragData.translation.yPos}px`}>
                 <DragBar
                     onMouseDown={handleMouseDown}
                     onMouseMove={handleMouseMove}
@@ -105,7 +111,7 @@ function DraggableTodo({ children, todoList }) {
                     className='drag-bar'
                 />
                 {children}
-            </div>
+            </DraggableConatiner>
     )
 }
 
