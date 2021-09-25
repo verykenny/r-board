@@ -27,7 +27,6 @@ function ToDoList({ todoList }) {
 
     return (
         <DraggableTodo>
-
             <ToDoListContainer>
                 <TodoListName nameEditToggle={nameEditToggle} todoList={todoList} setNameEditToggle={setNameEditToggle} setAddTodo={setAddTodo} />
                 <ToDosContainer>

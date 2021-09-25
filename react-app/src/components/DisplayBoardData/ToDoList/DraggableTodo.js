@@ -1,58 +1,65 @@
-import styled from "styled-components";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 
-
-function DraggableTodo({children}) {
-    const [isDragging, setIsDragging] = useState(false)
-    const [origX, setOrigX] = useState(0)
-    const [origY, setOrigY] = useState(0)
-    const [translateX, setTranslateX] = useState(0)
-    const [translateY, setTranslateY] = useState(0)
-    const [lastTranslateX, setLastTranslateX] = useState(0)
-    const [lastTranslateY, setLastTranslateY] = useState(0)
-
+// need to use a class component because we need the updated state immediately and functional components won't let you use the updated values immediately
+// useRef won't work because it doesn't notify anything of a change and doesn't cause a re-render
+function DraggableTodo({ children }) {
+    const [dragData, setDragData] = useState({
+        isDragging: false,
+        orig: { xPos: 0, yPos: 0 },
+        translation: { xPos: 0, yPos: 0 },
+        lastTranslation: { xPos: 0, yPos: 0 },
+    })
 
     const handleMouseDown = ({ clientX, clientY }) => {
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseup', handleMouseUp);
-
-        setOrigX(clientX)
-        setOrigY(clientY)
-        setIsDragging(true)
+        if (!dragData.isDragging) {
+            setDragData(prev => ({
+                ...prev,
+                isDragging: true,
+                orig: { xPos: clientX, yPos: clientY }
+            }))
+        }
     }
 
     const handleMouseMove = ({ clientX, clientY }) => {
-        if (!isDragging) {
-            return;
+        if (dragData.isDragging) {
+            const { orig, lastTranslation } = dragData
+            setDragData(prev => ({
+                ...prev,
+                translation: {
+                    xPos: clientX - orig.xPos + lastTranslation.xPos,
+                    yPos: clientY - orig.yPos + lastTranslation.yPos,
+                }
+            }))
         }
 
-        setTranslateX(clientX - origX + lastTranslateX)
-        setTranslateY(clientY - origY + lastTranslateY)
     }
 
     const handleMouseUp = (e) => {
-        window.removeEventListener('mosuemove', handleMouseMove);
-        window.removeEventListener('mouseup', handleMouseUp);
-
-        setOrigX(0)
-        setOrigY(0)
-        setLastTranslateX(translateX)
-        setLastTranslateY(translateY)
-        setIsDragging(false)
+        if (dragData.isDragging) {
+            const { translation } = dragData;
+            setDragData(prev => ({
+                ...prev,
+                isDragging: false,
+                lastTranslation: {
+                    xPos: translation.xPos,
+                    yPos: translation.yPos,
+                }
+            }))
+        }
     }
 
 
-    return (
+    return (<>
         <div
             onMouseDown={handleMouseDown}
-            x={translateX}
-            y={translateY}
-            isDragging={isDragging}
-            style={{transform: `translate(${translateX}px, ${translateY}px)`}}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            style={{ position: 'absolute', right: `${dragData.translation.xPos}px`, bottom: `${dragData.translation.yPos}px`, cursor: 'grab', background: 'pink' }}
         >
-            {children}
+        {children}
         </div>
+    </>
     )
 }
 
