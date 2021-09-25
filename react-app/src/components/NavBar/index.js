@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import FlyOut from './FlyOut';
 import { CSSTransition } from 'react-transition-group'
+import { useEffect, useRef } from 'react';
 
 
 const NavSideBar = styled.nav`
@@ -30,10 +31,28 @@ const PositionedContainer = styled.div`
 const NavBar = () => {
     const [showFlyOut, setShowFlyOut] = useState(false)
 
+    const clickCheck = useRef(null)
+    const ClickChecker = (ref) => {
+        useEffect(() => {
+            const handleCloseOptions = (e) => {
+                if (ref.current && !ref.current.contains(e.target)) {
+                    setShowFlyOut(false)
+
+                }
+            }
+
+            document.addEventListener("mousedown", handleCloseOptions);
+
+            return () => {
+                document.removeEventListener("mousedown", handleCloseOptions);
+            };
+        })
+    }
+    ClickChecker(clickCheck)
 
 
     return (
-        <>
+        <div ref={clickCheck}>
             <NavSideBar>
                 <i className="fas fa-bars" onClick={() => setShowFlyOut(prev => !prev)}></i>
             </NavSideBar>
@@ -50,7 +69,7 @@ const NavBar = () => {
                     </div>
                 </CSSTransition>
             </PositionedContainer>
-        </>
+        </div>
     );
 }
 

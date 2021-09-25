@@ -26,29 +26,10 @@ const MenuOptionsContainer = styled.div`
 const FlyOut = ({ setShowFlyOut }) => {
     const { displayBoard } = useBoardType()
 
-    const clickCheck = useRef(null)
-    const ClickChecker = (ref) => {
-        useEffect(() => {
-            const handleCloseOptions = (e) => {
-                if (ref.current && !ref.current.contains(e.target)) {
-                    setShowFlyOut(prev => !prev)
-
-                }
-            }
-
-            document.addEventListener("mousedown", handleCloseOptions);
-
-            return () => {
-                document.removeEventListener("mousedown", handleCloseOptions);
-            };
-        })
-    }
-    ClickChecker(clickCheck)
-
 
 
     return (
-        <FlyOutContainer ref={clickCheck}>
+        <FlyOutContainer>
             <WhiteBoards />
             <MenuOptionsContainer>
                 {displayBoard && <AddNewItem />}
