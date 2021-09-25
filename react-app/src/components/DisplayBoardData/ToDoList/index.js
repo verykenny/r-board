@@ -32,7 +32,7 @@ function ToDoList({ todoList }) {
             <ToDoListContainer>
                 <TodoListName nameEditToggle={nameEditToggle} todoList={todoList} setNameEditToggle={setNameEditToggle} setAddTodo={setAddTodo} />
                 <ToDosContainer>
-                    {todoList.todos.map(todo => (
+                    {todoList.todos.sort((a, b) => a.id - b.id).map(todo => (
                         <ToDo key={todo.id} todo={todo} todoListId={todoList.id} />
                     ))}
                     {addTodo && <AddToDo todoList={todoList} setAddTodo={setAddTodo} />}
