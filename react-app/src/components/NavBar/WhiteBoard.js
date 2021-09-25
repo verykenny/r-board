@@ -23,6 +23,7 @@ const WhiteBoardNameContainer = styled.div`
 `;
 
 const WhiteBoardName = styled.p`
+    width: 100%;
     &:hover {
         cursor: pointer;
     }
@@ -53,7 +54,7 @@ const PositionedContainer = styled.div`
 
 
 const WhiteBoard = ({ board }) => {
-    const { setDisplayBoard } = useBoardType()
+    const { displayBoard, setDisplayBoard } = useBoardType()
 
     const [optionsToggle, setOptionsToggle] = useState(false)
     const [nameEditToggle, setNameEditToggle] = useState(false)
@@ -110,8 +111,9 @@ const WhiteBoard = ({ board }) => {
             {!nameEditToggle && (
                 <WhiteBoardName onClick={handleChangeBoard}>{board.name}</WhiteBoardName>
             )}
-
-            <i onClick={() => setOptionsToggle(prev => !prev)} className="fas fa-ellipsis-h"></i>
+            {board.id === displayBoard?.id && (
+                <i onClick={() => setOptionsToggle(prev => !prev)} className="fas fa-ellipsis-h"></i>
+            )}
 
 
             <CSSTransition
@@ -192,7 +194,7 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
 
 const DeleteButton = ({ board, setOptionsToggle }) => {
     const [errors, setErrors] = useState(null)
-    const { setDisplayBoard } = useBoardType()
+    const { setDisplayBoard, setDisplayBoardData } = useBoardType()
     const { setUsersBoards } = useBoardsType()
 
 
@@ -205,6 +207,7 @@ const DeleteButton = ({ board, setOptionsToggle }) => {
                 console.log(errors);
             } else {
                 setDisplayBoard(null);
+                setDisplayBoardData(null);
                 board = null;
                 setOptionsToggle(prev => !prev)
                 setUsersBoards(null)

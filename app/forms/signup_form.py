@@ -48,7 +48,7 @@ class SignUpForm(FlaskForm):
         password_length,
         DataRequired(message='Please provide a password.'),
         Regexp(
-            '^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$',
-            message='Password must be at least 8 characters, with at least one number and one letter'
+            "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$",
+            message='Password must be at least 8 characters, with at least one number, one letter, and one special character'
         )
     ])
