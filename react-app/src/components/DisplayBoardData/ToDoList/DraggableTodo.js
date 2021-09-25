@@ -1,9 +1,11 @@
 import { useState, useRef } from "react";
+import useBoardType from "../../../context/Board";
 
 
 // need to use a class component because we need the updated state immediately and functional components won't let you use the updated values immediately
 // useRef won't work because it doesn't notify anything of a change and doesn't cause a re-render
 function DraggableTodo({ children, todoList }) {
+    const { setDisplayBoardData } = useBoardType();
     const [dragData, setDragData] = useState({
         isDragging: false,
         orig: { xPos: 0, yPos: 0 },
@@ -38,6 +40,37 @@ function DraggableTodo({ children, todoList }) {
     const handleMouseUp = (e) => {
         if (dragData.isDragging) {
             const { translation } = dragData;
+
+
+            (async () => {
+                const response = await fetch(`/api/todo_lists/${todoList.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: todoList.name,
+                        xPos: translation.xPos,
+                        yPos: translation.yPos,
+                    })
+                })
+                const data = await response.json()
+                if (data.errors) {
+                    console.log(data.errors);
+                }
+                setDisplayBoardData(prev => {
+                    const updatedBoardItems = { ...prev }
+                    updatedBoardItems.todoLists = updatedBoardItems.todoLists.map(listedTodoList => {
+                        if (listedTodoList.id === todoList.id) {
+                            return data.todoList
+                        }
+                        return listedTodoList;
+                    })
+                    return updatedBoardItems;
+                })
+            })()
+
+
             setDragData(prev => ({
                 ...prev,
                 isDragging: false,
