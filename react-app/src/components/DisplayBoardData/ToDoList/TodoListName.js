@@ -30,6 +30,12 @@ const TodoNameEdit = styled(StringEditInput)`
     font-family: 'Permanent Marker', cursive;
 `;
 
+const OptionsContainer =styled.div`
+    .fa-plus {
+        padding-right: 10px;
+    }
+`;
+
 
 function TodoListName({ nameEditToggle, todoList, setNameEditToggle, setAddTodo }) {
     const [toggleTodoMenu, setToggleTodoMenu] = useState(false)
@@ -86,8 +92,10 @@ function TodoListName({ nameEditToggle, todoList, setNameEditToggle, setAddTodo 
                 />
             )}
             {!nameEditToggle && todoList.name}
-            <i onClick={() => setAddTodo(prev => !prev)} className="fas fa-plus"></i>
-            <i onClick={() => setToggleTodoMenu(prev => !prev)} class="fas fa-ellipsis-h"></i>
+            <OptionsContainer>
+                <i onClick={() => setAddTodo(prev => !prev)} className="fas fa-plus"></i>
+                <i onClick={() => setToggleTodoMenu(prev => !prev)} class="fas fa-ellipsis-h"></i>
+            </OptionsContainer>
             {toggleTodoMenu && <TodoMenu setToggleTodoMenu={setToggleTodoMenu} todoList={todoList} setNameEditToggle={setNameEditToggle} />}
         </ToDoListNameContainer>
     )
