@@ -38,22 +38,40 @@ const ToDoListNameContainer = styled.div`
     }
     `;
 
-    const ToDosContainer = styled.div`
+const ToDosContainer = styled.div`
 
     `;
 
-    const TodoNameEdit = styled(StringEditInput)`
+const TodoNameEdit = styled(StringEditInput)`
         font-family: 'Permanent Marker', cursive;
     `;
 
 
 
 function ToDoList({ todoList }) {
-    const { setDisplayBoardData } = useBoardType()
     const [addTodo, setAddTodo] = useState(false)
-    const [toggleTodoMenu, setToggleTodoMenu] = useState(false)
     const [nameEditToggle, setNameEditToggle] = useState(false)
+
+
+    return (
+        <ToDoListContainer>
+            <TodoListName nameEditToggle={nameEditToggle} todoList={todoList} setNameEditToggle={setNameEditToggle} setAddTodo={setAddTodo} />
+            <ToDosContainer>
+                {todoList.todos.map(todo => (
+                    <ToDo key={todo.id} todo={todo} todoListId={todoList.id} />
+                ))}
+                {addTodo && <AddToDo todoList={todoList} setAddTodo={setAddTodo} />}
+            </ToDosContainer>
+        </ToDoListContainer>
+    )
+}
+
+
+
+function TodoListName({ nameEditToggle, todoList, setNameEditToggle, setAddTodo }) {
+    const [toggleTodoMenu, setToggleTodoMenu] = useState(false)
     const [todoListName, setTodoListName] = useState(todoList.name)
+    const { setDisplayBoardData } = useBoardType()
 
     const handleUpdateName = () => {
         (async () => {
@@ -93,31 +111,25 @@ function ToDoList({ todoList }) {
     }
 
     return (
-        <ToDoListContainer>
-            <ToDoListNameContainer>
-                {nameEditToggle && (
-                    < TodoNameEdit
-                        autoFocus
-                        type='text'
-                        value={todoListName}
-                        onChange={(e) => setTodoListName(e.target.value)}
-                        onBlur={handleUpdateName}
-                        onKeyDown={handleKeyDown}
-                    />
-                )}
-                {!nameEditToggle && todoList.name}
-                <i onClick={() => setAddTodo(prev => !prev)} className="fas fa-plus"></i>
-                <i onClick={() => setToggleTodoMenu(prev => !prev)} class="fas fa-ellipsis-h"></i>
-                {toggleTodoMenu && <TodoMenu setToggleTodoMenu={setToggleTodoMenu} todoList={todoList} setNameEditToggle={setNameEditToggle} />}
-            </ToDoListNameContainer>
-            <ToDosContainer>
-                {todoList.todos.map(todo => (
-                    <ToDo key={todo.id} todo={todo} todoListId={todoList.id} />
-                ))}
-                {addTodo && <AddToDo todoList={todoList} setAddTodo={setAddTodo} />}
-            </ToDosContainer>
-        </ToDoListContainer>
+        <ToDoListNameContainer>
+            {nameEditToggle && (
+                < TodoNameEdit
+                    autoFocus
+                    type='text'
+                    value={todoListName}
+                    onChange={(e) => setTodoListName(e.target.value)}
+                    onBlur={handleUpdateName}
+                    onKeyDown={handleKeyDown}
+                />
+            )}
+            {!nameEditToggle && todoList.name}
+            <i onClick={() => setAddTodo(prev => !prev)} className="fas fa-plus"></i>
+            <i onClick={() => setToggleTodoMenu(prev => !prev)} class="fas fa-ellipsis-h"></i>
+            {toggleTodoMenu && <TodoMenu setToggleTodoMenu={setToggleTodoMenu} todoList={todoList} setNameEditToggle={setNameEditToggle} />}
+        </ToDoListNameContainer>
     )
 }
+
+
 
 export default ToDoList
