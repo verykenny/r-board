@@ -3,6 +3,7 @@ import useBoardType from "../../../context/Board";
 import styled from "styled-components"
 
 const DraggableConatiner = styled.div`
+    padding: 50px;
     position: absolute;
     left: ${props => props.left};
     top: ${props => props.top};
@@ -39,7 +40,9 @@ function DraggableTodo({ children, todoList }) {
     }
 
     const handleMouseMove = ({ clientX, clientY }) => {
+
         if (dragData.isDragging) {
+            console.log('still dragging');
             const { orig, lastTranslation } = dragData
             setDragData(prev => ({
                 ...prev,
@@ -99,12 +102,15 @@ function DraggableTodo({ children, todoList }) {
 
 
     return (
-            <DraggableConatiner left={`${dragData.translation.xPos}px`} top={`${dragData.translation.yPos}px`}>
+            <DraggableConatiner
+                left={`${dragData.translation.xPos}px`}
+                top={`${dragData.translation.yPos}px`}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseUp}
+                onMouseUp={handleMouseUp}>
+
                 <DragBar
                     onMouseDown={handleMouseDown}
-                    onMouseMove={handleMouseMove}
-                    onMouseUp={handleMouseUp}
-                    onMouseLeave={handleMouseMove}
                     onToucheStart={handleMouseDown}
                     onTouchMove={handleMouseMove}
                     onTouchEnd={handleMouseUp}
