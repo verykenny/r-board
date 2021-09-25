@@ -16,7 +16,10 @@ import useBoardType from '../../context/Board';
 const MenuOptionsContainer = styled.div`
     background: #363635;
     flex: 1 1 auto;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 60px 20px;
 `;
 
 
@@ -48,9 +51,9 @@ const FlyOut = ({ setShowFlyOut }) => {
         <FlyOutContainer ref={clickCheck}>
             <WhiteBoards />
             <MenuOptionsContainer>
-                <LogoutButton />
-                <AddNewBoard />
                 {displayBoard && <AddNewItem />}
+                <AddNewBoard />
+                <LogoutButton />
             </MenuOptionsContainer>
         </FlyOutContainer>
     )
