@@ -1,16 +1,32 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import useBoardType from "../../../context/Board";
+import styled from "styled-components"
+
+const DraggableConatiner = styled.div`
+    padding: 50px;
+    position: absolute;
+    left: ${props => props.left};
+    top: ${props => props.top};
+`;
 
 
-// need to use a class component because we need the updated state immediately and functional components won't let you use the updated values immediately
-// useRef won't work because it doesn't notify anything of a change and doesn't cause a re-render
+const DragBar = styled.div`
+    height: 7px;
+
+    &:hover {
+        cursor: grab;
+        background: #2D75FC;
+    }
+`;
+
+
 function DraggableTodo({ children, todoList }) {
     const { setDisplayBoardData } = useBoardType();
     const [dragData, setDragData] = useState({
         isDragging: false,
         orig: { xPos: 0, yPos: 0 },
-        translation: { xPos: todoList.xPos , yPos: todoList.yPos },
-        lastTranslation: { xPos: todoList.xPos , yPos: todoList.yPos },
+        translation: { xPos: todoList.xPos, yPos: todoList.yPos },
+        lastTranslation: { xPos: todoList.xPos, yPos: todoList.yPos },
     })
 
     const handleMouseDown = ({ clientX, clientY }) => {
@@ -24,6 +40,7 @@ function DraggableTodo({ children, todoList }) {
     }
 
     const handleMouseMove = ({ clientX, clientY }) => {
+
         if (dragData.isDragging) {
             const { orig, lastTranslation } = dragData
             setDragData(prev => ({
@@ -83,20 +100,22 @@ function DraggableTodo({ children, todoList }) {
     }
 
 
-    return (<>
-        <div
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-            onToucheStart={handleMouseDown}
-            onTouchMove={handleMouseMove}
-            onTouchEnd={handleMouseUp}
-            style={{ position: 'absolute', left: `${dragData.translation.xPos}px`, top: `${dragData.translation.yPos}px`, cursor: 'grab', background: 'pink' }}
-        >
-        {children}
-        </div>
-    </>
+    return (
+            <DraggableConatiner
+                left={`${dragData.translation.xPos}px`}
+                top={`${dragData.translation.yPos}px`}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseUp}
+                onMouseUp={handleMouseUp}>
+
+                <DragBar
+                    onMouseDown={handleMouseDown}
+                    onToucheStart={handleMouseDown}
+                    onTouchMove={handleMouseMove}
+                    onTouchEnd={handleMouseUp}
+                />
+                {children}
+            </DraggableConatiner>
     )
 }
 
