@@ -192,7 +192,7 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
 
 const DeleteButton = ({ board, setOptionsToggle }) => {
     const [errors, setErrors] = useState(null)
-    const { setDisplayBoard } = useBoardType()
+    const { setDisplayBoard, setDisplayBoardData } = useBoardType()
     const { setUsersBoards } = useBoardsType()
 
 
@@ -205,6 +205,7 @@ const DeleteButton = ({ board, setOptionsToggle }) => {
                 console.log(errors);
             } else {
                 setDisplayBoard(null);
+                setDisplayBoardData(null);
                 board = null;
                 setOptionsToggle(prev => !prev)
                 setUsersBoards(null)
