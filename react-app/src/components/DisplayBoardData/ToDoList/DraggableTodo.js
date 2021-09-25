@@ -55,7 +55,7 @@ function DraggableTodo({ children }) {
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
-            style={{ position: 'absolute', right: `${dragData.translation.xPos}px`, bottom: `${dragData.translation.yPos}px`, cursor: 'grab', background: 'pink' }}
+            style={{ position: 'absolute', left: `${dragData.translation.xPos}px`, top: `${dragData.translation.yPos}px`, cursor: 'grab', background: 'pink' }}
         >
         {children}
         </div>
