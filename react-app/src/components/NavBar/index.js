@@ -46,7 +46,7 @@ const NavBar = () => {
                     unmountOnExit
                     >
                     <div classNames='main-flyout'>
-                        <FlyOut />
+                        <FlyOut  setShowFlyOut={setShowFlyOut}/>
                     </div>
                 </CSSTransition>
             </PositionedContainer>
