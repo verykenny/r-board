@@ -9,6 +9,13 @@ const DraggableConatiner = styled.div`
     top: ${props => props.top};
 `;
 
+const ChildrenContainer = styled.div`
+    transition: box-shadow 0.3s;
+    // box-shadow: 2px 2px 2px;
+
+    box-shadow: ${props => (props.dragging) ? '-2px 6px 6px' : '0px 2px 2px'}
+`;
+
 
 const DragBar = styled.div`
     height: 7px;
@@ -101,21 +108,23 @@ function DraggableTodo({ children, todoList }) {
 
 
     return (
-            <DraggableConatiner
-                left={`${dragData.translation.xPos}px`}
-                top={`${dragData.translation.yPos}px`}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseUp}
-                onMouseUp={handleMouseUp}>
+        <DraggableConatiner
+            left={`${dragData.translation.xPos}px`}
+            top={`${dragData.translation.yPos}px`}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseUp}
+            onMouseUp={handleMouseUp}>
 
-                <DragBar
-                    onMouseDown={handleMouseDown}
-                    onToucheStart={handleMouseDown}
-                    onTouchMove={handleMouseMove}
-                    onTouchEnd={handleMouseUp}
-                />
+            <DragBar
+                onMouseDown={handleMouseDown}
+                onToucheStart={handleMouseDown}
+                onTouchMove={handleMouseMove}
+                onTouchEnd={handleMouseUp}
+            />
+            <ChildrenContainer dragging={dragData.isDragging}>
                 {children}
-            </DraggableConatiner>
+            </ChildrenContainer>
+        </DraggableConatiner>
     )
 }
 
