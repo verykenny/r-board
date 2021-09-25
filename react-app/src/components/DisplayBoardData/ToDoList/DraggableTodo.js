@@ -27,8 +27,8 @@ function DraggableTodo({children}) {
             return;
         }
 
-        setTranslateX(origX + lastTranslateX)
-        setTranslateY(origY + lastTranslateY)
+        setTranslateX(clientX - origX + lastTranslateX)
+        setTranslateY(clientY - origY + lastTranslateY)
     }
 
     const handleMouseUp = (e) => {
