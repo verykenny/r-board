@@ -42,7 +42,6 @@ function DraggableTodo({ children, todoList }) {
     const handleMouseMove = ({ clientX, clientY }) => {
 
         if (dragData.isDragging) {
-            console.log('still dragging');
             const { orig, lastTranslation } = dragData
             setDragData(prev => ({
                 ...prev,

@@ -11,6 +11,7 @@ const ToDoListContainer = styled.div`
     border: 1px solid lightgrey;
     width: fit-content;
     height: fit-content;
+    min-width: 250px;
     max-width: 300px;
     display: flex;
     flex-direction: column;
