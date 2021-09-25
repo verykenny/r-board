@@ -1,6 +1,15 @@
 import { useState, useRef } from "react";
 import useBoardType from "../../../context/Board";
+import styled from "styled-components"
 
+const DragBar = styled.div`
+    height: 7px;
+
+    &:hover {
+        cursor: grab;
+        background: #2D75FC;
+    }
+`;
 
 // need to use a class component because we need the updated state immediately and functional components won't let you use the updated values immediately
 // useRef won't work because it doesn't notify anything of a change and doesn't cause a re-render
@@ -9,8 +18,8 @@ function DraggableTodo({ children, todoList }) {
     const [dragData, setDragData] = useState({
         isDragging: false,
         orig: { xPos: 0, yPos: 0 },
-        translation: { xPos: todoList.xPos , yPos: todoList.yPos },
-        lastTranslation: { xPos: todoList.xPos , yPos: todoList.yPos },
+        translation: { xPos: todoList.xPos, yPos: todoList.yPos },
+        lastTranslation: { xPos: todoList.xPos, yPos: todoList.yPos },
     })
 
     const handleMouseDown = ({ clientX, clientY }) => {
@@ -83,20 +92,20 @@ function DraggableTodo({ children, todoList }) {
     }
 
 
-    return (<>
-        <div
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-            onToucheStart={handleMouseDown}
-            onTouchMove={handleMouseMove}
-            onTouchEnd={handleMouseUp}
-            style={{ position: 'absolute', left: `${dragData.translation.xPos}px`, top: `${dragData.translation.yPos}px`, cursor: 'grab', background: 'pink' }}
-        >
-        {children}
-        </div>
-    </>
+    return (
+            <div style={{ position: 'absolute', left: `${dragData.translation.xPos}px`, top: `${dragData.translation.yPos}px`, background: 'pink' }}>
+                <DragBar
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseMove}
+                    onToucheStart={handleMouseDown}
+                    onTouchMove={handleMouseMove}
+                    onTouchEnd={handleMouseUp}
+                    className='drag-bar'
+                />
+                {children}
+            </div>
     )
 }
 
