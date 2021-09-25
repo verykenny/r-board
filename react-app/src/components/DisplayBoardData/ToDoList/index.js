@@ -7,7 +7,7 @@ import DraggableTodo from "./DraggableTodo";
 
 
 const ToDoListContainer = styled.div`
-    padding: 5px;
+    padding: 7px;
     border: 1px solid lightgrey;
     width: fit-content;
     height: fit-content;
@@ -15,6 +15,7 @@ const ToDoListContainer = styled.div`
     max-width: 300px;
     display: flex;
     flex-direction: column;
+    background: pink;
 `;
 
 const ToDosContainer = styled.div`
