@@ -1,11 +1,13 @@
 
 import { useState } from "react"
+import useBoardType from "../../context/Board"
 import useBoardsType from "../../context/Boards"
 import { Button } from "../StyledComponents"
 
 const AddNewBoard = () => {
     const [errors, setErrors] = useState(null)
     const { setUsersBoards } = useBoardsType()
+    const { setDisplayBoard } = useBoardType()
 
 
     const handleCreateBoard = () => {
@@ -26,6 +28,7 @@ const AddNewBoard = () => {
                 console.log(errors);
             } else {
                 setUsersBoards(prev => [...prev, data.board])
+                setDisplayBoard(data.board)
             }
 
         })()

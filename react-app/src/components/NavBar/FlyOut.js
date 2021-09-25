@@ -8,6 +8,7 @@ import './FlyOut.css'
 
 
 import AddNewBoard from './AddNewBoard';
+import useBoardType from '../../context/Board';
 
 
 
@@ -19,13 +20,14 @@ const MenuOptionsContainer = styled.div`
 
 
 const FlyOut = ({ showFlyOut }) => {
+    const { displayBoard } = useBoardType()
     return (
         <FlyOutContainer>
             <WhiteBoards />
             <MenuOptionsContainer>
                 <LogoutButton />
                 <AddNewBoard />
-                <AddNewItem />
+                {displayBoard && <AddNewItem />}
             </MenuOptionsContainer>
         </FlyOutContainer>
     )
