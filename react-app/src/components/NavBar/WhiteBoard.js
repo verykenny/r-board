@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
-import { ButtonAlt, StringEditInput } from "../StyledComponents";
+import { Button, ButtonAlt, StringEditInput } from "../StyledComponents";
 import { CSSTransition } from 'react-transition-group'
 import BackgroundEditFlyout from './BackgroundEditFlyout';
 import useBoardsType from "../../context/Boards";
@@ -42,6 +42,9 @@ const BoardOptionsContainer = styled.div`
     z-index: 100;
     background: #363635;
     width: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
 `;
 
 const PositionedContainer = styled.div`
@@ -51,7 +54,21 @@ const PositionedContainer = styled.div`
     z-index: -1;
 `;
 
+const SideMenuOption = styled(Button)`
+    margin: 5px;
+    background: transparent;
+    border: none;
 
+    &:hover {
+        color: #2D75FC;
+    }
+`;
+
+const SideMenuDeleteButton = styled(SideMenuOption)`
+    &:hover {
+        color: #F06449;
+    }
+`;
 
 const WhiteBoard = ({ board }) => {
     const { displayBoard, setDisplayBoard } = useBoardType()
@@ -184,8 +201,8 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
 
     return (
         <BoardOptionsContainer ref={clickCheck} >
-            <ButtonAlt onClick={handleNameEditToggle}>Update Name</ButtonAlt>
-            <ButtonAlt onClick={handleUpdateBackgroundToggle}>Update Background</ButtonAlt>
+            <SideMenuOption onClick={handleNameEditToggle}>Update Name</SideMenuOption>
+            <SideMenuOption onClick={handleUpdateBackgroundToggle}>Update Background</SideMenuOption>
             <DeleteButton board={board} setOptionsToggle={setOptionsToggle} />
         </BoardOptionsContainer>
     )
@@ -216,7 +233,7 @@ const DeleteButton = ({ board, setOptionsToggle }) => {
     }
 
     return (
-        <ButtonAlt onClick={handleDeleteBoard}>Delete</ButtonAlt>
+        <SideMenuDeleteButton onClick={handleDeleteBoard}>Delete</SideMenuDeleteButton>
     )
 }
 

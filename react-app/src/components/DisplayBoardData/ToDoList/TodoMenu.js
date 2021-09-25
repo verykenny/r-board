@@ -9,8 +9,25 @@ const TodoMenuContainer = styled.div`
     top: 0;
     background: #363635;
     color: white;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+`;
 
+const SideMenuOption = styled(Button)`
+    margin: 5px;
+    background: transparent;
+    border: none;
+
+    &:hover {
+        color: #2D75FC;
+    }
+`;
+
+const SideMenuDeleteButton = styled(SideMenuOption)`
+    &:hover {
+        color: #F06449;
+    }
 `;
 
 function TodoMenu({ setToggleTodoMenu, todoList, setNameEditToggle }) {
@@ -60,8 +77,8 @@ function TodoMenu({ setToggleTodoMenu, todoList, setNameEditToggle }) {
 
     return (
         <TodoMenuContainer ref={clickCheck}>
-            <Button onClick={handleNameEditToggle}>Update Name</Button>
-            <Button onClick={handleDeleteList}>Delete List</Button>
+            <SideMenuOption onClick={handleNameEditToggle}>Update Name</SideMenuOption>
+            <SideMenuDeleteButton onClick={handleDeleteList}>Delete List</SideMenuDeleteButton>
         </TodoMenuContainer>
     )
 }
