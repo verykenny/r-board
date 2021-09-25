@@ -3,6 +3,7 @@ import LogoutButton from '../auth/LogoutButton';
 import WhiteBoards from './WhiteBoards';
 import { FlyOutContainer } from '../StyledComponents'
 import AddNewItem from './AddNewItem'
+import { useEffect, useRef } from 'react';
 
 import './FlyOut.css'
 
@@ -15,19 +16,25 @@ import useBoardType from '../../context/Board';
 const MenuOptionsContainer = styled.div`
     background: #363635;
     flex: 1 1 auto;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 60px 20px;
 `;
 
 
-const FlyOut = ({ showFlyOut }) => {
+const FlyOut = ({ setShowFlyOut }) => {
     const { displayBoard } = useBoardType()
+
+
+
     return (
         <FlyOutContainer>
             <WhiteBoards />
             <MenuOptionsContainer>
-                <LogoutButton />
-                <AddNewBoard />
                 {displayBoard && <AddNewItem />}
+                <AddNewBoard />
+                <LogoutButton />
             </MenuOptionsContainer>
         </FlyOutContainer>
     )
