@@ -3,7 +3,7 @@ import useBoardType from "../../../context/Board";
 import styled from "styled-components"
 
 const DraggableConatiner = styled.div`
-    padding: 50px;
+    padding: 50px 0 0 0;
     position: absolute;
     left: ${props => props.left};
     top: ${props => props.top};
