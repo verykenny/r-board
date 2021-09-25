@@ -3,12 +3,12 @@ import { useState, useRef } from "react";
 
 // need to use a class component because we need the updated state immediately and functional components won't let you use the updated values immediately
 // useRef won't work because it doesn't notify anything of a change and doesn't cause a re-render
-function DraggableTodo({ children }) {
+function DraggableTodo({ children, todoList }) {
     const [dragData, setDragData] = useState({
         isDragging: false,
         orig: { xPos: 0, yPos: 0 },
-        translation: { xPos: 0, yPos: 0 },
-        lastTranslation: { xPos: 0, yPos: 0 },
+        translation: { xPos: todoList.xPos , yPos: todoList.yPos },
+        lastTranslation: { xPos: todoList.xPos , yPos: todoList.yPos },
     })
 
     const handleMouseDown = ({ clientX, clientY }) => {
@@ -55,6 +55,10 @@ function DraggableTodo({ children }) {
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onToucheStart={handleMouseDown}
+            onTouchMove={handleMouseMove}
+            onTouchEnd={handleMouseUp}
             style={{ position: 'absolute', left: `${dragData.translation.xPos}px`, top: `${dragData.translation.yPos}px`, cursor: 'grab', background: 'pink' }}
         >
         {children}

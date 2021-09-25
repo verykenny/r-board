@@ -54,8 +54,8 @@ const ItemOptions = ({ setAddItemToggle }) => {
                 },
                 body: JSON.stringify({
                     name: 'New List',
-                    xPos: 0,
-                    yPos: 0,
+                    xPos: window.innerWidth / 2,
+                    yPos: window.innerHeight / 2,
                 })
             })
             const data = await response.json()

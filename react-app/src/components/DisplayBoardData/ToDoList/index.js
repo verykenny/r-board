@@ -26,7 +26,7 @@ function ToDoList({ todoList }) {
     const [nameEditToggle, setNameEditToggle] = useState(false)
 
     return (
-        <DraggableTodo>
+        <DraggableTodo todoList={todoList}>
             <ToDoListContainer>
                 <TodoListName nameEditToggle={nameEditToggle} todoList={todoList} setNameEditToggle={setNameEditToggle} setAddTodo={setAddTodo} />
                 <ToDosContainer>
