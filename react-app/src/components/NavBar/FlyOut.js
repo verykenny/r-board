@@ -3,7 +3,6 @@ import LogoutButton from '../auth/LogoutButton';
 import WhiteBoards from './WhiteBoards';
 import { FlyOutContainer } from '../StyledComponents'
 import AddNewItem from './AddNewItem'
-import { useEffect, useRef } from 'react';
 
 import './FlyOut.css'
 

@@ -27,13 +27,13 @@ const DragBar = styled.div`
 `;
 
 
-function DraggableTodo({ children, todoList }) {
+function DraggableStickyNote({ children, stickyNote }) {
     const { setDisplayBoardData } = useBoardType();
     const [dragData, setDragData] = useState({
         isDragging: false,
         orig: { xPos: 0, yPos: 0 },
-        translation: { xPos: todoList.xPos, yPos: todoList.yPos },
-        lastTranslation: { xPos: todoList.xPos, yPos: todoList.yPos },
+        translation: { xPos: stickyNote.xPos, yPos: stickyNote.yPos },
+        lastTranslation: { xPos: stickyNote.xPos, yPos: stickyNote.yPos },
     })
 
     const handleMouseDown = ({ clientX, clientY }) => {
@@ -67,13 +67,13 @@ function DraggableTodo({ children, todoList }) {
 
 
             (async () => {
-                const response = await fetch(`/api/todo_lists/${todoList.id}`, {
+                const response = await fetch(`/api/sticky_notes/${stickyNote.id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        name: todoList.name,
+                        content: stickyNote.content,
                         xPos: translation.xPos,
                         yPos: translation.yPos,
                     })
@@ -84,11 +84,11 @@ function DraggableTodo({ children, todoList }) {
                 }
                 setDisplayBoardData(prev => {
                     const updatedBoardItems = { ...prev }
-                    updatedBoardItems.todoLists = updatedBoardItems.todoLists.map(listedTodoList => {
-                        if (listedTodoList.id === todoList.id) {
-                            return data.todoList
+                    updatedBoardItems.stickyNotes = updatedBoardItems.stickyNotes.map(listedStickyNote => {
+                        if (listedStickyNote.id === stickyNote.id) {
+                            return data.stickyNote
                         }
-                        return listedTodoList;
+                        return listedStickyNote;
                     })
                     return updatedBoardItems;
                 })
@@ -128,4 +128,4 @@ function DraggableTodo({ children, todoList }) {
     )
 }
 
-export default DraggableTodo
+export default DraggableStickyNote
