@@ -117,7 +117,7 @@ function DraggableTodo({ children, todoList }) {
 
             <DragBar
                 onMouseDown={handleMouseDown}
-                onToucheStart={handleMouseDown}
+                onTouchStart={handleMouseDown}
                 onTouchMove={handleMouseMove}
                 onTouchEnd={handleMouseUp}
             />

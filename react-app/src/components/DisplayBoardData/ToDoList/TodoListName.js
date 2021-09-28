@@ -94,7 +94,7 @@ function TodoListName({ nameEditToggle, todoList, setNameEditToggle, setAddTodo 
             {!nameEditToggle && todoList.name}
             <OptionsContainer>
                 <i onClick={() => setAddTodo(prev => !prev)} className="fas fa-plus"></i>
-                <i onClick={() => setToggleTodoMenu(prev => !prev)} class="fas fa-ellipsis-h"></i>
+                <i onClick={() => setToggleTodoMenu(prev => !prev)} className="fas fa-ellipsis-h"></i>
             </OptionsContainer>
             {toggleTodoMenu && <TodoMenu setToggleTodoMenu={setToggleTodoMenu} todoList={todoList} setNameEditToggle={setNameEditToggle} />}
         </ToDoListNameContainer>

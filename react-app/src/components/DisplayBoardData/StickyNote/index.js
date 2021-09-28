@@ -13,11 +13,12 @@ const StickyNoteContainer = styled.div`
     max-width: 300px;
     display: flex;
     flex-direction: column;
-    background: pink;
+    background: lightblue;
 `;
 
 
 function StickyNote({ stickyNote }) {
+    console.log(stickyNote);
     const [contentEditToggle, setContentEditToggle] = useState(false)
 
     return (

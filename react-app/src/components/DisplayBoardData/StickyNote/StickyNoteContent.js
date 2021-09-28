@@ -1,9 +1,14 @@
-import React from 'react'
+import styled from "styled-components";
 
-export default function StickyNoteContent() {
+const StickyNoteContentContainer = styled.div`
+
+
+`;
+
+export default function StickyNoteContent({ stickyNote }) {
     return (
-        <div>
-            
-        </div>
+        <StickyNoteContentContainer>
+            <h1>{stickyNote.content}</h1>
+        </StickyNoteContentContainer>
     )
 }
