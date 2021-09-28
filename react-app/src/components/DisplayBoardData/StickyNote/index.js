@@ -7,10 +7,9 @@ import DraggableStickyNote from "./DraggableStickyNote";
 const StickyNoteContainer = styled.div`
     padding: 7px;
     border: 1px solid lightgrey;
-    width: fit-content;
-    height: fit-content;
-    min-width: 250px;
-    max-width: 300px;
+    height: 300px;
+    width: 300px;
+
     display: flex;
     flex-direction: column;
     background: lightblue;
@@ -18,7 +17,6 @@ const StickyNoteContainer = styled.div`
 
 
 function StickyNote({ stickyNote }) {
-    console.log(stickyNote);
     const [contentEditToggle, setContentEditToggle] = useState(false)
 
     return (
