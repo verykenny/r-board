@@ -1,6 +1,6 @@
 # Welcome to rBoard!
 
-rBoard is a web application meant to combine refrigerator space and whiteboards into one app. On rBoard, users can create a board, known as a whiteboard, add sticky notes to their board, invite their family or roommates who have signed up to the board to begin adding things as well!
+rBoard is a web application that combines your refrigerator space and whiteboard into one app-making it easy to manage chores, reminders, and other tasks in your household or for school. On rBoard, users can create a board, known as a whiteboard, add sticky notes to their board, and invite their family or roommates who have signed up to the board to begin adding things as well!
 #### Live link: [rBoard](https://rboard2021.herokuapp.com/home)
 ***
 
