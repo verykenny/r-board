@@ -5,16 +5,15 @@ import StickyNoteMenu from "./StickyNoteMenu";
 
 const StickyNoteContentContainer = styled.div`
     font-family: 'Reenie Beanie', cursive;
-    padding: 20px;
     font-size: 25px;
     display: flex;
+    flex-direction: column;
 
-    .fa-plus,
     .fa-ellipsis-h {
         color: grey;
+        font-size: 20px;
     }
 
-    .fa-plus:hover,
     .fa-ellipsis-h:hover {
         color: black;
         cursor: pointer;
@@ -28,13 +27,16 @@ const StickyNoteEdit = styled.textarea`
     background: transparent;
     font-size: inherit;
     font-type: inherit;
+    resize: none;
+
 
     &:focus {
         outline: none;
     }
 `;
 
-const OptionsContainer =styled.div`
+const OptionsContainer = styled.div`
+    align-self: flex-end;
     .fa-plus {
         padding-right: 10px;
     }
@@ -88,21 +90,22 @@ export default function StickyNoteContent({ stickyNote, contentEditToggle, setCo
 
     return (
         <StickyNoteContentContainer>
-            {contentEditToggle && (
-                <StickyNoteEdit
+                    <OptionsContainer>
+                        <i onClick={() => setToggleStickyNoteMenu(prev => !prev)} className="fas fa-ellipsis-h"></i>
+                    </OptionsContainer>
+                {contentEditToggle && (
+                    <StickyNoteEdit
                     autoFocus
                     type='text'
                     value={stickyNoteContent}
                     onChange={(e) => setStickyNoteContent(e.target.value)}
                     onBlur={handleUpdateContent}
                     onKeyDown={handleKeyDown}
-                />
-            )}
-            {!contentEditToggle && stickyNote.content}
-            <OptionsContainer>
-                <i onClick={() => setToggleStickyNoteMenu(prev => !prev)} className="fas fa-ellipsis-h"></i>
-            </OptionsContainer>
-            {toggleStickyNoteMenu && <StickyNoteMenu setToggleStickyNoteMenu={setToggleStickyNoteMenu} stickyNote={stickyNote} setContentEditToggle={setContentEditToggle} />}
+                    rows='9'
+                    />
+                )}
+                {!contentEditToggle && stickyNote.content}
+                {toggleStickyNoteMenu && <StickyNoteMenu setToggleStickyNoteMenu={setToggleStickyNoteMenu} stickyNote={stickyNote} setContentEditToggle={setContentEditToggle} />}
         </StickyNoteContentContainer>
     )
 }

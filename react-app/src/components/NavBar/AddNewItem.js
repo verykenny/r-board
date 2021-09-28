@@ -17,7 +17,10 @@ const ItemFlyoutContainer = styled(FlyOutContainer)`
     width: 350px;
     padding: 40px 20px;
     padding-left: 70px;
-    justify-content: space-between;
+`;
+
+const AddItemButton = styled(Button)`
+    margin-bottom: 15px;
 `;
 
 
@@ -102,8 +105,8 @@ const ItemOptions = ({ setAddItemToggle }) => {
 
     return (
         <ItemFlyoutContainer>
-            <Button onClick={handleCreateTodoList}>New Todo List</Button>
-            <Button onClick={handleCreateStickyNote}>New Sticky Note</Button>
+            <AddItemButton onClick={handleCreateTodoList}>New Todo List</AddItemButton>
+            <AddItemButton onClick={handleCreateStickyNote}>New Sticky Note</AddItemButton>
         </ItemFlyoutContainer>
     )
 }
