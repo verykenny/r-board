@@ -24,7 +24,6 @@ function StickyNote({ stickyNote }) {
         <DraggableStickyNote stickyNote={stickyNote}>
             <StickyNoteContainer>
                 <StickyNoteContent contentEditToggle={contentEditToggle} stickyNote={stickyNote} setContentEditToggle={setContentEditToggle} />
-
             </StickyNoteContainer>
         </DraggableStickyNote>
     )
