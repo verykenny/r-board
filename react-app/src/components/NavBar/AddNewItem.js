@@ -71,11 +71,39 @@ const ItemOptions = ({ setAddItemToggle }) => {
             }
         })()
     }
-    console.log(displayBoardData);
+
+    const handleCreateStickyNote = () => {
+        (async () => {
+            const response = await fetch(`/api/boards/${displayBoard.id}/sticky_notes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    content: 'Sure to be one of your best!',
+                    xPos: window.innerWidth / 2,
+                    yPos: window.innerHeight / 2,
+                })
+            })
+            const data = await response.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                setAddItemToggle(false)
+                setDisplayBoardData(prev => {
+                    const newBoardData = { ...prev }
+                    newBoardData.stickyNotes.push(data.stickyNote)
+                    return newBoardData;
+                })
+            }
+        })()
+    }
+
 
     return (
         <ItemFlyoutContainer>
             <Button onClick={handleCreateTodoList}>New Todo List</Button>
+            <Button onClick={handleCreateStickyNote}>New Sticky Note</Button>
         </ItemFlyoutContainer>
     )
 }
