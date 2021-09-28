@@ -24,6 +24,14 @@ const StickyNoteContentContainer = styled.div`
 
 const StickyNoteEdit = styled.textarea`
     font-family: 'Reenie Beanie', cursive;
+    border: none;
+    background: transparent;
+    font-size: inherit;
+    font-type: inherit;
+
+    &:focus {
+        outline: none;
+    }
 `;
 
 const OptionsContainer =styled.div`
