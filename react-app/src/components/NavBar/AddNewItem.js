@@ -43,7 +43,7 @@ const AddNewItem = () => {
 
 
 const ItemOptions = ({ setAddItemToggle }) => {
-    const { displayBoard, setDisplayBoardData, displayBoardData } = useBoardType()
+    const { displayBoard, setDisplayBoardData } = useBoardType()
 
     const handleCreateTodoList = () => {
         (async () => {
