@@ -1,8 +1,6 @@
-
-
-from app.forms.sticky_note_form import StickyNoteForm
 from flask import Blueprint, request
 from app.models import db, User, StickyNote
+from app.forms import StickyNoteForm
 from flask_login import login_required, current_user
 from .validation_errors import validation_errors_to_error_messages
 

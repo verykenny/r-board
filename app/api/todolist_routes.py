@@ -1,5 +1,4 @@
-from app.forms.todoListItem_form import ToDoListItemForm
-from app.forms.todoList_form import ToDoListForm
+from app.forms import ToDoListItemForm, ToDoListForm
 from flask import Blueprint, request
 from app.models import db, User, ToDoList, ToDo
 from flask_login import login_required, current_user

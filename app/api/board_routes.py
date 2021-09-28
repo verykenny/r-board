@@ -1,7 +1,5 @@
 from app.models import db, Board, User, BoardUser, ToDoList, StickyNote
-from app.forms.board_form import BoardForm
-from app.forms.todoList_form import ToDoListForm
-from app.forms import StickyNoteForm
+from app.forms import StickyNoteForm, BoardForm, ToDoListForm
 from .validation_errors import validation_errors_to_error_messages
 from flask import Blueprint, request
 from flask_login import login_required, current_user
