@@ -42,7 +42,11 @@ def seed_users():
     todo1 = ToDo(content='take out trash')
     todo2 = ToDo(content='do dishes')
 
-    seed1 = StickyNote(content='Soccer Practice: 5:30p!')
+    seed1 = StickyNote(
+        content='Soccer Practice: 5:30p!',
+        xPos=150,
+        yPos=350
+    )
 
     todolist1.todos.append(todo1)
     todolist1.todos.append(todo2)
