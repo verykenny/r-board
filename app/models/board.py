@@ -12,6 +12,7 @@ class Board(db.Model):
     users = db.relationship('BoardUser', back_populates='board', cascade='all, delete')
 
     lists = db.relationship('ToDoList', back_populates='board', cascade='all, delete')
+    stickyNotes = db.relationship('StickyNote', back_populates='board', cascade='all, delete')
 
     def to_dict(self):
         return {
@@ -22,5 +23,6 @@ class Board(db.Model):
 
     def to_dict_items(self):
         return {
-            'todoLists': [todoList.to_dict() for todoList in self.lists]
+            'todoLists': [todoList.to_dict() for todoList in self.lists],
+            'stickyNotes': [stickyNote.to_dict() for stickyNote in self.stickyNotes]
         }

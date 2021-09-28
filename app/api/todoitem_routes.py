@@ -1,7 +1,6 @@
-from app.forms.todoListItem_form import ToDoListItemForm
-from app.forms.todoList_form import ToDoListForm
 from flask import Blueprint, request
 from app.models import db, User, ToDoList, ToDo
+from app.forms import ToDoListForm, ToDoListItemForm
 from flask_login import login_required, current_user
 from .validation_errors import validation_errors_to_error_messages
 

@@ -1,6 +1,5 @@
-from app.models import db, Board, User, BoardUser, ToDoList
-from app.forms.board_form import BoardForm
-from app.forms.todoList_form import ToDoListForm
+from app.models import db, Board, User, BoardUser, ToDoList, StickyNote
+from app.forms import StickyNoteForm, BoardForm, ToDoListForm
 from .validation_errors import validation_errors_to_error_messages
 from flask import Blueprint, request
 from flask_login import login_required, current_user
@@ -72,4 +71,24 @@ def create_todo_list(boardId):
         db.session.commit()
 
         return {'todoList': todoList.to_dict()}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@board_routes.route('/<int:boardId>/sticky_notes', methods=['POST'])
+@login_required
+def create_sticky_note(boardId):
+    """
+    Create a new sticky note
+    """
+    board = Board.query.get(boardId)
+    form = StickyNoteForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        sticky_note = StickyNote()
+        form.populate_obj(sticky_note)
+        board.stickyNotes.append(sticky_note)
+        db.session.add(board)
+        db.session.commit()
+
+        return {'stickyNote': sticky_note.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
