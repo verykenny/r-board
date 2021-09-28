@@ -39,6 +39,7 @@ app.register_blueprint(board_routes, url_prefix='/api/boards')
 app.register_blueprint(todolist_routes, url_prefix='/api/todo_lists')
 app.register_blueprint(todoitem_routes, url_prefix='/api/todo_list_items')
 app.register_blueprint(sticky_notes_routes, url_prefix='/api/sticky_notes')
+
 db.init_app(app)
 Migrate(app, db)
 

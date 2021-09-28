@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class StickyNote(db.Model):
-    __tablename__ = 'todo_lists'
+    __tablename__ = 'sticky_notes'
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=True)
@@ -13,7 +13,7 @@ class StickyNote(db.Model):
 
     boardId = db.Column(db.Integer, db.ForeignKey('boards.id'))
 
-    board = db.relationship('Board', back_populates='lists')
+    board = db.relationship('Board', back_populates='stickyNotes')
 
     def to_dict(self):
         return {
