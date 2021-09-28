@@ -22,7 +22,7 @@ def sticky_notes(stickyNoteId):
         form = StickyNoteForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            stickyNote.name = form['name'].data
+            stickyNote.content = form['content'].data
             stickyNote.xPos = form['xPos'].data
             stickyNote.yPos = form['yPos'].data
 

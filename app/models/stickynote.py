@@ -18,7 +18,7 @@ class StickyNote(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'content': self.name,
+            'content': self.content,
             'createdAt': self.createdAt.strftime('%Y-%m-%d %H:%M:%S'),
             'xPos': self.xPos,
             'yPos': self.yPos,

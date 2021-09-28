@@ -23,5 +23,6 @@ class Board(db.Model):
 
     def to_dict_items(self):
         return {
-            'todoLists': [todoList.to_dict() for todoList in self.lists]
+            'todoLists': [todoList.to_dict() for todoList in self.lists],
+            'stickyNotes': [stickyNote.to_dict() for stickyNote in self.stickyNotes]
         }
