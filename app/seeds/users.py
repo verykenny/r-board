@@ -174,8 +174,8 @@ def seed_users():
     )
     todo1 = ToDo(content='take out trash', completed=True)
     todo2 = ToDo(content='do dishes')
-    todo3 = ToDo(content='feed henrey')
-    todo4 = ToDo(content='find pickels')
+    todo3 = ToDo(content='feed pickels')
+    todo4 = ToDo(content='find pickels...again')
     todolist1.todos.append(todo1)
     todolist1.todos.append(todo2)
     todolist1.todos.append(todo3)
@@ -243,7 +243,7 @@ def seed_users():
     board17.lists.append(todolist5)
 
     sticky1 = StickyNote(
-        content='Soccer Practice: 5:30p!',
+        content='Soccer Practice: 5:30p! \n \n remember what happened last time you forgot :(((',
         xPos=150,
         yPos=350
     )
