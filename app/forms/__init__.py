@@ -4,3 +4,4 @@ from .board_form import BoardForm
 from .sticky_note_form import StickyNoteForm
 from .todoList_form import ToDoListForm
 from .todoListItem_form import ToDoListItemForm
+from .boardUser_form import BoardUserForm
