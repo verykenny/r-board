@@ -12,6 +12,7 @@ from .api.board_routes import board_routes
 from .api.todolist_routes import todolist_routes
 from .api.todoitem_routes import todoitem_routes
 from .api.sticky_notes_routes import sticky_notes_routes
+from .api.board_user_routes import board_user_routes
 
 from .seeds import seed_commands
 
@@ -39,6 +40,7 @@ app.register_blueprint(board_routes, url_prefix='/api/boards')
 app.register_blueprint(todolist_routes, url_prefix='/api/todo_lists')
 app.register_blueprint(todoitem_routes, url_prefix='/api/todo_list_items')
 app.register_blueprint(sticky_notes_routes, url_prefix='/api/sticky_notes')
+app.register_blueprint(board_user_routes, url_prefix='/api/board_users')
 
 db.init_app(app)
 Migrate(app, db)
