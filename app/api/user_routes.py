@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, request
 from flask_login import login_required
-from app.models import User
+from app.models import db, User, Board, BoardUser
 
 user_routes = Blueprint('users', __name__)
 
@@ -27,7 +27,17 @@ def boards(id):
     return {'boards': [board.board_to_dict() for board in user.boards]}
 
 
-@user_routes.route('/<int:userId>/boards/<int:boardId>')
+@user_routes.route('/<int:userId>/boards/<int:boardId>', methods=['POST', 'PUT', 'DELETE'])
 @login_required
 def add_user(userId, boardId):
-    return { 'user': 'success'}
+    """
+    Update user access to a board either by updating a 'request'
+    or creating a join
+    """
+    board = Board.query.get(boardId)
+    user = User.query.get(userId)
+    BoardUser(user=user, board=board, owner=False)
+    db.session.add(board)
+    db.session.add(user)
+    db.session.commit()
+    return {'user': user.to_dict()}
