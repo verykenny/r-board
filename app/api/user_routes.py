@@ -25,3 +25,9 @@ def boards(id):
     user = User.query.get(id)
     print(user.boards)
     return {'boards': [board.board_to_dict() for board in user.boards]}
+
+
+@user_routes.route('/<int:userId>/boards/<int:boardId>')
+@login_required
+def add_user(userId, boardId):
+    return { 'user': 'success'}
