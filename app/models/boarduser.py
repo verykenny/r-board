@@ -12,5 +12,16 @@ class BoardUser(db.Model):
     user = db.relationship('User', back_populates='boards')
     board = db.relationship('Board', back_populates='users')
 
+    def to_dict(self):
+        return {
+            'user': self.user.to_dict(),
+            'board': self.board.to_dict(),
+            'verified': self.verified,
+            'owner': self.owner,
+        }
+
     def board_to_dict(self):
         return self.board.to_dict()
+
+    def user_to_dict(self):
+        return self.user.to_dict()
