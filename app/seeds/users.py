@@ -96,7 +96,6 @@ def seed_users():
     )
     BoardUser(user=luke, board=board7)
 
-
     board8 = Board(
         name='School', backgroundUrl='https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'
     )
@@ -168,30 +167,94 @@ def seed_users():
     )
     BoardUser(user=cathy, board=board20)
 
+    todolist1 = ToDoList(
+        name='Chores',
+        xPos=400,
+        yPos=120
+    )
+    todo1 = ToDo(content='take out trash', completed=True)
+    todo2 = ToDo(content='do dishes')
+    todo3 = ToDo(content='feed henrey')
+    todo4 = ToDo(content='find pickels')
+    todolist1.todos.append(todo1)
+    todolist1.todos.append(todo2)
+    todolist1.todos.append(todo3)
+    todolist1.todos.append(todo4)
+    board1.lists.append(todolist1)
 
+    todolist2 = ToDoList(
+        name='Homework',
+        xPos=600,
+        yPos=170
+    )
 
+    todo5 = ToDo(content='math, pg 3-45', completed=True)
+    todo6 = ToDo(content='10 min speech on how cute pickles is')
+    todo7 = ToDo(content='get parking pass')
 
-    # todolist1 = ToDoList(
-    #     name='Chores',
-    #     xPos=500,
-    #     yPos=150
-    # )
+    todolist2.todos.append(todo5)
+    todolist2.todos.append(todo6)
+    todolist2.todos.append(todo7)
+    board2.lists.append(todolist2)
 
-    # todo1 = ToDo(content='take out trash')
-    # todo2 = ToDo(content='do dishes')
+    todolist3 = ToDoList(
+        name='components',
+        xPos=600,
+        yPos=100
+    )
 
-    # seed1 = StickyNote(
-    #     content='Soccer Practice: 5:30p!',
-    #     xPos=150,
-    #     yPos=350
-    # )
+    todo8 = ToDo(content='add friend button')
+    todo9 = ToDo(content='login modal', completed=True)
+    todo10 = ToDo(content='alert modal')
 
-    # todolist1.todos.append(todo1)
-    # todolist1.todos.append(todo2)
+    todolist3.todos.append(todo8)
+    todolist3.todos.append(todo9)
+    todolist3.todos.append(todo10)
+    board6.lists.append(todolist3)
 
-    # board1.lists.append(todolist1)
+    todolist4 = ToDoList(
+        name='Geoffrey todo',
+        xPos=620,
+        yPos=400
+    )
 
-    # seed1.board = board1
+    todo11 = ToDo(content='write out butter ingredients', completed=True)
+    todo12 = ToDo(content='apologize to Mrs. Wasserheim')
+    todo13 = ToDo(content='work on dinosaur diorama')
+
+    todolist4.todos.append(todo11)
+    todolist4.todos.append(todo12)
+    todolist4.todos.append(todo13)
+    board17.lists.append(todolist4)
+
+    todolist5 = ToDoList(
+        name='spelling test',
+        xPos=500,
+        yPos=135,
+    )
+
+    todo14 = ToDo(content='cucumber')
+    todo15 = ToDo(content='vinegar')
+    todo16 = ToDo(content='pickles')
+
+    todolist5.todos.append(todo14)
+    todolist5.todos.append(todo15)
+    todolist5.todos.append(todo16)
+    board17.lists.append(todolist5)
+
+    sticky1 = StickyNote(
+        content='Soccer Practice: 5:30p!',
+        xPos=150,
+        yPos=350
+    )
+    sticky1.board = board1
+
+    sticky2 = StickyNote(
+        content='I don\'t know who let pickles out again but I swear I\'ll force everyone in this family to eat brusslesprouts if it happens again!',
+        xPos=750,
+        yPos=250
+    )
+    sticky2.board = board1
 
     for user in [demo, marnie, bobbie, luke, amanda, cathy, mom, reggie, pinque, mozart, dennis, geoffrey, caleb, sean, kenny]:
         db.session.add(user)
