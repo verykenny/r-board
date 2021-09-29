@@ -243,7 +243,7 @@ def seed_users():
     board17.lists.append(todolist5)
 
     sticky1 = StickyNote(
-        content='Soccer Practice: 5:30p! \n \n remember what happened last time you forgot :(((',
+        content='Soccer Practice: 5:30p! Remember what happened last time you forgot :(((',
         xPos=150,
         yPos=350
     )
@@ -255,6 +255,41 @@ def seed_users():
         yPos=250
     )
     sticky2.board = board1
+
+    sticky3 = StickyNote(
+        content='"The beautiful thing about learning is that no one can take it away from you."  -B.B. King ',
+        xPos=750,
+        yPos=450
+    )
+    sticky3.board = board2
+
+    sticky4 = StickyNote(
+        content='"Opportunities multiply as they are seized."  -Sun Tzu ',
+        xPos=250,
+        yPos=150
+    )
+    sticky4.board = board2
+
+    sticky5 = StickyNote(
+        content='Daily Stand-up Meeting: 6:30a',
+        xPos=850,
+        yPos=330
+    )
+    sticky5.board = board6
+
+    sticky6 = StickyNote(
+        content='Everytime you push to main, an angle loses their wings and my cat, pickles, gets lost outside.',
+        xPos=200,
+        yPos=430
+    )
+    sticky6.board = board6
+
+    sticky7 = StickyNote(
+        content='Today, Geoffrey asked Mrs. Wasserheim why she was visible in technicolor if she was born before 1870...',
+        xPos=800,
+        yPos=80
+    )
+    sticky7.board = board17
 
     for user in [demo, marnie, bobbie, luke, amanda, cathy, mom, reggie, pinque, mozart, dennis, geoffrey, caleb, sean, kenny]:
         db.session.add(user)
