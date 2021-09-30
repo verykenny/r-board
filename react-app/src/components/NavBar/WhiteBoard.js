@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
-import { Button, ButtonAlt, StringEditInput } from "../StyledComponents";
+import { Button, StringEditInput } from "../StyledComponents";
 import { CSSTransition } from 'react-transition-group'
 import BackgroundEditFlyout from './BackgroundEditFlyout';
 import useBoardsType from "../../context/Boards";
+import { useSelector } from 'react-redux'
 
 
 const WhiteBoardNameContainer = styled.div`
@@ -199,11 +200,23 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
         setBackgroundEditToggle(prev => !prev)
     }
 
+
+
     return (
         <BoardOptionsContainer ref={clickCheck} >
-            <SideMenuOption onClick={handleNameEditToggle}>Update Name</SideMenuOption>
-            <SideMenuOption onClick={handleUpdateBackgroundToggle}>Update Background</SideMenuOption>
-            <DeleteButton board={board} setOptionsToggle={setOptionsToggle} />
+            {board.owner && (
+                <>
+                    <SideMenuOption onClick={handleNameEditToggle}>Update Name</SideMenuOption>
+                    <SideMenuOption onClick={handleUpdateBackgroundToggle}>Update Background</SideMenuOption>
+                    <DeleteButton board={board} setOptionsToggle={setOptionsToggle} />
+                </>
+            )}
+
+            {!board.owner && (
+                <>
+                    <LeaveButton board={board} setOptionsToggle={setOptionsToggle}></LeaveButton>
+                </>
+            )}
         </BoardOptionsContainer>
     )
 }
@@ -217,7 +230,7 @@ const DeleteButton = ({ board, setOptionsToggle }) => {
 
     const handleDeleteBoard = () => {
         (async () => {
-            const response = await fetch(`/api/boards/${board.id}`, { method: 'DELETE'})
+            const response = await fetch(`/api/boards/${board.id}`, { method: 'DELETE' })
             const data = await response.json()
             if (data.errors) {
                 setErrors(data.errors)
@@ -234,6 +247,32 @@ const DeleteButton = ({ board, setOptionsToggle }) => {
 
     return (
         <SideMenuDeleteButton onClick={handleDeleteBoard}>Delete</SideMenuDeleteButton>
+    )
+}
+
+const LeaveButton = ({ board, setOptionsToggle }) => {
+    const { setDisplayBoard, setDisplayBoardData } = useBoardType()
+    const { setUsersBoards } = useBoardsType()
+    const user = useSelector(state => state.session.user)
+
+    const handleLeaveBoard = () => {
+        (async () => {
+            const response = await fetch(`/api/board_users/users/${user.id}/boards/${board.id}`, { method: 'DELETE' })
+            const data = await response.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                setDisplayBoard(null);
+                setDisplayBoardData(null);
+                board = null;
+                setOptionsToggle(prev => !prev)
+                setUsersBoards(null)
+            }
+        })()
+    }
+
+    return(
+        <SideMenuDeleteButton onClick = {handleLeaveBoard}>Leave</SideMenuDeleteButton>
     )
 }
 
