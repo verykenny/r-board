@@ -92,7 +92,6 @@ function ViewUsersFlyout({ board, setViewUsersToggle }) {
                     <BoardUser key={boardUser.user.id} boardUser={boardUser} setBoardUsers={setBoardUsers} board={board}></BoardUser>
                     ))}
             </UsersConatiner>
-            {!board.owner && <SectionTitle>Board Owner: {boardUsers?.filter(boardUser => boardUser.owner === true)[0].user.username}</SectionTitle>}
         </ViewUsersFlyoutContainer>
     )
 }
