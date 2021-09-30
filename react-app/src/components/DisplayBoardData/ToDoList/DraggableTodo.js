@@ -32,8 +32,14 @@ function DraggableTodo({ children, todoList }) {
     const [dragData, setDragData] = useState({
         isDragging: false,
         orig: { xPos: 0, yPos: 0 },
-        translation: { xPos: todoList.xPos, yPos: todoList.yPos },
-        lastTranslation: { xPos: todoList.xPos, yPos: todoList.yPos },
+        translation: {
+            xPos: (window.innerWidth > todoList.xPos + 300) ? todoList.xPos : window.innerWidth - 300,
+            yPos: (window.innerHeight > todoList.yPos + 300) ? todoList.yPos : window.innerHeight - 300,
+        },
+        lastTranslation: {
+            xPos: (window.innerWidth > todoList.xPos + 300) ? todoList.xPos : window.innerWidth - 300,
+            yPos: (window.innerHeight > todoList.yPos + 300) ? todoList.yPos : window.innerHeight - 300,
+        },
     })
 
     const handleMouseDown = ({ clientX, clientY }) => {
@@ -146,7 +152,7 @@ function DraggableTodo({ children, todoList }) {
                 isDragging: false,
                 lastTranslation: {
                     xPos: lastTranslation.xPos,
-                    yPos: window.innerHeight - 200,
+                    yPos: window.innerHeight - 300,
                 }
             }))
         }
@@ -164,7 +170,7 @@ function DraggableTodo({ children, todoList }) {
                     },
                     body: JSON.stringify({
                         name: todoList.name,
-                        xPos: window.innerWidth - 200,
+                        xPos: window.innerWidth - 300,
                         yPos: lastTranslation.yPos,
                     })
                 })
@@ -189,7 +195,7 @@ function DraggableTodo({ children, todoList }) {
                 ...prev,
                 isDragging: false,
                 lastTranslation: {
-                    xPos: window.innerWidth - 200,
+                    xPos: window.innerWidth - 300,
                     yPos: lastTranslation.yPos,
                 }
             }))
