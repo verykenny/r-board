@@ -203,7 +203,7 @@ function DraggableTodo({ children, todoList }) {
     let resizeEvent;
     window.onresize = () => {
         clearTimeout(resizeEvent);
-        resizeEvent = setTimeout(updatePlacement, 500)
+        resizeEvent = setTimeout(updatePlacement, 300)
     };
 
     return (
