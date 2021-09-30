@@ -45,7 +45,6 @@ const SideMenuDeleteButton = styled(SideMenuOption)`
 function ViewUsersFlyout({ board, setViewUsersToggle }) {
     const [boardUsers, setBoardUsers] = useState(null)
     const user = useSelector(state => state.session.user)
-    console.log(boardUsers);
     const clickCheck = useRef(null)
     const ClickChecker = (ref) => {
         useEffect(() => {
