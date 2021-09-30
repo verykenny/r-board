@@ -83,22 +83,23 @@ function ViewUsersFlyout({ board, setViewUsersToggle }) {
             <UsersConatiner>
                 <SectionTitle>Granted Access</SectionTitle>
                 {boardUsers && boardUsers.filter(boardUser => boardUser.verified === true && boardUser.user.id !== user.id).map(boardUser => (
-                    <BoardUser key={boardUser.user.id} boardUser={boardUser} boardUsers={boardUsers} setBoardUsers={setBoardUsers}></BoardUser>
-                ))}
+                    <BoardUser key={boardUser.user.id} boardUser={boardUser} setBoardUsers={setBoardUsers} board={board}></BoardUser>
+                    ))}
             </UsersConatiner>
             <UsersConatiner>
                 <SectionTitle>Requested Access</SectionTitle>
                 {boardUsers && boardUsers.filter(boardUser => boardUser.verified !== true).map(boardUser => (
-                    <BoardUser key={boardUser.user.id} boardUser={boardUser} setBoardUsers={setBoardUsers}></BoardUser>
-                ))}
+                    <BoardUser key={boardUser.user.id} boardUser={boardUser} setBoardUsers={setBoardUsers} board={board}></BoardUser>
+                    ))}
             </UsersConatiner>
+            {!board.owner && <SectionTitle>Board Owner: {boardUsers?.filter(boardUser => boardUser.owner === true)[0].user.username}</SectionTitle>}
         </ViewUsersFlyoutContainer>
     )
 }
 
 
 
-function BoardUser({ boardUser, setBoardUsers }) {
+function BoardUser({ boardUser, setBoardUsers, board }) {
 
     const handleRemoveUser = () => {
         (async () => {
@@ -139,11 +140,12 @@ function BoardUser({ boardUser, setBoardUsers }) {
 
     return (
         <BoardUserContainer>
-            {boardUser.user.username}
-            {boardUser.verified && (
+            {boardUser.owner && <p>{boardUser.user.username} - owner</p>}
+            {!boardUser.owner && boardUser.user.username}
+            {(boardUser.verified && board.owner) && (
                 <SideMenuDeleteButton onClick={handleRemoveUser}>Remove</SideMenuDeleteButton>
             )}
-            {!boardUser.verified && (
+            {(!boardUser.verified && board.owner) && (
                 <SideMenuOption onClick={handleApproveUser}>Approve</SideMenuOption>
             )}
         </BoardUserContainer>
