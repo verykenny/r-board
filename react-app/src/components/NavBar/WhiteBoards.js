@@ -19,8 +19,6 @@ const WhiteBoards = () => {
     const { usersBoards, setUsersBoards } = useBoardsType();
     const [errors, setErrors] = useState(null)
 
-    console.log(usersBoards)
-
     useEffect(() => {
         (async () => {
             if (! usersBoards) {

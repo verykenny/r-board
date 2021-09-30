@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group'
 import BackgroundEditFlyout from './BackgroundEditFlyout';
 import useBoardsType from "../../context/Boards";
 import { useSelector } from 'react-redux'
+import ViewUsersFlyout from "./ViewUsersFlyout";
 
 
 const WhiteBoardNameContainer = styled.div`
@@ -77,6 +78,7 @@ const WhiteBoard = ({ board }) => {
     const [optionsToggle, setOptionsToggle] = useState(false)
     const [nameEditToggle, setNameEditToggle] = useState(false)
     const [backgroundEditToggle, setBackgroundEditToggle] = useState(false)
+    const [viewUsersToggle, setViewUsersToggle] = useState(false)
     const [boardName, setBoardName] = useState(board.name)
 
     const handleChangeBoard = () => {
@@ -145,6 +147,7 @@ const WhiteBoard = ({ board }) => {
                     setOptionsToggle={setOptionsToggle}
                     setBackgroundEditToggle={setBackgroundEditToggle}
                     board={board}
+                    setViewUsersToggle={setViewUsersToggle}
                 />
             </CSSTransition>
 
@@ -157,8 +160,21 @@ const WhiteBoard = ({ board }) => {
                 >
                     <BackgroundEditFlyout
                         board={board}
-                        setOptionsToggle={setOptionsToggle}
                         setBackgroundEditToggle={setBackgroundEditToggle}
+                    />
+                </CSSTransition>
+            </PositionedContainer>
+
+            <PositionedContainer>
+                <CSSTransition
+                    in={viewUsersToggle}
+                    timeout={300}
+                    classNames='second-flyout'
+                    unmountOnExit
+                >
+                    <ViewUsersFlyout
+                        board={board}
+                        setViewUsersToggle={setViewUsersToggle}
                     />
                 </CSSTransition>
             </PositionedContainer>
@@ -170,7 +186,7 @@ const WhiteBoard = ({ board }) => {
 
 
 
-const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEditToggle, board }) => {
+const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEditToggle, board, setViewUsersToggle }) => {
     const clickCheck = useRef(null)
     const ClickChecker = (ref) => {
         useEffect(() => {
@@ -200,10 +216,15 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
         setBackgroundEditToggle(prev => !prev)
     }
 
+    const handleViewUsersToggle = () => {
+        setOptionsToggle(prev => !prev)
+        setViewUsersToggle(prev => !prev)
+    }
 
 
     return (
         <BoardOptionsContainer ref={clickCheck} >
+            <SideMenuOption onClick={handleViewUsersToggle}>View Users</SideMenuOption>
             {board.owner && (
                 <>
                     <SideMenuOption onClick={handleNameEditToggle}>Update Name</SideMenuOption>
