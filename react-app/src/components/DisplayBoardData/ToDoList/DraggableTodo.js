@@ -106,6 +106,103 @@ function DraggableTodo({ children, todoList }) {
         }
     }
 
+    const updatePlacement = () => {
+        if (window.innerHeight < dragData.translation.yPos + 300) {
+            const { lastTranslation } = dragData;
+            console.log('resize event');
+
+
+            (async () => {
+                const response = await fetch(`/api/todo_lists/${todoList.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: todoList.name,
+                        xPos: lastTranslation.xPos,
+                        yPos: window.innerHeight - 300,
+                    })
+                })
+                const data = await response.json()
+                if (data.errors) {
+                    console.log(data.errors);
+                }
+                setDisplayBoardData(prev => {
+                    const updatedBoardItems = { ...prev }
+                    updatedBoardItems.todoLists = updatedBoardItems.todoLists.map(listedTodoList => {
+                        if (listedTodoList.id === todoList.id) {
+                            return data.todoList
+                        }
+                        return listedTodoList;
+                    })
+                    return updatedBoardItems;
+                })
+            })()
+
+
+            setDragData(prev => ({
+                ...prev,
+                isDragging: false,
+                lastTranslation: {
+                    xPos: lastTranslation.xPos,
+                    yPos: window.innerHeight - 200,
+                }
+            }))
+        }
+
+        if (window.innerWidth < dragData.translation.xPos + 300) {
+            const { lastTranslation } = dragData;
+            console.log('resize event');
+
+
+            (async () => {
+                const response = await fetch(`/api/todo_lists/${todoList.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: todoList.name,
+                        xPos: window.innerWidth - 200,
+                        yPos: lastTranslation.yPos,
+                    })
+                })
+                const data = await response.json()
+                if (data.errors) {
+                    console.log(data.errors);
+                }
+                setDisplayBoardData(prev => {
+                    const updatedBoardItems = { ...prev }
+                    updatedBoardItems.todoLists = updatedBoardItems.todoLists.map(listedTodoList => {
+                        if (listedTodoList.id === todoList.id) {
+                            return data.todoList
+                        }
+                        return listedTodoList;
+                    })
+                    return updatedBoardItems;
+                })
+            })()
+
+
+            setDragData(prev => ({
+                ...prev,
+                isDragging: false,
+                lastTranslation: {
+                    xPos: window.innerWidth - 200,
+                    yPos: lastTranslation.yPos,
+                }
+            }))
+        }
+    }
+
+    let resizeEvent;
+    window.onresize = () => {
+        console.log(dragData);
+        console.log(window.innerHeight);
+        clearTimeout(resizeEvent);
+        resizeEvent = setTimeout(updatePlacement, 500)
+    };
 
     return (
         <DraggableConatiner
