@@ -13,6 +13,11 @@ const WhiteBoardsContainer = styled.div`
     padding: 60px 20px;
 `;
 
+const SectionNameContainer = styled.h2`
+`;
+const SectionNameContainerTwo = styled.h2`
+    margin-top: 50px;
+`;
 
 const WhiteBoards = () => {
     const user = useSelector(state => state.session.user)
@@ -37,8 +42,12 @@ const WhiteBoards = () => {
 
     return (
         <WhiteBoardsContainer>
-            <h2>Whiteboards</h2>
-            {usersBoards && usersBoards.map(board => (
+            <SectionNameContainer>Your Whiteboards</SectionNameContainer>
+            {usersBoards && usersBoards.filter(board => board.owner).map(board => (
+                <WhiteBoard key={board.id} board={board} />
+            ))}
+            <SectionNameContainerTwo>Other's Whiteboards</SectionNameContainerTwo>
+            {usersBoards && usersBoards.filter(board => board.owner === false).map(board => (
                 <WhiteBoard key={board.id} board={board} />
             ))}
         </WhiteBoardsContainer>
