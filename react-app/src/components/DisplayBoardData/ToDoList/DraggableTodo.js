@@ -115,8 +115,6 @@ function DraggableTodo({ children, todoList }) {
     const updatePlacement = () => {
         if (window.innerHeight < dragData.translation.yPos + 300) {
             const { lastTranslation } = dragData;
-            console.log('resize event');
-
 
             (async () => {
                 const response = await fetch(`/api/todo_lists/${todoList.id}`, {
@@ -159,8 +157,6 @@ function DraggableTodo({ children, todoList }) {
 
         if (window.innerWidth < dragData.translation.xPos + 300) {
             const { lastTranslation } = dragData;
-            console.log('resize event');
-
 
             (async () => {
                 const response = await fetch(`/api/todo_lists/${todoList.id}`, {
