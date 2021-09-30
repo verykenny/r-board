@@ -114,7 +114,28 @@ function BoardUser({ boardUser, setBoardUsers }) {
     }
 
     const handleApproveUser = () => {
-
+        (async () => {
+            const response = await fetch(`/api/board_users/users/${boardUser.user.id}/boards/${boardUser.board.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    verified: true
+                })
+            })
+            const data = await response.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                setBoardUsers(prev => prev.map(listedBoardUser => {
+                    if (listedBoardUser.user.id === boardUser.user.id) {
+                        listedBoardUser.verified = true;
+                    }
+                    return listedBoardUser
+                }))
+            }
+        })()
     }
 
     return (
