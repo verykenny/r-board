@@ -77,6 +77,7 @@ const BackgroundEditFlyout = ({ board, setBackgroundEditToggle }) => {
             if (data.errors) {
                 console.log(data.errors);
             } else {
+                data.board.owner = true;
                 setDisplayBoard(data.board)
                 setUsersBoards(prev => prev.map(userboard => {
                     if (userboard.id ===  board.id) {
