@@ -45,7 +45,7 @@ const SideMenuDeleteButton = styled(SideMenuOption)`
 function ViewUsersFlyout({ board, setViewUsersToggle }) {
     const [boardUsers, setBoardUsers] = useState(null)
     const user = useSelector(state => state.session.user)
-
+    console.log(boardUsers);
     const clickCheck = useRef(null)
     const ClickChecker = (ref) => {
         useEffect(() => {
@@ -84,13 +84,13 @@ function ViewUsersFlyout({ board, setViewUsersToggle }) {
             <UsersConatiner>
                 <SectionTitle>Granted Access</SectionTitle>
                 {boardUsers && boardUsers.filter(boardUser => boardUser.verified === true && boardUser.user.id !== user.id).map(boardUser => (
-                    <BoardUser key={boardUser.user.id} boardUser={boardUser}></BoardUser>
+                    <BoardUser key={boardUser.user.id} boardUser={boardUser} boardUsers={boardUsers} setBoardUsers={setBoardUsers}></BoardUser>
                 ))}
             </UsersConatiner>
             <UsersConatiner>
                 <SectionTitle>Requested Access</SectionTitle>
                 {boardUsers && boardUsers.filter(boardUser => boardUser.verified !== true).map(boardUser => (
-                    <BoardUser key={boardUser.user.id} boardUser={boardUser}></BoardUser>
+                    <BoardUser key={boardUser.user.id} boardUser={boardUser} setBoardUsers={setBoardUsers}></BoardUser>
                 ))}
             </UsersConatiner>
         </ViewUsersFlyoutContainer>
@@ -99,15 +99,32 @@ function ViewUsersFlyout({ board, setViewUsersToggle }) {
 
 
 
-function BoardUser({ boardUser }) {
+function BoardUser({ boardUser, setBoardUsers }) {
+
+    const handleRemoveUser = () => {
+        (async () => {
+            const response = await fetch(`/api/board_users/users/${boardUser.user.id}/boards/${boardUser.board.id}`, {method: 'DELETE'})
+            const data = await response.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                setBoardUsers(prev => prev.filter(listedBoardUser => listedBoardUser.user.id !== boardUser.user.id))
+            }
+        })()
+    }
+
+    const handleApproveUser = () => {
+
+    }
+
     return (
         <BoardUserContainer>
             {boardUser.user.username}
             {boardUser.verified && (
-                <SideMenuDeleteButton>Remove</SideMenuDeleteButton>
+                <SideMenuDeleteButton onClick={handleRemoveUser}>Remove</SideMenuDeleteButton>
             )}
             {!boardUser.verified && (
-                <SideMenuOption>Approve</SideMenuOption>
+                <SideMenuOption onClick={handleApproveUser}>Approve</SideMenuOption>
             )}
         </BoardUserContainer>
     )
