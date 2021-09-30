@@ -32,8 +32,14 @@ function DraggableStickyNote({ children, stickyNote }) {
     const [dragData, setDragData] = useState({
         isDragging: false,
         orig: { xPos: 0, yPos: 0 },
-        translation: { xPos: stickyNote.xPos, yPos: stickyNote.yPos },
-        lastTranslation: { xPos: stickyNote.xPos, yPos: stickyNote.yPos },
+        translation: {
+            xPos: (window.innerWidth > stickyNote.xPos + 300) ? stickyNote.xPos : window.innerWidth - 300,
+            yPos: (window.innerHeight > stickyNote.yPos + 300) ? stickyNote.yPos : window.innerHeight - 300,
+        },
+        lastTranslation: {
+            xPos: (window.innerWidth > stickyNote.xPos + 300) ? stickyNote.xPos : window.innerWidth - 300,
+            yPos: (window.innerHeight > stickyNote.yPos + 300) ? stickyNote.yPos : window.innerHeight - 300,
+        },
     })
 
     const handleMouseDown = ({ clientX, clientY }) => {
