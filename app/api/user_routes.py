@@ -23,7 +23,6 @@ def user(id):
 @login_required
 def boards(id):
     user = User.query.get(id)
-    print({'boards': [board.board_to_dict() for board in user.boards]})
     return {'boards': [board.board_to_dict() for board in user.boards]}
 
 
