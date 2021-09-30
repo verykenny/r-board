@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useBoardType from "../../context/Board";
-import { Button, ButtonAlt, StringEditInput } from "../StyledComponents";
+import { Button, StringEditInput } from "../StyledComponents";
 import { CSSTransition } from 'react-transition-group'
 import BackgroundEditFlyout from './BackgroundEditFlyout';
 import useBoardsType from "../../context/Boards";
+import { useSelector } from 'react-redux'
+import ViewUsersFlyout from "./ViewUsersFlyout";
 
 
 const WhiteBoardNameContainer = styled.div`
@@ -76,6 +78,7 @@ const WhiteBoard = ({ board }) => {
     const [optionsToggle, setOptionsToggle] = useState(false)
     const [nameEditToggle, setNameEditToggle] = useState(false)
     const [backgroundEditToggle, setBackgroundEditToggle] = useState(false)
+    const [viewUsersToggle, setViewUsersToggle] = useState(false)
     const [boardName, setBoardName] = useState(board.name)
 
     const handleChangeBoard = () => {
@@ -144,6 +147,7 @@ const WhiteBoard = ({ board }) => {
                     setOptionsToggle={setOptionsToggle}
                     setBackgroundEditToggle={setBackgroundEditToggle}
                     board={board}
+                    setViewUsersToggle={setViewUsersToggle}
                 />
             </CSSTransition>
 
@@ -156,8 +160,21 @@ const WhiteBoard = ({ board }) => {
                 >
                     <BackgroundEditFlyout
                         board={board}
-                        setOptionsToggle={setOptionsToggle}
                         setBackgroundEditToggle={setBackgroundEditToggle}
+                    />
+                </CSSTransition>
+            </PositionedContainer>
+
+            <PositionedContainer>
+                <CSSTransition
+                    in={viewUsersToggle}
+                    timeout={300}
+                    classNames='second-flyout'
+                    unmountOnExit
+                >
+                    <ViewUsersFlyout
+                        board={board}
+                        setViewUsersToggle={setViewUsersToggle}
                     />
                 </CSSTransition>
             </PositionedContainer>
@@ -169,7 +186,7 @@ const WhiteBoard = ({ board }) => {
 
 
 
-const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEditToggle, board }) => {
+const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEditToggle, board, setViewUsersToggle }) => {
     const clickCheck = useRef(null)
     const ClickChecker = (ref) => {
         useEffect(() => {
@@ -199,11 +216,28 @@ const BoardOptionsMenu = ({ setNameEditToggle, setOptionsToggle, setBackgroundEd
         setBackgroundEditToggle(prev => !prev)
     }
 
+    const handleViewUsersToggle = () => {
+        setOptionsToggle(prev => !prev)
+        setViewUsersToggle(prev => !prev)
+    }
+
+
     return (
         <BoardOptionsContainer ref={clickCheck} >
-            <SideMenuOption onClick={handleNameEditToggle}>Update Name</SideMenuOption>
-            <SideMenuOption onClick={handleUpdateBackgroundToggle}>Update Background</SideMenuOption>
-            <DeleteButton board={board} setOptionsToggle={setOptionsToggle} />
+            <SideMenuOption onClick={handleViewUsersToggle}>View Users</SideMenuOption>
+            {board.owner && (
+                <>
+                    <SideMenuOption onClick={handleNameEditToggle}>Update Name</SideMenuOption>
+                    <SideMenuOption onClick={handleUpdateBackgroundToggle}>Update Background</SideMenuOption>
+                    <DeleteButton board={board} setOptionsToggle={setOptionsToggle} />
+                </>
+            )}
+
+            {!board.owner && (
+                <>
+                    <LeaveButton board={board} setOptionsToggle={setOptionsToggle}></LeaveButton>
+                </>
+            )}
         </BoardOptionsContainer>
     )
 }
@@ -217,7 +251,7 @@ const DeleteButton = ({ board, setOptionsToggle }) => {
 
     const handleDeleteBoard = () => {
         (async () => {
-            const response = await fetch(`/api/boards/${board.id}`, { method: 'DELETE'})
+            const response = await fetch(`/api/boards/${board.id}`, { method: 'DELETE' })
             const data = await response.json()
             if (data.errors) {
                 setErrors(data.errors)
@@ -234,6 +268,32 @@ const DeleteButton = ({ board, setOptionsToggle }) => {
 
     return (
         <SideMenuDeleteButton onClick={handleDeleteBoard}>Delete</SideMenuDeleteButton>
+    )
+}
+
+const LeaveButton = ({ board, setOptionsToggle }) => {
+    const { setDisplayBoard, setDisplayBoardData } = useBoardType()
+    const { setUsersBoards } = useBoardsType()
+    const user = useSelector(state => state.session.user)
+
+    const handleLeaveBoard = () => {
+        (async () => {
+            const response = await fetch(`/api/board_users/users/${user.id}/boards/${board.id}`, { method: 'DELETE' })
+            const data = await response.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                setDisplayBoard(null);
+                setDisplayBoardData(null);
+                board = null;
+                setOptionsToggle(prev => !prev)
+                setUsersBoards(null)
+            }
+        })()
+    }
+
+    return(
+        <SideMenuDeleteButton onClick = {handleLeaveBoard}>Leave</SideMenuDeleteButton>
     )
 }
 

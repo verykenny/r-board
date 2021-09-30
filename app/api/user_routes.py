@@ -23,16 +23,15 @@ def user(id):
 @login_required
 def boards(id):
     user = User.query.get(id)
-    print(user.boards)
+    print({'boards': [board.board_to_dict() for board in user.boards]})
     return {'boards': [board.board_to_dict() for board in user.boards]}
 
 
-@user_routes.route('/<int:userId>/boards/<int:boardId>', methods=['POST', 'PUT', 'DELETE'])
+@user_routes.route('/<int:userId>/boards/<int:boardId>', methods=['POST'])
 @login_required
 def add_user(userId, boardId):
     """
-    Update user access to a board either by updating a 'request'
-    or creating a join
+    Add user access to board as a BoardUser item
     """
     board = Board.query.get(boardId)
     user = User.query.get(userId)

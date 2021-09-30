@@ -21,7 +21,9 @@ class BoardUser(db.Model):
         }
 
     def board_to_dict(self):
-        return self.board.to_dict()
+        board = self.board.to_dict()
+        board['owner'] = self.owner
+        return board
 
     def user_to_dict(self):
         return self.user.to_dict()

@@ -116,7 +116,6 @@ function DraggableStickyNote({ children, stickyNote }) {
     const updatePlacement = () => {
         if (window.innerHeight < dragData.translation.yPos + 300) {
             const { lastTranslation } = dragData;
-            console.log('resize event');
 
 
             (async () => {
@@ -160,8 +159,6 @@ function DraggableStickyNote({ children, stickyNote }) {
 
         if (window.innerWidth < dragData.translation.xPos + 300) {
             const { lastTranslation } = dragData;
-            console.log('resize event');
-
 
             (async () => {
                 const response = await fetch(`/api/sticky_notes/${stickyNote.id}`, {

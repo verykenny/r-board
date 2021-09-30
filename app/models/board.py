@@ -18,7 +18,7 @@ class Board(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'backgroundUrl': self.backgroundUrl
+            'backgroundUrl': self.backgroundUrl,
         }
 
     def to_dict_items(self):

@@ -24,7 +24,7 @@ def board_user_items(userId, boardId):
             db.session.add(user)
             db.session.add(board)
             db.session.commit()
-            return {'boardUsers': boardUser.to_dict()}
+            return {'boardUser': boardUser.to_dict()}
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     elif request.method == 'DELETE':
         boardUser = BoardUser.query.filter_by(boardId=boardId, userId=userId).first()
