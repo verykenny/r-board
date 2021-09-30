@@ -199,13 +199,13 @@ function DraggableTodo({ children, todoList }) {
                     yPos: lastTranslation.yPos,
                 }
             }))
+
+            window.location.reload()
         }
     }
 
     let resizeEvent;
     window.onresize = () => {
-        console.log(dragData);
-        console.log(window.innerHeight);
         clearTimeout(resizeEvent);
         resizeEvent = setTimeout(updatePlacement, 500)
     };

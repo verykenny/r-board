@@ -107,6 +107,104 @@ function DraggableStickyNote({ children, stickyNote }) {
     }
 
 
+    const updatePlacement = () => {
+        if (window.innerHeight < dragData.translation.yPos + 300) {
+            const { lastTranslation } = dragData;
+            console.log('resize event');
+
+
+            (async () => {
+                const response = await fetch(`/api/sticky_notes/${stickyNote.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: stickyNote.content,
+                        xPos: lastTranslation.xPos,
+                        yPos: window.innerHeight - 300,
+                    })
+                })
+                const data = await response.json()
+                if (data.errors) {
+                    console.log(data.errors);
+                }
+                setDisplayBoardData(prev => {
+                    const updatedBoardItems = { ...prev }
+                    updatedBoardItems.stickyNotes = updatedBoardItems.stickyNotes.map(listedStickyNote => {
+                        if (listedStickyNote.id === stickyNote.id) {
+                            return data.stickyNote
+                        }
+                        return listedStickyNote;
+                    })
+                    return updatedBoardItems;
+                })
+            })()
+
+
+            setDragData(prev => ({
+                ...prev,
+                isDragging: false,
+                lastTranslation: {
+                    xPos: lastTranslation.xPos,
+                    yPos: window.innerHeight - 300,
+                }
+            }))
+        }
+
+        if (window.innerWidth < dragData.translation.xPos + 300) {
+            const { lastTranslation } = dragData;
+            console.log('resize event');
+
+
+            (async () => {
+                const response = await fetch(`/api/sticky_notes/${stickyNote.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: stickyNote.content,
+                        xPos: window.innerWidth - 300,
+                        yPos: lastTranslation.yPos,
+                    })
+                })
+                const data = await response.json()
+                if (data.errors) {
+                    console.log(data.errors);
+                }
+                setDisplayBoardData(prev => {
+                    const updatedBoardItems = { ...prev }
+                    updatedBoardItems.stickyNotes = updatedBoardItems.stickyNotes.map(listedStickyNote => {
+                        if (listedStickyNote.id === stickyNote.id) {
+                            return data.stickyNote
+                        }
+                        return listedStickyNote;
+                    })
+                    return updatedBoardItems;
+                })
+            })()
+
+
+            setDragData(prev => ({
+                ...prev,
+                isDragging: false,
+                lastTranslation: {
+                    xPos: window.innerWidth - 300,
+                    yPos: lastTranslation.yPos,
+                }
+            }))
+
+            window.location.reload()
+        }
+    }
+
+    let resizeEvent;
+    window.onresize = () => {
+        clearTimeout(resizeEvent);
+        resizeEvent = setTimeout(updatePlacement, 500)
+    };
+
     return (
         <DraggableConatiner
             left={`${dragData.translation.xPos}px`}
