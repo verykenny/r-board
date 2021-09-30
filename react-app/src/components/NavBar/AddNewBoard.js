@@ -27,6 +27,7 @@ const AddNewBoard = () => {
                 setErrors(data.errors)
                 console.log(errors);
             } else {
+                data.board.owner = true
                 setUsersBoards(prev => [...prev, data.board])
                 setDisplayBoard(data.board)
             }
