@@ -81,6 +81,7 @@ const WhiteBoard = ({ board }) => {
     const [viewUsersToggle, setViewUsersToggle] = useState(false)
     const [boardName, setBoardName] = useState(board.name)
 
+
     const handleChangeBoard = () => {
         setDisplayBoard(board)
     }
