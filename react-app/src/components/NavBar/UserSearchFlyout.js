@@ -1,7 +1,8 @@
 import styled from "styled-components"
 import { Button, FlyOutContainer } from "../StyledComponents";
 import { CSSTransition } from 'react-transition-group'
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+
 
 const UserSearchFlyoutContainer = styled(FlyOutContainer)`
     width: 350px;
@@ -15,6 +16,7 @@ const PositionedContainer = styled.div`
     top: 0px;
     z-index: -1;
 `;
+
 
 function UserSearchFlyout() {
     const [userSearchToggle, setUserSearchToggle] = useState('')
@@ -36,11 +38,27 @@ function UserSearchFlyout() {
     )
 }
 
-function UserSearch({setUserSearchToggle}) {
 
+function UserSearch({setUserSearchToggle}) {
+    const clickCheck = useRef(null)
+    const ClickChecker = (ref) => {
+        useEffect(() => {
+            const handleCloseOptions = (e) => {
+                if (ref.current && !ref.current.contains(e.target)) {
+                    setUserSearchToggle(false)
+
+                }
+            }
+            document.addEventListener("mousedown", handleCloseOptions);
+            return () => {
+                document.removeEventListener("mousedown", handleCloseOptions);
+            };
+        })
+    }
+    ClickChecker(clickCheck)
 
     return (
-        <UserSearchFlyoutContainer>
+        <UserSearchFlyoutContainer ref={clickCheck}>
 
         </UserSearchFlyoutContainer>
     )

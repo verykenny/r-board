@@ -9,6 +9,7 @@ import './FlyOut.css'
 
 import AddNewBoard from './AddNewBoard';
 import useBoardType from '../../context/Board';
+import UserSearchFlyout from './UserSearchFlyout';
 
 
 
@@ -33,6 +34,7 @@ const FlyOut = ({ setShowFlyOut }) => {
             <MenuOptionsContainer>
                 {displayBoard && <AddNewItem />}
                 <AddNewBoard />
+                <UserSearchFlyout />
                 <LogoutButton />
             </MenuOptionsContainer>
         </FlyOutContainer>
