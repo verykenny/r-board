@@ -153,7 +153,7 @@ function DraggableTodo({ children, todoList }) {
                     yPos: (window.innerHeight > lastTranslation.yPos + 300) ? lastTranslation.yPos : window.innerHeight - 300,
                 }
             }))
-            
+
             window.location.reload()
         }
     }
