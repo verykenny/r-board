@@ -113,7 +113,7 @@ function DraggableTodo({ children, todoList }) {
     }
 
     const updatePlacement = () => {
-        if (window.innerHeight < dragData.translation.yPos + 300) {
+        if (window.innerWidth < todoList.xPos + 300 || window.innerHeight < todoList.yPos + 300) {
             const { lastTranslation } = dragData;
 
             (async () => {
@@ -124,8 +124,9 @@ function DraggableTodo({ children, todoList }) {
                     },
                     body: JSON.stringify({
                         name: todoList.name,
-                        xPos: lastTranslation.xPos,
-                        yPos: window.innerHeight - 300,
+
+                        xPos: (window.innerWidth > lastTranslation.xPos + 300) ? lastTranslation.xPos : window.innerWidth - 300,
+                        yPos: (window.innerHeight > lastTranslation.yPos + 300) ? lastTranslation.yPos : window.innerHeight - 300,
                     })
                 })
                 const data = await response.json()
@@ -144,58 +145,15 @@ function DraggableTodo({ children, todoList }) {
                 })
             })()
 
-
             setDragData(prev => ({
                 ...prev,
                 isDragging: false,
                 lastTranslation: {
-                    xPos: lastTranslation.xPos,
-                    yPos: window.innerHeight - 300,
+                    xPos: (window.innerWidth > lastTranslation.xPos + 300) ? lastTranslation.xPos : window.innerWidth - 300,
+                    yPos: (window.innerHeight > lastTranslation.yPos + 300) ? lastTranslation.yPos : window.innerHeight - 300,
                 }
             }))
-        }
-
-        if (window.innerWidth < dragData.translation.xPos + 300) {
-            const { lastTranslation } = dragData;
-
-            (async () => {
-                const response = await fetch(`/api/todo_lists/${todoList.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: todoList.name,
-                        xPos: window.innerWidth - 300,
-                        yPos: lastTranslation.yPos,
-                    })
-                })
-                const data = await response.json()
-                if (data.errors) {
-                    console.log(data.errors);
-                }
-                setDisplayBoardData(prev => {
-                    const updatedBoardItems = { ...prev }
-                    updatedBoardItems.todoLists = updatedBoardItems.todoLists.map(listedTodoList => {
-                        if (listedTodoList.id === todoList.id) {
-                            return data.todoList
-                        }
-                        return listedTodoList;
-                    })
-                    return updatedBoardItems;
-                })
-            })()
-
-
-            setDragData(prev => ({
-                ...prev,
-                isDragging: false,
-                lastTranslation: {
-                    xPos: window.innerWidth - 300,
-                    yPos: lastTranslation.yPos,
-                }
-            }))
-
+            
             window.location.reload()
         }
     }
@@ -203,7 +161,7 @@ function DraggableTodo({ children, todoList }) {
     let resizeEvent;
     window.onresize = () => {
         clearTimeout(resizeEvent);
-        resizeEvent = setTimeout(updatePlacement, 300)
+        resizeEvent = setTimeout(updatePlacement, 500)
     };
 
     return (
