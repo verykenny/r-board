@@ -114,9 +114,8 @@ function DraggableStickyNote({ children, stickyNote }) {
 
 
     const updatePlacement = () => {
-        if (window.innerHeight < dragData.translation.yPos + 300) {
+        if (window.innerWidth < stickyNote.xPos + 300 || window.innerHeight < stickyNote.yPos + 300) {
             const { lastTranslation } = dragData;
-
 
             (async () => {
                 const response = await fetch(`/api/sticky_notes/${stickyNote.id}`, {
@@ -126,8 +125,8 @@ function DraggableStickyNote({ children, stickyNote }) {
                     },
                     body: JSON.stringify({
                         content: stickyNote.content,
-                        xPos: lastTranslation.xPos,
-                        yPos: window.innerHeight - 300,
+                        xPos: (window.innerWidth > lastTranslation.xPos + 300) ? lastTranslation.xPos : window.innerWidth - 300,
+                        yPos: (window.innerHeight > lastTranslation.yPos + 300) ? lastTranslation.yPos : window.innerHeight - 300,
                     })
                 })
                 const data = await response.json()
@@ -146,55 +145,12 @@ function DraggableStickyNote({ children, stickyNote }) {
                 })
             })()
 
-
             setDragData(prev => ({
                 ...prev,
                 isDragging: false,
                 lastTranslation: {
-                    xPos: lastTranslation.xPos,
-                    yPos: window.innerHeight - 300,
-                }
-            }))
-        }
-
-        if (window.innerWidth < dragData.translation.xPos + 300) {
-            const { lastTranslation } = dragData;
-
-            (async () => {
-                const response = await fetch(`/api/sticky_notes/${stickyNote.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        content: stickyNote.content,
-                        xPos: window.innerWidth - 300,
-                        yPos: lastTranslation.yPos,
-                    })
-                })
-                const data = await response.json()
-                if (data.errors) {
-                    console.log(data.errors);
-                }
-                setDisplayBoardData(prev => {
-                    const updatedBoardItems = { ...prev }
-                    updatedBoardItems.stickyNotes = updatedBoardItems.stickyNotes.map(listedStickyNote => {
-                        if (listedStickyNote.id === stickyNote.id) {
-                            return data.stickyNote
-                        }
-                        return listedStickyNote;
-                    })
-                    return updatedBoardItems;
-                })
-            })()
-
-
-            setDragData(prev => ({
-                ...prev,
-                isDragging: false,
-                lastTranslation: {
-                    xPos: window.innerWidth - 300,
-                    yPos: lastTranslation.yPos,
+                    xPos: (window.innerWidth > lastTranslation.xPos + 300) ? lastTranslation.xPos : window.innerWidth - 300,
+                    yPos: (window.innerHeight > lastTranslation.yPos + 300) ? lastTranslation.yPos : window.innerHeight - 300,
                 }
             }))
 
