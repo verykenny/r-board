@@ -50,9 +50,14 @@ const ButtonContainer = styled.div`
 
 
 const RequestTypeButton = styled(Button)`
+    background: #595A4A;
+
     &:disabled {
-        background: #363635;
+        background: #2D75FC;
         cursor: auto;
+        &:hover {
+            filter: brightness(1)
+        }
     }
 `;
 
