@@ -20,23 +20,43 @@ const PositionedContainer = styled.div`
 `;
 
 const SearchBar = styled.input`
+    border: none;
+    border-bottom: 1px solid lightgrey;
+    padding: 12px;
+    margin: 20px 0;
+    width: 100%;
 
+
+    &:focus {
+        outline: none;
+    }
 `;
 
 const UserResultsContainer = styled.div`
-
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid white;
+    height: 250px;
+    overflow: auto;
 `;
 
 const UserContainer = styled.div`
     cursor: pointer;
+    margin: 10px 0;
 
     background-color: ${props => (props.active) ? '#2D75FC' : 'none'};
 `;
 
 const UserBoardsContainer = styled.div`
+    padding: 20px;
+    margin: 20px 0 50px 0;
+    border: 1px solid white;
+    height: 250px;
+    overflow: auto;
 
 `;
 const BoardContainer = styled.div`
+    margin: 10px 0;
     cursor: pointer;
 
     background-color: ${props => (props.active) ? '#2D75FC' : 'none'};
@@ -46,6 +66,7 @@ const BoardContainer = styled.div`
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    height: 40px;
 `;
 
 
@@ -231,21 +252,23 @@ function UserSearch({ setUserSearchToggle }) {
                     }} active={listedUser.id === activeUserId}>{listedUser.username}</UserContainer>
                 ))}
             </UserResultsContainer>
-            {activeUserId && (
-                <ButtonContainer>
-                    <RequestTypeButton disabled={requestType === 'request'} onClick={() => {
-                        handleGetUserBoards(activeUserId)
-                        setRequestType('request')
-                        setActiveBoardId(null)
+            <ButtonContainer>
+                {activeUserId && (
+                    <>
+                        <RequestTypeButton disabled={requestType === 'request'} onClick={() => {
+                            handleGetUserBoards(activeUserId)
+                            setRequestType('request')
+                            setActiveBoardId(null)
 
-                    }}>Request Access</RequestTypeButton>
-                    <RequestTypeButton disabled={requestType === 'grant'} onClick={() => {
-                        handleGetUserBoards(activeUserId)
-                        setRequestType('grant')
-                        setActiveBoardId(null)
-                    }}>Grant Access</RequestTypeButton>
-                </ButtonContainer>
-            )}
+                        }}>Request Access</RequestTypeButton>
+                        <RequestTypeButton disabled={requestType === 'grant'} onClick={() => {
+                            handleGetUserBoards(activeUserId)
+                            setRequestType('grant')
+                            setActiveBoardId(null)
+                        }}>Grant Access</RequestTypeButton>
+                    </>
+                )}
+            </ButtonContainer>
             <UserBoardsContainer>
                 {(boards && requestType === 'request') && boards.filter(board => board.owner).map(board => (
                     <BoardContainer key={board.id} onClick={() => setActiveBoardId(board.id)} active={board.id === activeBoardId}>{board.name}</BoardContainer>
