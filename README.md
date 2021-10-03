@@ -50,12 +50,14 @@ As someone who has almost always lived with roommates, a project like this has b
 ***
 
 ### Key Features
+- Logged in users can create own whiteboards, add todo lists and sticky notes to their whiteboard, and invite people to also view and edit their whiteboard
+- Users can request access to another user's whiteboard. Users can approve requests for access to their boards or simply grant access to a board proactively
+- Drag and Drop for positioning whiteboard items
 - CSRUF library used to prevent csrf attacks
 - Flask-Login used to authorize users
-- Logged in users can create own whiteboards, add todo lists and sticky notes to their whiteboard, and invite people to also view and edit their whiteboard.
 - Redux Store State is used to manage session data on the front end
 - Context Providers manage application data on the front end
-- Drag and Drop for positioning whiteboard items
+
 
 ***
 
