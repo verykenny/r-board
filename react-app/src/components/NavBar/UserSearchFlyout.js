@@ -167,14 +167,14 @@ function UserSearch({ setUserSearchToggle }) {
     }, [activeUserId])
 
 
-    const handleGetSessionUserBoards = (userId) => {
+    const handleGetUserBoards = (userId) => {
         (async () => {
             const response = await fetch(`/api/users/${userId}/boards`)
             const data = await response.json()
             if (data.errors) {
                 console.log(data.errors);
             } else {
-                setBoards(data.boards.filter(board => (board.owner)))
+                setBoards(data.boards)
             }
         })()
     }
@@ -191,6 +191,28 @@ function UserSearch({ setUserSearchToggle }) {
                 setUserSearchToggle(false);
             }
         })()
+    }
+
+    const handleGrantAccess = () => {
+        (async () => {
+            await fetch(`/api/users/${activeUserId}/boards/${activeBoardId}`, { method: 'POST' })
+            const altResponse = await fetch(`/api/board_users/users/${activeUserId}/boards/${activeBoardId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    verified: true
+                })
+            })
+            const data = await altResponse.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                setUserSearchToggle(false);
+            }
+        })()
+
     }
 
     return (
@@ -212,22 +234,30 @@ function UserSearch({ setUserSearchToggle }) {
             {activeUserId && (
                 <ButtonContainer>
                     <RequestTypeButton disabled={requestType === 'request'} onClick={() => {
-                        handleGetSessionUserBoards(activeUserId)
+                        handleGetUserBoards(activeUserId)
                         setRequestType('request')
                         setActiveBoardId(null)
 
                     }}>Request Access</RequestTypeButton>
                     <RequestTypeButton disabled={requestType === 'grant'} onClick={() => {
-                        handleGetSessionUserBoards(user.id)
+                        handleGetUserBoards(activeUserId)
                         setRequestType('grant')
                         setActiveBoardId(null)
                     }}>Grant Access</RequestTypeButton>
                 </ButtonContainer>
             )}
             <UserBoardsContainer>
-                {(boards && requestType) && boards.map(board => (
+                {(boards && requestType === 'request') && boards.filter(board => board.owner).map(board => (
                     <BoardContainer key={board.id} onClick={() => setActiveBoardId(board.id)} active={board.id === activeBoardId}>{board.name}</BoardContainer>
                 ))}
+                {(boards && requestType === 'grant') && usersBoards.map(board => {
+                    if (boards.map(listedBoard => listedBoard.id).includes(board.id) || !board.owner) {
+                        return '';
+                    }
+                    return (
+                        <BoardContainer key={board.id} onClick={() => setActiveBoardId(board.id)} active={board.id === activeBoardId}>{board.name}</BoardContainer>
+                    )
+                })}
             </UserBoardsContainer>
             {(!usersBoards.map(board => board.id).includes(activeBoardId) && requestType === 'request') && (
                 <>
@@ -239,7 +269,7 @@ function UserSearch({ setUserSearchToggle }) {
                 <AlreadySubmittedButton disabled>Request Already Submitted</AlreadySubmittedButton>
             )}
 
-            {(requestType === 'grant' && activeBoardId) && (<Button>Approve Access</Button>)}
+            {(requestType === 'grant' && activeBoardId) && (<Button onClick={handleGrantAccess}>Approve Access</Button>)}
 
 
         </UserSearchFlyoutContainer>
