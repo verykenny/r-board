@@ -163,7 +163,7 @@ def seed_users():
     BoardUser(user=pinque, board=board19)
 
     board20 = Board(
-        name='Work', backgroundUrl='https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'
+        name='Play', backgroundUrl='https://pseudogram-bucket.s3.amazonaws.com/bg-whiteboard.png'
     )
     BoardUser(user=cathy, board=board20)
 

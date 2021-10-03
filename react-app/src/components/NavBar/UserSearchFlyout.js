@@ -33,7 +33,7 @@ const SearchBar = styled.input`
 `;
 
 const UserResultsContainer = styled.div`
-    padding: 20px;
+    padding: 5px 20px 20px 20px;
     margin: 20px 0;
     border: 1px solid white;
     height: 250px;
@@ -42,13 +42,13 @@ const UserResultsContainer = styled.div`
 
 const UserContainer = styled.div`
     cursor: pointer;
-    margin: 10px 0;
+    padding: 5px 10px;
 
     background-color: ${props => (props.active) ? '#2D75FC' : 'none'};
 `;
 
 const UserBoardsContainer = styled.div`
-    padding: 20px;
+    padding: 5px 20px 20px 20px;
     margin: 20px 0 50px 0;
     border: 1px solid white;
     height: 250px;
@@ -56,7 +56,7 @@ const UserBoardsContainer = styled.div`
 
 `;
 const BoardContainer = styled.div`
-    margin: 10px 0;
+    padding: 5px 10px;
     cursor: pointer;
 
     background-color: ${props => (props.active) ? '#2D75FC' : 'none'};
@@ -147,9 +147,22 @@ function UserSearch({ setUserSearchToggle }) {
         const searchUsers = (search, id) => {
             let lowerSearch = search.toLowerCase()
             const filteredUsers = users.filter(user => {
-                return user.username.toLowerCase().startsWith(lowerSearch) && user.id !== id
+                return user.username.toLowerCase().includes(lowerSearch) && user.id !== id
             })
-            if (search !== '') setFilteredSearch(filteredUsers)
+            console.log(filteredUsers);
+            if (search !== '') setFilteredSearch(filteredUsers.sort((a, b) => {
+                var nameA = a.username.toUpperCase(); // ignore upper and lowercase
+                var nameB = b.username.toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+
+                // names must be equal
+                return 0;
+            }))
             else setFilteredSearch([])
         }
 
@@ -244,6 +257,7 @@ function UserSearch({ setUserSearchToggle }) {
                 onChange={(e) => setSearch(e.target.value)}
             />
             <UserResultsContainer>
+                <h2>Users</h2>
                 {filteredSearch && filteredSearch.map(listedUser => (
                     <UserContainer key={listedUser.id} onClick={() => {
                         setActiveUserId(listedUser.id)
@@ -252,6 +266,9 @@ function UserSearch({ setUserSearchToggle }) {
                     }} active={listedUser.id === activeUserId}>{listedUser.username}</UserContainer>
                 ))}
             </UserResultsContainer>
+
+
+
             <ButtonContainer>
                 {activeUserId && (
                     <>
@@ -269,10 +286,18 @@ function UserSearch({ setUserSearchToggle }) {
                     </>
                 )}
             </ButtonContainer>
+
+
+
             <UserBoardsContainer>
+                {requestType === 'grant' && <h2>Your Boards</h2>}
+                {requestType !== 'grant' && <h2>Boards</h2>}
                 {(boards && requestType === 'request') && boards.filter(board => board.owner).map(board => (
                     <BoardContainer key={board.id} onClick={() => setActiveBoardId(board.id)} active={board.id === activeBoardId}>{board.name}</BoardContainer>
                 ))}
+
+
+
                 {(boards && requestType === 'grant') && usersBoards.map(board => {
                     if (boards.map(listedBoard => listedBoard.id).includes(board.id) || !board.owner) {
                         return '';
@@ -282,6 +307,9 @@ function UserSearch({ setUserSearchToggle }) {
                     )
                 })}
             </UserBoardsContainer>
+
+
+
             {(!usersBoards.map(board => board.id).includes(activeBoardId) && requestType === 'request') && (
                 <>
                     {(requestType === 'request' && activeBoardId) && (<Button onClick={handleSubmitRequest}>Submit Request</Button>)}
