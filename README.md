@@ -5,6 +5,8 @@ rBoard is a web application that combines your refrigerator space and whiteboard
 ***
 
 ### Index
+[Development](#development)
+
 [Technologies](#technologies)
 
 [Key Features](#key-features)
@@ -16,6 +18,15 @@ rBoard is a web application that combines your refrigerator space and whiteboard
 [Future Goals](#future-goals)
 
 ***
+### Development
+- You can read more about the project using the wiki located at: https://github.com/verykenny/r-board/wiki
+- To start a development environment:
+  - Clone the repository at: https://github.com/verykenny/r-board
+  - Run the command "npm install" from the react-app directory in your terminal to install dependencies for the front end
+  - Run the command "pipenv install" from the root directory in your terminal to install dependencies for the backend and create a virtual environment.
+  - Run the command "flask run" from the root directory to start the backend server.
+  - Run the command "npm start" from the react-app directory to start the frontend server.
+  - Navigate to the localhost port specified in config/index.js
 
 ### Technologies
 #### Front End
