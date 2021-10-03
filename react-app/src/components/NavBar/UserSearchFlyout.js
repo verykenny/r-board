@@ -59,7 +59,7 @@ function UserSearch({setUserSearchToggle}) {
 
     return (
         <UserSearchFlyoutContainer ref={clickCheck}>
-
+            
         </UserSearchFlyoutContainer>
     )
 }
