@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 import { useState, useEffect, useRef } from "react";
 import useDebounce from "../hooks/useDebounce";
 import { useSelector } from 'react-redux'
-
+import useBoardsType from "../../context/Boards";
 
 const UserSearchFlyoutContainer = styled(FlyOutContainer)`
     width: 350px;
@@ -30,7 +30,7 @@ const UserResultsContainer = styled.div`
 const UserContainer = styled.div`
     cursor: pointer;
 
-    background-color: ${props => (props.active) ? 'blue' : 'none'};
+    background-color: ${props => (props.active) ? '#2D75FC' : 'none'};
 `;
 
 const UserBoardsContainer = styled.div`
@@ -39,7 +39,7 @@ const UserBoardsContainer = styled.div`
 const BoardContainer = styled.div`
     cursor: pointer;
 
-    background-color: ${props => (props.active) ? 'blue' : 'none'};
+    background-color: ${props => (props.active) ? '#2D75FC' : 'none'};
 
 `;
 
@@ -59,6 +59,17 @@ const RequestTypeButton = styled(Button)`
             filter: brightness(1)
         }
     }
+`;
+
+const AlreadySubmittedButton = styled(Button)`
+    &:disabled {
+        background: #595A4A;
+        cursor: auto;
+        &:hover {
+            filter: brightness(1)
+        }
+    }
+
 `;
 
 function UserSearchFlyout() {
@@ -92,6 +103,7 @@ function UserSearch({ setUserSearchToggle }) {
     const [activeUserId, setActiveUserId] = useState(null)
     const [activeBoardId, setActiveBoardId] = useState(null)
     const [requestType, setRequestType] = useState(null)
+    const { usersBoards, setUsersBoards } = useBoardsType();
 
     const clickCheck = useRef(null)
     const ClickChecker = (ref) => {
@@ -162,12 +174,24 @@ function UserSearch({ setUserSearchToggle }) {
             if (data.errors) {
                 console.log(data.errors);
             } else {
-                setBoards(data.boards.filter(board => board.owner))
+                setBoards(data.boards.filter(board => (board.owner)))
             }
         })()
     }
 
 
+    const handleSubmitRequest = () => {
+        (async () => {
+            const response = await fetch(`/api/users/${user.id}/boards/${activeBoardId}`, { method: 'POST' })
+            const data = await response.json()
+            if (data.errors) {
+                console.log(data.errors);
+            } else {
+                setUsersBoards(prev => [...prev, data.board])
+                setUserSearchToggle(false);
+            }
+        })()
+    }
 
     return (
         <UserSearchFlyoutContainer ref={clickCheck}>
@@ -178,7 +202,11 @@ function UserSearch({ setUserSearchToggle }) {
             />
             <UserResultsContainer>
                 {filteredSearch && filteredSearch.map(listedUser => (
-                    <UserContainer key={listedUser.id} onClick={() => setActiveUserId(listedUser.id)} active={listedUser.id === activeUserId}>{listedUser.username}</UserContainer>
+                    <UserContainer key={listedUser.id} onClick={() => {
+                        setActiveUserId(listedUser.id)
+                        setActiveBoardId(null)
+                        setRequestType(null)
+                    }} active={listedUser.id === activeUserId}>{listedUser.username}</UserContainer>
                 ))}
             </UserResultsContainer>
             {activeUserId && (
@@ -201,9 +229,18 @@ function UserSearch({ setUserSearchToggle }) {
                     <BoardContainer key={board.id} onClick={() => setActiveBoardId(board.id)} active={board.id === activeBoardId}>{board.name}</BoardContainer>
                 ))}
             </UserBoardsContainer>
+            {(!usersBoards.map(board => board.id).includes(activeBoardId) && requestType === 'request') && (
+                <>
+                    {(requestType === 'request' && activeBoardId) && (<Button onClick={handleSubmitRequest}>Submit Request</Button>)}
+                </>
+            )}
+
+            {(usersBoards.map(board => board.id).includes(activeBoardId) && requestType === 'request') && (
+                <AlreadySubmittedButton disabled>Request Already Submitted</AlreadySubmittedButton>
+            )}
 
             {(requestType === 'grant' && activeBoardId) && (<Button>Approve Access</Button>)}
-            {(requestType === 'request' && activeBoardId) && (<Button>Submit Request</Button>)}
+
 
         </UserSearchFlyoutContainer>
     )

@@ -47,7 +47,7 @@ const WhiteBoards = () => {
                 <WhiteBoard key={board.id} board={board} />
             ))}
             <SectionNameContainerTwo>Other's Whiteboards</SectionNameContainerTwo>
-            {usersBoards && usersBoards.filter(board => board.owner === false).map(board => (
+            {usersBoards && usersBoards.filter(board => board.owner === false && board.verified === true).map(board => (
                 <WhiteBoard key={board.id} board={board} />
             ))}
         </WhiteBoardsContainer>

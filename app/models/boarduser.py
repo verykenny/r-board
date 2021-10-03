@@ -23,6 +23,7 @@ class BoardUser(db.Model):
     def board_to_dict(self):
         board = self.board.to_dict()
         board['owner'] = self.owner
+        board['verified'] = self.verified
         return board
 
     def user_to_dict(self):

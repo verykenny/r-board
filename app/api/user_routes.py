@@ -34,8 +34,8 @@ def add_user(userId, boardId):
     """
     board = Board.query.get(boardId)
     user = User.query.get(userId)
-    BoardUser(user=user, board=board, owner=False)
+    boardUser = BoardUser(user=user, board=board, owner=False, verified=False)
     db.session.add(board)
     db.session.add(user)
     db.session.commit()
-    return {'user': user.to_dict()}
+    return {'user': user.to_dict(), 'board': boardUser.board_to_dict()}
