@@ -184,18 +184,20 @@ function UserSearch({ setUserSearchToggle }) {
 
 
     useEffect(() => {
-        const handleGetBoards = (activeUserId) => {
-            (async () => {
-                const response = await fetch(`/api/users/${activeUserId}/boards`)
-                const data = await response.json()
-                if (data.errors) {
-                    console.log(data.errors);
-                } else {
-                    setBoards(data.boards.filter(board => board.owner))
-                }
-            })()
+        if (activeUserId) {
+            const handleGetBoards = (activeUserId) => {
+                (async () => {
+                    const response = await fetch(`/api/users/${activeUserId}/boards`)
+                    const data = await response.json()
+                    if (data.errors) {
+                        console.log(data.errors);
+                    } else {
+                        setBoards(data.boards.filter(board => board.owner))
+                    }
+                })()
+            }
+            handleGetBoards(activeUserId)
         }
-        handleGetBoards(activeUserId)
 
     }, [activeUserId])
 
