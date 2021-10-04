@@ -3,10 +3,11 @@ import useBoardType from "../../../context/Board";
 import styled from "styled-components"
 
 const DraggableConatiner = styled.div`
-    padding: 50px 0 0 0;
+    // padding: 50px 0 0 0;
     position: absolute;
     left: ${props => props.left};
     top: ${props => props.top};
+    z-index: ${props => (props.dragging) ? '5' : '1'}
 `;
 
 const ChildrenContainer = styled.div`
@@ -42,25 +43,27 @@ function DraggableTodo({ children, todoList }) {
         },
     })
 
-    const handleMouseDown = ({ clientX, clientY }) => {
+    const handleMouseDown = (e) => {
         if (!dragData.isDragging) {
             setDragData(prev => ({
                 ...prev,
                 isDragging: true,
-                orig: { xPos: clientX, yPos: clientY }
+                orig: { xPos: e.clientX, yPos: e.clientY }
             }))
         }
     }
 
-    const handleMouseMove = ({ clientX, clientY }) => {
+    const handleMouseMove = (e) => {
+        if (e.preventDefault) e.preventDefault()
+        if (e.stopPropagation) e.stopPropagation()
 
         if (dragData.isDragging) {
             const { orig, lastTranslation } = dragData
             setDragData(prev => ({
                 ...prev,
                 translation: {
-                    xPos: clientX - orig.xPos + lastTranslation.xPos,
-                    yPos: clientY - orig.yPos + lastTranslation.yPos,
+                    xPos: e.clientX - orig.xPos + lastTranslation.xPos,
+                    yPos: e.clientY - orig.yPos + lastTranslation.yPos,
                 }
             }))
         }
@@ -166,10 +169,12 @@ function DraggableTodo({ children, todoList }) {
 
     return (
         <DraggableConatiner
+            dragging={dragData.isDragging}
             left={`${dragData.translation.xPos}px`}
             top={`${dragData.translation.yPos}px`}
             onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseUp}
+            onMouseLeave={handleMouseMove}
+            onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}>
 
             <DragBar
