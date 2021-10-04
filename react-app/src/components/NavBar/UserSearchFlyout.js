@@ -149,7 +149,6 @@ function UserSearch({ setUserSearchToggle }) {
             const filteredUsers = users.filter(user => {
                 return user.username.toLowerCase().includes(lowerSearch) && user.id !== id
             })
-            console.log(filteredUsers);
             if (search !== '') setFilteredSearch(filteredUsers.sort((a, b) => {
                 var nameA = a.username.toUpperCase(); // ignore upper and lowercase
                 var nameB = b.username.toUpperCase(); // ignore upper and lowercase
