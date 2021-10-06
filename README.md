@@ -4,6 +4,9 @@ rBoard is a web application that combines your refrigerator space and whiteboard
 
 As someone who has almost always lived with roommates, a project like this has been on my mind for a long time. I wanted something digital, that could be accessed from anywhere and had the versatility of a real whiteboard or fridge. This meant being able to provide an assortment of items to add to the board that could meet most household requirements and leaving the board flexible enough to be organized how the user wants. Being able to keep a household of 5 or 6 people organized can be a struggle and having a solution that is fun to use and that is readily available can make organization a breeze.
 
+<img src="https://github.com/verykenny/r-board/blob/main/planning/rBoard_dnd.gif" alt="rBoard drag and drop" height="300">
+
+
 #### Live link: [rBoard](https://rboard2021.herokuapp.com/home)
 ***
 
