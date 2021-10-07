@@ -14,7 +14,7 @@ As someone who has almost always lived with roommates, a project like this has b
 ***
 
 ### Index
-[Development](#development)
+[Launch](#launch)
 
 [Technologies](#technologies)
 
@@ -27,14 +27,20 @@ As someone who has almost always lived with roommates, a project like this has b
 [Future Goals](#future-goals)
 
 ***
-### Development
+### Launch
 - You can read more about the project using the wiki located at: https://github.com/verykenny/r-board/wiki
 - To start a development environment:
   - Clone the repository at: https://github.com/verykenny/r-board
-  - Run the command "npm install" from the react-app directory in your terminal to install dependencies for the front end
-  - Run the command "pipenv install" from the root directory in your terminal to install dependencies for the backend and create a virtual environment.
-  - Run the command "flask run" from the root directory to start the backend server.
-  - Run the command "npm start" from the react-app directory to start the frontend server.
+  - Install front-end locally using npm from the react-app directory:
+    ```
+    npm install
+    npm start
+    ```
+  - Install back-end locally using pipenv "pipenv install" from the root directory:
+    ```
+    pipenv install
+    pipenv run flask run
+    ```
   - Navigate to the localhost port specified in config/index.js
 
 ### Technologies
