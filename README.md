@@ -60,12 +60,14 @@ As someone who has almost always lived with roommates, a project like this has b
 ***
 
 ### Key Features
-Draggable components enables users to take control of how their information is organized on the screen.
+- Draggable components enable users to take control of how their information is organized on the screen.
+
 <p align="center">
   <img src="https://github.com/verykenny/r-board/blob/main/planning/rBoard_dnd.gif" alt="rBoard drag and drop" height="300">
 </p>
 
-On load, initial positioning ensures that all user elements are visible:
+- On load, initial positioning ensures that all user elements are visible:
+
 
 ```js
 const [dragData, setDragData] = useState({
@@ -82,7 +84,8 @@ const [dragData, setDragData] = useState({
 })
 ```
 
-On MouseUp event, the current location of the element is stored via a fetch request and the current state object is updated:
+- On MouseUp event, the current location of the element is stored via a fetch request and the current state object is updated:
+
 
 ```js
 const handleMouseUp = (e) => {
@@ -129,7 +132,8 @@ const handleMouseUp = (e) => {
 ```
 
 
-Users can update information in-place without being taken to another page or form. Clicking away or pressing enter saves updates on the database:
+- Users can update information in-place without being taken to another page or form. Clicking away or pressing enter saves updates on the database:
+
 
 ```js
 {nameEditToggle && (
@@ -147,7 +151,8 @@ Users can update information in-place without being taken to another page or for
 )}
 ```
 
-In place edit forms are styled to look like the target text:
+- In place edit forms are styled to look like the target text:
+
 
 ```js
 export const StringEditInput = styled.input`
