@@ -244,50 +244,50 @@ def seed_users():
 
     sticky1 = StickyNote(
         content='Soccer Practice: 5:30p! Remember what happened last time you forgot :(((',
-        xPos=150,
-        yPos=350
+        xPos=15,
+        yPos=76
     )
     sticky1.board = board1
 
     sticky2 = StickyNote(
         content='I don\'t know who let pickles out again but I swear I\'ll force everyone in this family to eat brusslesprouts if it happens again!',
-        xPos=750,
-        yPos=250
+        xPos=42,
+        yPos=63
     )
     sticky2.board = board1
 
     sticky3 = StickyNote(
         content='"The beautiful thing about learning is that no one can take it away from you."  -B.B. King ',
-        xPos=750,
-        yPos=450
+        xPos=21,
+        yPos=85
     )
     sticky3.board = board2
 
     sticky4 = StickyNote(
         content='"Opportunities multiply as they are seized."  -Sun Tzu ',
-        xPos=250,
-        yPos=150
+        xPos=85,
+        yPos=36
     )
     sticky4.board = board2
 
     sticky5 = StickyNote(
         content='Daily Stand-up Meeting: 6:30a',
-        xPos=850,
-        yPos=330
+        xPos=74,
+        yPos=12
     )
     sticky5.board = board6
 
     sticky6 = StickyNote(
         content='Everytime you push to main, an angle loses their wings and my cat, pickles, gets lost outside.',
-        xPos=200,
-        yPos=430
+        xPos=41,
+        yPos=79
     )
     sticky6.board = board6
 
     sticky7 = StickyNote(
         content='Today, Geoffrey asked Mrs. Wasserheim why she was visible in technicolor if she was born before 1870...',
-        xPos=800,
-        yPos=80
+        xPos=52,
+        yPos=41
     )
     sticky7.board = board17
 

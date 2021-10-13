@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components"
 import StickyNoteContent from "./StickyNoteContent";
-import DraggableStickyNote from "./DraggableStickyNote";
+import DraggableItem from "../DraggableItem";
 
 
 const StickyNoteContainer = styled.div`
@@ -20,11 +20,11 @@ function StickyNote({ stickyNote }) {
     const [contentEditToggle, setContentEditToggle] = useState(false)
 
     return (
-        <DraggableStickyNote stickyNote={stickyNote}>
+        <DraggableItem element={stickyNote}>
             <StickyNoteContainer>
                 <StickyNoteContent contentEditToggle={contentEditToggle} stickyNote={stickyNote} setContentEditToggle={setContentEditToggle} />
             </StickyNoteContainer>
-        </DraggableStickyNote>
+        </DraggableItem>
     )
 }
 
