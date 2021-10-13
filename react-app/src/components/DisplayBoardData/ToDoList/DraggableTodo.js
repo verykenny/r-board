@@ -34,14 +34,24 @@ function DraggableTodo({ children, todoList }) {
         isDragging: false,
         orig: { xPos: 0, yPos: 0 },
         translation: {
-            xPos: (window.innerWidth > todoList.xPos + 300) ? todoList.xPos : window.innerWidth - 300,
-            yPos: (window.innerHeight > todoList.yPos + 300) ? todoList.yPos : window.innerHeight - 300,
+            xPos: (window.innerWidth * (todoList.xPos / 100)),
+            yPos: (window.innerHeight * (todoList.yPos / 100)),
         },
         lastTranslation: {
-            xPos: (window.innerWidth > todoList.xPos + 300) ? todoList.xPos : window.innerWidth - 300,
-            yPos: (window.innerHeight > todoList.yPos + 300) ? todoList.yPos : window.innerHeight - 300,
+            xPos: (window.innerWidth * (todoList.xPos / 100)),
+            yPos: (window.innerHeight * (todoList.yPos / 100)),
         },
+        // translation: {
+        //     xPos: (window.innerWidth > todoList.xPos + 300) ? todoList.xPos : window.innerWidth - 300,
+        //     yPos: (window.innerHeight > todoList.yPos + 300) ? todoList.yPos : window.innerHeight - 300,
+        // },
+        // lastTranslation: {
+        //     xPos: (window.innerWidth > todoList.xPos + 300) ? todoList.xPos : window.innerWidth - 300,
+        //     yPos: (window.innerHeight > todoList.yPos + 300) ? todoList.yPos : window.innerHeight - 300,
+        // },
     })
+
+    console.log(dragData.translation.xPos);
 
     const handleMouseDown = (e) => {
         if (!dragData.isDragging) {
@@ -74,7 +84,6 @@ function DraggableTodo({ children, todoList }) {
         if (dragData.isDragging) {
             const { translation } = dragData;
 
-
             (async () => {
                 const response = await fetch(`/api/todo_lists/${todoList.id}`, {
                     method: 'PUT',
@@ -83,8 +92,8 @@ function DraggableTodo({ children, todoList }) {
                     },
                     body: JSON.stringify({
                         name: todoList.name,
-                        xPos: translation.xPos,
-                        yPos: translation.yPos,
+                        xPos: Math.floor((translation.xPos / window.innerWidth) * 100),
+                        yPos: Math.floor((translation.yPos / window.innerHeight) * 100),
                     })
                 })
                 const data = await response.json()
@@ -115,57 +124,7 @@ function DraggableTodo({ children, todoList }) {
         }
     }
 
-    const updatePlacement = () => {
-        if (window.innerWidth < todoList.xPos + 300 || window.innerHeight < todoList.yPos + 300) {
-            const { lastTranslation } = dragData;
 
-            (async () => {
-                const response = await fetch(`/api/todo_lists/${todoList.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: todoList.name,
-
-                        xPos: (window.innerWidth > lastTranslation.xPos + 300) ? lastTranslation.xPos : window.innerWidth - 300,
-                        yPos: (window.innerHeight > lastTranslation.yPos + 300) ? lastTranslation.yPos : window.innerHeight - 300,
-                    })
-                })
-                const data = await response.json()
-                if (data.errors) {
-                    console.log(data.errors);
-                }
-                setDisplayBoardData(prev => {
-                    const updatedBoardItems = { ...prev }
-                    updatedBoardItems.todoLists = updatedBoardItems.todoLists.map(listedTodoList => {
-                        if (listedTodoList.id === todoList.id) {
-                            return data.todoList
-                        }
-                        return listedTodoList;
-                    })
-                    return updatedBoardItems;
-                })
-            })()
-
-            setDragData(prev => ({
-                ...prev,
-                isDragging: false,
-                lastTranslation: {
-                    xPos: (window.innerWidth > lastTranslation.xPos + 300) ? lastTranslation.xPos : window.innerWidth - 300,
-                    yPos: (window.innerHeight > lastTranslation.yPos + 300) ? lastTranslation.yPos : window.innerHeight - 300,
-                }
-            }))
-
-            window.location.reload()
-        }
-    }
-
-    let resizeEvent;
-    window.onresize = () => {
-        clearTimeout(resizeEvent);
-        resizeEvent = setTimeout(updatePlacement, 500)
-    };
 
     return (
         <DraggableConatiner

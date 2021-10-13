@@ -169,8 +169,8 @@ def seed_users():
 
     todolist1 = ToDoList(
         name='Chores',
-        xPos=400,
-        yPos=120
+        xPos=75,
+        yPos=80
     )
     todo1 = ToDo(content='take out trash', completed=True)
     todo2 = ToDo(content='do dishes')
@@ -184,8 +184,8 @@ def seed_users():
 
     todolist2 = ToDoList(
         name='Homework',
-        xPos=600,
-        yPos=170
+        xPos=75,
+        yPos=80
     )
 
     todo5 = ToDo(content='math, pg 3-45', completed=True)
@@ -199,8 +199,8 @@ def seed_users():
 
     todolist3 = ToDoList(
         name='components',
-        xPos=600,
-        yPos=100
+        xPos=25,
+        yPos=25
     )
 
     todo8 = ToDo(content='add friend button')
@@ -214,8 +214,8 @@ def seed_users():
 
     todolist4 = ToDoList(
         name='Geoffrey todo',
-        xPos=620,
-        yPos=400
+        xPos=35,
+        yPos=45
     )
 
     todo11 = ToDo(content='write out butter ingredients', completed=True)
@@ -229,8 +229,8 @@ def seed_users():
 
     todolist5 = ToDoList(
         name='spelling test',
-        xPos=500,
-        yPos=135,
+        xPos=45,
+        yPos=50,
     )
 
     todo14 = ToDo(content='cucumber')
