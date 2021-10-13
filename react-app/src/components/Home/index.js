@@ -8,15 +8,18 @@ import DisplayBoardData from "../DisplayBoardData";
 
 const HomeContainer = styled.div`
     position: relative;
-    background-image: url(${props => props.backgroundUrl});
-    background-size: 100vw 100vh;
-    height: 100vh;
-    width: 100vw;
     overflow: hidden;
-
-
     display: flex;
     justify-content: center;
+    `;
+
+
+const DisplayContainer = styled.div`
+    margin-left: 50px;
+    background-image: url(${props => props.backgroundUrl});
+    background-size: 100% 100%;
+    height: 100vh;
+    width: 100vw;
 `;
 
 const Home = () => {
@@ -55,9 +58,11 @@ const Home = () => {
     }, [displayBoard, setDisplayBoardData, errors])
 
     return (
-        <HomeContainer backgroundUrl={displayBoard?.backgroundUrl}>
+        <HomeContainer>
             <NavBar />
-            {displayBoardData && <DisplayBoardData />}
+            <DisplayContainer backgroundUrl={displayBoard?.backgroundUrl}>
+                {displayBoardData && <DisplayBoardData />}
+            </DisplayContainer>
         </HomeContainer>
     )
 }
