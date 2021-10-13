@@ -12,9 +12,9 @@ const DraggableConatiner = styled.div`
 
 const ChildrenContainer = styled.div`
     transition: box-shadow 0.3s;
-    // box-shadow: 2px 2px 2px;
+    // box-shadow: 2px -2px 2px;
 
-    box-shadow: ${props => (props.dragging) ? '-2px 6px 6px' : '0px 2px 2px'}
+    box-shadow: ${props => (props.dragging) ? '6px -2px 6px' : '0px -2px 2px'}
 `;
 
 

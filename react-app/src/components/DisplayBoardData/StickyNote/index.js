@@ -6,13 +6,16 @@ import DraggableItem from "../DraggableItem";
 
 const StickyNoteContainer = styled.div`
     padding: 7px;
-    border: 1px solid lightgrey;
+    // border: 1px solid lightgrey;
     height: 300px;
     width: 300px;
 
     display: flex;
     flex-direction: column;
-    background: lightblue;
+    // background: lightblue;
+    background-image: url("/stickynote.png");
+    background-size: 114% 110%;
+    background-position: center center;
 `;
 
 
