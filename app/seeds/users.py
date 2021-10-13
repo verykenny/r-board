@@ -169,8 +169,8 @@ def seed_users():
 
     todolist1 = ToDoList(
         name='Chores',
-        xPos=400,
-        yPos=120
+        xPos=70,
+        yPos=14
     )
     todo1 = ToDo(content='take out trash', completed=True)
     todo2 = ToDo(content='do dishes')
@@ -184,8 +184,8 @@ def seed_users():
 
     todolist2 = ToDoList(
         name='Homework',
-        xPos=600,
-        yPos=170
+        xPos=39,
+        yPos=57
     )
 
     todo5 = ToDo(content='math, pg 3-45', completed=True)
@@ -199,8 +199,8 @@ def seed_users():
 
     todolist3 = ToDoList(
         name='components',
-        xPos=600,
-        yPos=100
+        xPos=18,
+        yPos=17
     )
 
     todo8 = ToDo(content='add friend button')
@@ -214,8 +214,8 @@ def seed_users():
 
     todolist4 = ToDoList(
         name='Geoffrey todo',
-        xPos=620,
-        yPos=400
+        xPos=10,
+        yPos=12
     )
 
     todo11 = ToDo(content='write out butter ingredients', completed=True)
@@ -229,8 +229,8 @@ def seed_users():
 
     todolist5 = ToDoList(
         name='spelling test',
-        xPos=500,
-        yPos=135,
+        xPos=28,
+        yPos=63,
     )
 
     todo14 = ToDo(content='cucumber')
@@ -244,50 +244,50 @@ def seed_users():
 
     sticky1 = StickyNote(
         content='Soccer Practice: 5:30p! Remember what happened last time you forgot :(((',
-        xPos=150,
-        yPos=350
+        xPos=9,
+        yPos=20
     )
     sticky1.board = board1
 
     sticky2 = StickyNote(
         content='I don\'t know who let pickles out again but I swear I\'ll force everyone in this family to eat brusslesprouts if it happens again!',
-        xPos=750,
-        yPos=250
+        xPos=43,
+        yPos=42
     )
     sticky2.board = board1
 
     sticky3 = StickyNote(
         content='"The beautiful thing about learning is that no one can take it away from you."  -B.B. King ',
-        xPos=750,
-        yPos=450
+        xPos=10,
+        yPos=13
     )
     sticky3.board = board2
 
     sticky4 = StickyNote(
         content='"Opportunities multiply as they are seized."  -Sun Tzu ',
-        xPos=250,
-        yPos=150
+        xPos=63,
+        yPos=13
     )
     sticky4.board = board2
 
     sticky5 = StickyNote(
         content='Daily Stand-up Meeting: 6:30a',
-        xPos=850,
-        yPos=330
+        xPos=66,
+        yPos=42
     )
     sticky5.board = board6
 
     sticky6 = StickyNote(
         content='Everytime you push to main, an angle loses their wings and my cat, pickles, gets lost outside.',
-        xPos=200,
-        yPos=430
+        xPos=31,
+        yPos=49
     )
     sticky6.board = board6
 
     sticky7 = StickyNote(
         content='Today, Geoffrey asked Mrs. Wasserheim why she was visible in technicolor if she was born before 1870...',
-        xPos=800,
-        yPos=80
+        xPos=55,
+        yPos=21
     )
     sticky7.board = board17
 

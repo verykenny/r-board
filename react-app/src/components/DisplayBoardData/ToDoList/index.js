@@ -3,7 +3,7 @@ import styled from "styled-components"
 import TodoListName from "./TodoListName";
 import AddToDo from "./AddToDo";
 import ToDo from "./ToDo";
-import DraggableTodo from "./DraggableTodo";
+import DraggableItem from "../DraggableItem";
 
 
 const ToDoListContainer = styled.div`
@@ -28,7 +28,7 @@ function ToDoList({ todoList }) {
     const [nameEditToggle, setNameEditToggle] = useState(false)
 
     return (
-        <DraggableTodo todoList={todoList}>
+        <DraggableItem element={todoList}>
             <ToDoListContainer>
                 <TodoListName nameEditToggle={nameEditToggle} todoList={todoList} setNameEditToggle={setNameEditToggle} setAddTodo={setAddTodo} />
                 <ToDosContainer>
@@ -38,7 +38,7 @@ function ToDoList({ todoList }) {
                     {addTodo && <AddToDo todoList={todoList} setAddTodo={setAddTodo} />}
                 </ToDosContainer>
             </ToDoListContainer>
-        </DraggableTodo>
+        </DraggableItem>
     )
 }
 
