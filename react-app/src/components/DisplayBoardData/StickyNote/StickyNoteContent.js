@@ -8,6 +8,7 @@ const StickyNoteContentContainer = styled.div`
     font-size: 25px;
     display: flex;
     flex-direction: column;
+    padding-left: 10px;
 
     .fa-ellipsis-h {
         color: grey;
