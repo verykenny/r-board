@@ -52,7 +52,7 @@ const MainContent = () => {
                 <Opacity>
                 <SmallContainer>
                     <ContentHeader>Welcome to rBoard!</ContentHeader>
-                    <Content>rBoard meant to combine precious refrigerator space and whiteboards into one app.</Content>
+                    <Content>rBoard combines precious refrigerator space and whiteboards into one app.</Content>
                     <Content>Begin by creating a whiteboard and inviting family or roommates to keep your home organized!</Content>
                 </SmallContainer>
                 <SmallContainer>
