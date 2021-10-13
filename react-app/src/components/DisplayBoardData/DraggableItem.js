@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useBoardType from "../../context/Board";
 import styled from "styled-components"
 
@@ -133,7 +133,6 @@ function DraggableItem({ children, element }) {
                 })()
             }
 
-
             setDragData(prev => ({
                 ...prev,
                 isDragging: false,
@@ -145,6 +144,27 @@ function DraggableItem({ children, element }) {
         }
     }
 
+    useEffect(() => {
+        const handleResize = () => {
+            setDragData(prev => ({
+                ...prev,
+                translation: {
+                    xPos: (window.innerWidth * (element.xPos / 100)),
+                    yPos: (window.innerHeight * (element.yPos / 100)),
+                },
+                lastTranslation: {
+                    xPos: (window.innerWidth * (element.xPos / 100)),
+                    yPos: (window.innerHeight * (element.yPos / 100)),
+                },
+            }))
+        }
+
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    })
 
 
     return (
