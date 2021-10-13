@@ -13,7 +13,7 @@ const StickyNoteContainer = styled.div`
     display: flex;
     flex-direction: column;
     // background: lightblue;
-    background-image: url("/stickynote.png");
+    background-image: url("https://pseudogram-bucket.s3.amazonaws.com/stickynote.png");
     background-size: 114% 110%;
     background-position: center center;
 `;
