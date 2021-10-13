@@ -57,8 +57,8 @@ const ItemOptions = ({ setAddItemToggle }) => {
                 },
                 body: JSON.stringify({
                     name: 'New List',
-                    xPos: window.innerWidth / 2,
-                    yPos: window.innerHeight / 2,
+                    xPos: 50,
+                    yPos: 50,
                 })
             })
             const data = await response.json()
@@ -84,8 +84,8 @@ const ItemOptions = ({ setAddItemToggle }) => {
                 },
                 body: JSON.stringify({
                     content: 'Sure to be one of your best!',
-                    xPos: window.innerWidth / 2,
-                    yPos: window.innerHeight / 2,
+                    xPos: 50,
+                    yPos: 50,
                 })
             })
             const data = await response.json()
