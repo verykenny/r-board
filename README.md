@@ -41,6 +41,7 @@ As someone who has almost always lived with roommates, a project like this has b
     ```
   - Navigate to the localhost port specified in config/index.js
 
+***
 ### Technologies
 #### Front End
 - JavaScript
