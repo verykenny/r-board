@@ -66,7 +66,7 @@ As someone who has almost always lived with roommates, a project like this has b
   <img src="https://github.com/verykenny/r-board/blob/main/planning/rBoard_dnd.gif" alt="rBoard drag and drop" height="300">
 </p>
 
-- On load, initial positioning ensures that all user elements are visible:
+- On load, initial positioning is relative to the width of the window which ensures that all user elements are placed in the same relative position despite possible changes in screen size:
 
 
 ```js
@@ -74,61 +74,52 @@ const [dragData, setDragData] = useState({
     isDragging: false,
     orig: { xPos: 0, yPos: 0 },
     translation: {
-        xPos: (window.innerWidth > stickyNote.xPos + 300) ? stickyNote.xPos : window.innerWidth - 300,
-        yPos: (window.innerHeight > stickyNote.yPos + 300) ? stickyNote.yPos : window.innerHeight - 300,
+        xPos: (window.innerWidth * (element.xPos / 100)),
+        yPos: (window.innerHeight * (element.yPos / 100)),
     },
     lastTranslation: {
-        xPos: (window.innerWidth > stickyNote.xPos + 300) ? stickyNote.xPos : window.innerWidth - 300,
-        yPos: (window.innerHeight > stickyNote.yPos + 300) ? stickyNote.yPos : window.innerHeight - 300,
+        xPos: (window.innerWidth * (element.xPos / 100)),
+        yPos: (window.innerHeight * (element.yPos / 100)),
     },
-})
 ```
 
-- On MouseUp event, the current location of the element is stored via a fetch request and the current state object is updated:
-
+- On MouseUp event, the current location of the element is stored after checking the type of element. A fetch request is made and the current relative position of the element is updated on the database:
 
 ```js
 const handleMouseUp = (e) => {
     if (dragData.isDragging) {
         const { translation } = dragData;
-        (async () => {
-            const response = await fetch(`/api/sticky_notes/${stickyNote.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    content: stickyNote.content,
-                    xPos: translation.xPos,
-                    yPos: translation.yPos,
-                })
-            })
-            const data = await response.json()
-            if (data.errors) {
-                console.log(data.errors);
-            }
-            setDisplayBoardData(prev => {
-                const updatedBoardItems = { ...prev }
-                updatedBoardItems.stickyNotes = updatedBoardItems.stickyNotes.map(listedStickyNote => {
-                    if (listedStickyNote.id === stickyNote.id) {
-                        return data.stickyNote
-                    }
-                    return listedStickyNote;
-                })
-                return updatedBoardItems;
-            })
-        })()
 
-        setDragData(prev => ({
-            ...prev,
-            isDragging: false,
-            lastTranslation: {
-                xPos: translation.xPos,
-                yPos: translation.yPos,
-            }
-        }))
-    }
-}
+        if (element.name) {
+            (async () => {
+                const response = await fetch(`/api/todo_lists/${element.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: element.name,
+                        xPos: Math.floor((translation.xPos / window.innerWidth) * 100),
+                        yPos: Math.floor((translation.yPos / window.innerHeight) * 100),
+                    })
+                })
+                const data = await response.json()
+                if (data.errors) {
+                    console.log(data.errors);
+                }
+                setDisplayBoardData(prev => {
+                    const updatedBoardItems = { ...prev }
+                    updatedBoardItems.todoLists = updatedBoardItems.todoLists.map(listedTodoList => {
+                        if (listedTodoList.id === element.id) {
+                            return data.todoList
+                        }
+                        return listedTodoList;
+                    })
+                    return updatedBoardItems;
+                })
+            })()
+        }
+    ...
 ```
 
 
