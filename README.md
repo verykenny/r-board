@@ -61,7 +61,7 @@ As someone who has almost always lived with roommates, a project like this has b
 ***
 
 ### Key Features
-- Draggable components enable users to take control of how their information is organized on the screen.
+- Draggable components enable users to take control of how their information is organized on the screen:
 
 <p align="center">
   <img src="https://github.com/verykenny/r-board/blob/main/planning/rBoard_dnd.gif" alt="rBoard drag and drop" height="300">
@@ -171,7 +171,7 @@ const WhiteBoardNameEdit = styled(StringEditInput)`
 ```
 
 
-- Logged in users can create their own whiteboards, add todo lists and sticky notes to their whiteboard, and invite people to also view and edit their whiteboard
+- Logged in users can create their own whiteboards, add todo lists and sticky notes to their whiteboard, and invite people to also view and edit their whiteboard.
 - Users can request access to another user's whiteboard. Users can approve requests for access to their boards or simply grant access to a board proactively:
 
 <p align="center">
@@ -179,8 +179,8 @@ const WhiteBoardNameEdit = styled(StringEditInput)`
 </p>
 
 
-- Redux Store State is used to manage session data on the front end
-- Context Providers manage application data on the front end
+- Redux Store State is used to manage session data on the front end.
+- Context Providers manage application data on the front end. Admittedly, using Redux Store State would have been a good idea since this is a single-page application. Forcing myself to get away from Redux really helped me realize some of the places where Redux is helpful and helped me learn to be a little more flexible (and not handcuff myself to a particular idea) when it comes to actually implementing the goals I have set for myself or a project. 
 
 ***
 
