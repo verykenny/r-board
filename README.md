@@ -171,7 +171,7 @@ const WhiteBoardNameEdit = styled(StringEditInput)`
 ```
 
 
-- Logged in users can create own whiteboards, add todo lists and sticky notes to their whiteboard, and invite people to also view and edit their whiteboard
+- Logged in users can create their own whiteboards, add todo lists and sticky notes to their whiteboard, and invite people to also view and edit their whiteboard
 - Users can request access to another user's whiteboard. Users can approve requests for access to their boards or simply grant access to a board proactively:
 
 <p align="center">
